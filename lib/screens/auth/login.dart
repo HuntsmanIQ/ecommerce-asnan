@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:grostore/app_lang.dart';
-import 'package:grostore/configs/app_config.dart';
 import 'package:grostore/configs/style_config.dart';
 import 'package:grostore/configs/theme_config.dart';
 import 'package:grostore/custom_ui/Button.dart';
@@ -13,7 +11,6 @@ import 'package:grostore/presenters/auth/auth_presenter.dart';
 import 'package:grostore/screens/auth/password_forget.dart';
 import 'package:grostore/screens/auth/registration.dart';
 import 'package:provider/provider.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -117,7 +114,7 @@ class _LoginState extends State<Login> {
                           color: ThemeConfig.blue, fontStyle: FontStyle.italic),
                     ),
                     onPressed: () {
-                      MakeRoute.go(context, PasswordForget());
+                      MakeRoute.go(context, const PasswordForget());
                     },
                   )
                 ],
@@ -125,7 +122,7 @@ class _LoginState extends State<Login> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 30.0),
-              child: Container(
+              child: SizedBox(
                 height: 45,
                 child: Button.minSize(
                     width: getWidth(context),
@@ -135,7 +132,7 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.all(Radius.circular(6.0))),
                     child: Text(
                       AppLang.local(context).login,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
@@ -156,7 +153,7 @@ class _LoginState extends State<Login> {
                     style:
                         TextStyle(color: ThemeConfig.fontColor, fontSize: 12),
                   )),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Button(
@@ -171,7 +168,7 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Registration();
+                        return const Registration();
                       }));
                     },
                   ),

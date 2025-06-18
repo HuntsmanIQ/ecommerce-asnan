@@ -122,12 +122,12 @@ class MyApp extends StatelessWidget {
           // home: Splash(),
           initialRoute: '/',
           routes: {
-            "/": (context) => Splash(),
+            "/": (context) => const Splash(),
             "/home": (context) => Home(
                   id: getQueryParameter(context, "id"),
                 ),
-            "/main": (context) => Main(),
-            "/landing_page": (context) => LandingPage(),
+            "/main": (context) => const Main(),
+            "/landing_page": (context) => const LandingPage(),
           },
         );
       }),

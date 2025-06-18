@@ -12,7 +12,7 @@ class BoxDecorations{
         color: ThemeConfig.lightGrey,
         width: 1) ,
         borderRadius: const BorderRadius.all(
-          const Radius.circular(2.0),
+          Radius.circular(2.0),
         )
     );
   }
@@ -32,7 +32,7 @@ class BoxDecorations{
       boxShadow : [
         BoxShadow(
           color: ThemeConfig.xlightGrey.withOpacity(0.5),
-          offset: Offset(0,1),
+          offset: const Offset(0,1),
           blurRadius: 2
       )],
       color : ThemeConfig.white,
@@ -45,7 +45,7 @@ class BoxDecorations{
       boxShadow : [
         BoxShadow(
           color: ThemeConfig.xlightGrey.withOpacity(0.5),
-          offset: Offset(0,1),
+          offset: const Offset(0,1),
           blurRadius: 2
       )],
       color : color,

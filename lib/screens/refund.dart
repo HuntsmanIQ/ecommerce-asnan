@@ -9,7 +9,6 @@ import 'package:grostore/custom_ui/shimmers.dart';
 import 'package:grostore/helpers/common_functions.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/presenters/refund_presenter.dart';
-import 'package:grostore/presenters/wallet_presenter.dart';
 import 'package:provider/provider.dart';
 
 
@@ -42,13 +41,13 @@ class _RefundState extends State<Refund> {
             return RefreshIndicator(
               onRefresh: data.onRefresh,
               child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: data.isRefundInit && data.refundHistory.isEmpty?const NoData():data.isRefundInit?ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     padding: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
                     itemBuilder: (context,index)=>Container(
-                      padding: EdgeInsets.symmetric(horizontal: 14,vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 10),
                       decoration: BoxDecorations.shadow(radius: 10),
                       child: Row(
                         children: [
@@ -58,21 +57,21 @@ class _RefundState extends State<Refund> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(data.refundHistory[index].date),
-                                SizedBox(height: 8,),
+                                const SizedBox(height: 8,),
                                 Text(data.refundHistory[index].orderCode),
-                                SizedBox(height: 8,),
+                                const SizedBox(height: 8,),
                                 Text(data.refundHistory[index].productName),
                               ],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           SizedBox(
                             width: getWidth(context)*0.4,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(data.refundHistory[index].status.toUpperCase(),style: StyleConfig.fs14cSecondryfwBold.copyWith(color: data.refundHistory[index].status=="refunded"?ThemeConfig.fontColor:null),),
-                                SizedBox(height: 8,),
+                                const SizedBox(height: 8,),
                                 Text(showPrice(data.refundHistory[index].amount),style: StyleConfig.fs14fwNormal),
                               ],
                             ),

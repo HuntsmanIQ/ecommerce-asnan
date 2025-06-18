@@ -8,15 +8,12 @@ import 'package:grostore/custom_ui/Button.dart';
 import 'package:grostore/custom_ui/Image_view.dart';
 import 'package:grostore/custom_ui/common_appbar.dart';
 import 'package:grostore/custom_ui/input_decorations.dart';
-import 'package:grostore/custom_ui/loading.dart';
 import 'package:grostore/custom_ui/shimmers.dart';
 import 'package:grostore/helpers/common_functions.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/models/payment_types_response.dart';
 import 'package:grostore/models/time_slote_response.dart';
 import 'package:grostore/presenters/check_out_presenter.dart';
-import 'package:grostore/presenters/user_presenter.dart';
-import 'package:grostore/screens/main.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -47,15 +44,15 @@ class _CheckOutState extends State<CheckOut> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               buildShippingAddress(context, data),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               buildBillingAddress(context, data),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               if (data.logistics.isNotEmpty)
@@ -64,14 +61,14 @@ class _CheckOutState extends State<CheckOut> {
                 Container(
                     margin:
                         EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecorations.shadow(radius: 8)
                         .copyWith(color: ThemeConfig.red),
                     child: Text(
                       "We are not shipping to your city now. ",
                       style: StyleConfig.fs14cWhitefwNormal,
                     )),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Padding(
@@ -84,11 +81,11 @@ class _CheckOutState extends State<CheckOut> {
               data.isFetchTimeSlot
                   ? buildDeliveryTime(context, data)
                   : timeSlotShimmer(),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               buildPersonalInfo(context, data),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Padding(
@@ -98,7 +95,7 @@ class _CheckOutState extends State<CheckOut> {
                   style: StyleConfig.fs16fwBold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -118,7 +115,7 @@ class _CheckOutState extends State<CheckOut> {
                   minWidth: getWidth(context),
                   child: Row(
                     children: [
-                      Container(
+                      SizedBox(
                           width: getWidth(context) * 0.38,
                           child: Text(
                             data.selectedPaymentMethod?.name ?? '',
@@ -126,13 +123,13 @@ class _CheckOutState extends State<CheckOut> {
                           )),
                       Container(
                         width: getWidth(context) * 0.3,
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         child: ImageView.svg(
                             url: data.selectedPaymentMethod?.image ?? "",
                             height: 50,
                             width: 50),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Image.asset(
                         getAssetIcon("next.png"),
                         width: 16,
@@ -142,7 +139,7 @@ class _CheckOutState extends State<CheckOut> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Padding(
@@ -152,7 +149,7 @@ class _CheckOutState extends State<CheckOut> {
                   style: StyleConfig.fs16fwBold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -167,7 +164,7 @@ class _CheckOutState extends State<CheckOut> {
                       "Tips",
                       style: StyleConfig.fs12fwBold,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
@@ -178,7 +175,7 @@ class _CheckOutState extends State<CheckOut> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Padding(
@@ -188,7 +185,7 @@ class _CheckOutState extends State<CheckOut> {
                   style: StyleConfig.fs16fwBold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -213,7 +210,7 @@ class _CheckOutState extends State<CheckOut> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -229,7 +226,7 @@ class _CheckOutState extends State<CheckOut> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -245,7 +242,7 @@ class _CheckOutState extends State<CheckOut> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -285,7 +282,7 @@ class _CheckOutState extends State<CheckOut> {
                           style: StyleConfig.fs14fwNormal,
                         ),
                         Text(
-                          "${showPrice(data.orderSummeryResponse.total)}",
+                          showPrice(data.orderSummeryResponse.total),
                           style: StyleConfig.fs14fwNormal,
                         ),
                       ],
@@ -293,7 +290,7 @@ class _CheckOutState extends State<CheckOut> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Button(
@@ -302,7 +299,7 @@ class _CheckOutState extends State<CheckOut> {
                 onPressed: () {
                   data.placeOrder(context);
                 },
-                padding: EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Text(
                   "Place Order",
                   style: StyleConfig.fs16cWhitefwBold,
@@ -322,7 +319,7 @@ class _CheckOutState extends State<CheckOut> {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             decoration: BoxDecorations.shadow(radius: 8),
             child: Shimmers(
               height: 40,
@@ -330,7 +327,7 @@ class _CheckOutState extends State<CheckOut> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             decoration: BoxDecorations.shadow(radius: 8),
             child: Shimmers(
               height: 40,
@@ -353,7 +350,7 @@ class _CheckOutState extends State<CheckOut> {
             style: StyleConfig.fs16fwBold,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Container(
@@ -368,7 +365,7 @@ class _CheckOutState extends State<CheckOut> {
                 AppLang.local(context).phone,
                 style: StyleConfig.fs12fwBold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextField(
@@ -376,14 +373,14 @@ class _CheckOutState extends State<CheckOut> {
                 keyboardType: TextInputType.phone,
                 decoration: InputDecorations.phone(hint_text: "Phone"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(
                 AppLang.local(context).alternative_phone_ucf,
                 style: StyleConfig.fs12fwBold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextField(
@@ -392,19 +389,19 @@ class _CheckOutState extends State<CheckOut> {
                 decoration: InputDecorations.phone(
                     hint_text: AppLang.local(context).alternative_phone_ucf),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(
                 AppLang.local(context).additional_info_ucf,
                 style: StyleConfig.fs12fwBold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
-                padding: EdgeInsets.all(8),
-                constraints: BoxConstraints(minHeight: 80),
+                padding: const EdgeInsets.all(8),
+                constraints: const BoxConstraints(minHeight: 80),
                 width: getWidth(context),
                 decoration: BoxDecorations.basic().copyWith(
                     border: Border.all(color: ThemeConfig.grey, width: 1)),
@@ -425,7 +422,7 @@ class _CheckOutState extends State<CheckOut> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Padding(
@@ -436,7 +433,7 @@ class _CheckOutState extends State<CheckOut> {
               data.onChangeDeliveryType("regular");
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: BoxDecorations.shadow(radius: 8).copyWith(
                   border: data.shipping_delivery_type == "regular"
                       ? Border.all(color: ThemeConfig.accentColor, width: 2)
@@ -448,7 +445,7 @@ class _CheckOutState extends State<CheckOut> {
                     size: 54,
                     color: ThemeConfig.grey,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Column(
@@ -478,7 +475,7 @@ class _CheckOutState extends State<CheckOut> {
           child: Container(
             margin: EdgeInsets.symmetric(
                 horizontal: StyleConfig.padding, vertical: 10),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             decoration: BoxDecorations.shadow(radius: 8).copyWith(
                 border: data.shipping_delivery_type == "scheduled"
                     ? Border.all(color: ThemeConfig.accentColor, width: 2)
@@ -492,9 +489,9 @@ class _CheckOutState extends State<CheckOut> {
                     minWidth: getWidth(context) * 0.35,
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "${DateFormat(
+                      DateFormat(
                         "d MMM",
-                      ).format(data.selectedDate!)}",
+                      ).format(data.selectedDate!),
                       style: StyleConfig.fs14fwNormal,
                     ),
                     onPressed: () async {
@@ -566,7 +563,7 @@ class _CheckOutState extends State<CheckOut> {
                                   : ThemeConfig.grey)),
                       child: Button(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         shape: StyleConfig.buttonRadius(8),
                         minWidth: getWidth(context) * 0.5,
                         child: Column(
@@ -599,7 +596,7 @@ class _CheckOutState extends State<CheckOut> {
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return SizedBox(
+                    return const SizedBox(
                       width: 10,
                     );
                   },
@@ -642,7 +639,7 @@ class _CheckOutState extends State<CheckOut> {
                                   : ThemeConfig.grey)),
                       child: Button(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         shape: StyleConfig.buttonRadius(8),
                         minWidth: getWidth(context) * 0.5,
                         child: Column(
@@ -674,7 +671,7 @@ class _CheckOutState extends State<CheckOut> {
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return SizedBox(
+                    return const SizedBox(
                       width: 10,
                     );
                   },
@@ -715,7 +712,7 @@ class _CheckOutState extends State<CheckOut> {
                                 ? ThemeConfig.accentColor
                                 : ThemeConfig.grey)),
                 child: Button(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   shape: StyleConfig.buttonRadius(8),
                   minWidth: getWidth(context) * 0.5,
                   child: Column(
@@ -744,7 +741,7 @@ class _CheckOutState extends State<CheckOut> {
               );
             },
             separatorBuilder: (context, index) {
-              return SizedBox(
+              return const SizedBox(
                 width: 10,
               );
             },
@@ -788,7 +785,7 @@ class _CheckOutState extends State<CheckOut> {
             title: Container(
               alignment: Alignment.center,
               color: ThemeConfig.accentColor,
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 24),
               child: Text(
                 "Choose Payment Method",
                 style: StyleConfig.fs16cWhitefwBold,
@@ -806,7 +803,7 @@ class _CheckOutState extends State<CheckOut> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                                 width: getWidth(context) * 0.3,
                                 child: Text(
                                   data.paymentTypes[index].name,
@@ -814,7 +811,7 @@ class _CheckOutState extends State<CheckOut> {
                                 )),
                             Container(
                               width: getWidth(context) * 0.3,
-                              padding: EdgeInsets.all(8),
+                              padding: const EdgeInsets.all(8),
                               child: ImageView.svg(
                                   url: data.paymentTypes[index].image,
                                   height: 50,
@@ -829,7 +826,7 @@ class _CheckOutState extends State<CheckOut> {
             actions: [
               Button(
                 minWidth: getWidth(context),
-                padding: EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 color: ThemeConfig.red,
                 onPressed: () {
                   Navigator.pop(context);

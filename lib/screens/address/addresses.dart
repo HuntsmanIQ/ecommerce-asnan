@@ -5,12 +5,10 @@ import 'package:grostore/configs/theme_config.dart';
 import 'package:grostore/custom_ui/Boxdecorations.dart';
 import 'package:grostore/custom_ui/Button.dart';
 import 'package:grostore/custom_ui/common_appbar.dart';
-import 'package:grostore/custom_ui/filter_dropdown.dart';
 import 'package:grostore/custom_ui/shimmers.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/presenters/address_presenter.dart';
-import 'package:grostore/presenters/user_presenter.dart';
 import 'package:grostore/screens/address/address_new_or_update.dart';
 import 'package:provider/provider.dart';
 
@@ -156,7 +154,7 @@ class _AddressesState extends State<Addresses> {
                                 padding: EdgeInsets.zero,
                                 minWidth: 10.0,
                                 minHeight: 10.0,
-                                child:Icon(Icons.edit,),
+                                child:const Icon(Icons.edit,),
                               ),
                             ),
                            const SizedBox(height: 15,),
@@ -170,7 +168,7 @@ class _AddressesState extends State<Addresses> {
                                 padding: EdgeInsets.zero,
                                 minWidth: 10.0,
                                 minHeight: 10.0,
-                                child:Icon(Icons.delete,),
+                                child:const Icon(Icons.delete,),
                               ),
                             ),
                           ],
@@ -180,7 +178,7 @@ class _AddressesState extends State<Addresses> {
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return SizedBox(
+                  return const SizedBox(
                     height: 10,
                   );
                 },

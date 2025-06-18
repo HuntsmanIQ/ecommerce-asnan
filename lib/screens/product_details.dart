@@ -19,7 +19,6 @@ import 'package:grostore/presenters/product_details_presenter.dart';
 import 'package:grostore/presenters/wishlist_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
 import 'package:grostore/screens/cart.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -38,7 +37,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   void initState() {
     Provider.of<ProductDetailsPresenter>(context, listen: false)
         .setContext(context);
-    Future.delayed(Duration(seconds: 0)).then((value) {
+    Future.delayed(const Duration(seconds: 0)).then((value) {
       Provider.of<ProductDetailsPresenter>(context, listen: false)
           .iniState(widget.slug);
     });
@@ -67,7 +66,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                 buildSliderSection(data),
                 buildProductNameSection(context, data),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Padding(
@@ -78,7 +77,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     style: StyleConfig.fs12fwBold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 data.isProductInfoInitial
@@ -119,7 +118,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       data.variations[variationIndex].values
                                           .length, (valueIndex) {
                                     return Container(
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 5, vertical: 5),
                                       decoration: BoxDecorations.shadow(
                                               radius: 6)
@@ -169,11 +168,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                         },
                         itemCount: data.variations.length),
                   ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 buildPriceAndQuantitySection(context, data),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Padding(
@@ -184,7 +183,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     style: StyleConfig.fs16fwBold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 buildRelatedProductSection(data),
@@ -217,9 +216,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                   minWidth: getWidth(context) - 40,
                   onPressed: () {
                     if (SystemData.isLogIn) {
-                      MakeRoute.go(context, Cart());
+                      MakeRoute.go(context, const Cart());
                     } else {
-                      MakeRoute.go(context, Login());
+                      MakeRoute.go(context, const Login());
                     }
                   },
                   child:
@@ -253,8 +252,8 @@ class _ProductDetailsState extends State<ProductDetails> {
     return GridView.builder(
         padding: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
@@ -310,7 +309,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 AppLang.local(context).price,
                 style: StyleConfig.fs12fwBold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 6,
               ),
               data.isProductInfoInitial
@@ -319,7 +318,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   : Shimmers(width: 100, height: 25),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Consumer<WishlistPresenter>(
             // listenable: wishlistPresenter,
             builder: (context, wishlistPresenter, child) {
@@ -350,7 +349,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               minWidth: 40,
               shape: StyleConfig.buttonRadius(6),
               color: ThemeConfig.accentColor,
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               onPressed: () {
                 if (SystemData.isLogIn) {
                   if (data.selectedVariation!.sock > 0) {
@@ -361,7 +360,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ToastUi.show(context, "Stock out");
                   }
                 } else {
-                  MakeRoute.go(context, Login());
+                  MakeRoute.go(context, const Login());
                 }
               },
               child: Text(
@@ -426,7 +425,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           alignment: Alignment.bottomLeft,
           padding: EdgeInsets.only(left: StyleConfig.padding),
           decoration: BoxDecorations.customRadius(
-              radius: BorderRadius.only(topLeft: Radius.circular(70)),
+              radius: const BorderRadius.only(topLeft: Radius.circular(70)),
               color: ThemeConfig.xxlightGrey),
           child: data.isProductInfoInitial
               ? Text(
@@ -441,7 +440,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Container(
       height: 200,
       decoration: BoxDecorations.customRadius(
-          radius: BorderRadius.only(bottomRight: Radius.circular(70))),
+          radius: const BorderRadius.only(bottomRight: Radius.circular(70))),
       child: Column(
         children: [
           Stack(
@@ -533,7 +532,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget imageSample(String data) {
     //  print(data);
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       child: ImageView(
         url: data,
         width: getWidth(context) - 40,
@@ -544,9 +543,9 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   buildImages(ProductDetailsPresenter data) {
     List<Widget> sliders = [];
-    data.productInfo!.galleryImages.forEach((image) {
+    for (var image in data.productInfo!.galleryImages) {
       sliders.add(imageSample(image));
-    });
+    }
     return sliders;
   }
 

@@ -40,7 +40,7 @@ class _OrdersState extends State<Orders> {
     return WillPopScope(
       onWillPop: (){
         if(widget.fromCheckOut){
-          MakeRoute.goAndRemoveAll(context, Main());
+          MakeRoute.goAndRemoveAll(context, const Main());
           return Future(() => true);
         }
         return Future(() => true);
@@ -58,12 +58,12 @@ class _OrdersState extends State<Orders> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   buildTapbar(context, data),
                   if (!data.isOrdersInit)
-                    Container(
+                    SizedBox(
                       width: getWidth(context),
                       height: getHeight(context) - 100,
                       child: Shimmers.list(10, getWidth(context), 80),
@@ -76,11 +76,11 @@ class _OrdersState extends State<Orders> {
                           top: 10,
                           bottom: widget.fromBottomBar ? 80 : 10),
                       scrollDirection: Axis.vertical,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: data.orders.length,
                       separatorBuilder: (context, index) {
-                        return SizedBox(
+                        return const SizedBox(
                           height: 10,
                         );
                       },
@@ -110,23 +110,23 @@ class _OrdersState extends State<Orders> {
   }
 
   Container buildTapbar(BuildContext context, OrderPresenter data) {
-    return Container(
+    return SizedBox(
 
       // color: Colors.red,
       width: getWidth(context),
       height: 40,
       child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         scrollDirection: Axis.horizontal,
         itemCount: data.searchKey.values.length,
         separatorBuilder: (context, index) {
-          return SizedBox(
+          return const SizedBox(
             width: 10,
           );
         },
         itemBuilder: (context, index) {
           return Button(
-            padding: EdgeInsets.symmetric(vertical: 3, horizontal: 15),
+            padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 15),
             color: data.keySelectedIndex == index
                 ? ThemeConfig.green
                 : ThemeConfig.white,

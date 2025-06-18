@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:grostore/models/product_details_response.dart';
 
 TimeSlotResponse timeSlotResponseFromJson(String str) => TimeSlotResponse.fromJson(json.decode(str));
 

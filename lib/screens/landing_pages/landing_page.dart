@@ -6,11 +6,7 @@ import 'package:grostore/configs/theme_config.dart';
 import 'package:grostore/custom_ui/Button.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/route.dart';
-import 'package:grostore/helpers/shared_value_helper.dart';
 import 'package:grostore/presenters/landing_page_presenter.dart';
-import 'package:grostore/screens/landing_pages/page_model.dart';
-import 'package:grostore/screens/landing_pages/auth_model.dart';
-import 'package:grostore/screens/main.dart';
 import 'package:provider/provider.dart';
 
 
@@ -87,10 +83,11 @@ Provider.of<LandingPagePresenter>(context).iniState();
 
                   minWidth: getWidth(context),
                 onPressed: (){
-                    if(data.currentIndex==3)
-                    MakeRoute.goName(context, "/main");
-                    else
+                    if(data.currentIndex==3) {
+                      MakeRoute.goName(context, "/main");
+                    } else {
                       data.onChangeSlider();
+                    }
                 },
                 child: Text(data.currentIndex==3?AppLang.local(context).skip:AppLang.local(context).next,style: StyleConfig.fs14cWhitefwNormal,),),
               ),

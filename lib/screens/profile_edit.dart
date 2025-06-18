@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:grostore/app_lang.dart';
 import 'package:grostore/configs/style_config.dart';
@@ -15,6 +13,8 @@ import 'package:grostore/presenters/user_presenter.dart';
 import 'package:provider/provider.dart';
 
 class ProfileEdit extends StatefulWidget {
+  const ProfileEdit({super.key});
+
   @override
   _ProfileEditState createState() => _ProfileEditState();
 }
@@ -67,8 +67,8 @@ class _ProfileEditState extends State<ProfileEdit> {
           SliverList(
             delegate: SliverChildListDelegate([
               buildTopSection(data),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
               ),
               buildProfileForm(data)
             ]),
@@ -124,9 +124,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                   width: 24,
                   height: 24,
                   child: Button(
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     shape: CircleBorder(
-                      side: new BorderSide(color: ThemeConfig.lightGrey),
+                      side: BorderSide(color: ThemeConfig.lightGrey),
                     ),
                     color: ThemeConfig.lightGrey,
                     onPressed: () {
@@ -173,7 +173,7 @@ class _ProfileEditState extends State<ProfileEdit> {
             AppLang.local(context).password_change_ucf,
             style: StyleConfig.fs12fwBold,
             textHeightBehavior:
-                TextHeightBehavior(applyHeightToFirstAscent: false),
+                const TextHeightBehavior(applyHeightToFirstAscent: false),
             textAlign: TextAlign.center,
             softWrap: false,
           ),
@@ -197,7 +197,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                 decoration: BoxDecorations.basic(),
                 height: 36,
                 child: TextField(
-                  style: TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 12),
                   controller: data.passwordController,
                   autofocus: false,
                   obscureText: !data.showPassword,
@@ -206,7 +206,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   decoration:
                       InputDecorations.basic(hint_text: "• • • • • • • •")
                           .copyWith(
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide.none,
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -261,7 +261,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               autocorrect: false,
               decoration:
                   InputDecorations.basic(hint_text: "• • • • • • • •").copyWith(
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -287,14 +287,14 @@ class _ProfileEditState extends State<ProfileEdit> {
             alignment: Alignment.center,
             width: 150,
             child: Button(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               minWidth: MediaQuery.of(context).size.width,
               color: ThemeConfig.accentColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(8.0))),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
               child: Text(
                 AppLang.local(context).update_password_ucf,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
@@ -341,7 +341,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               style: TextStyle(color: ThemeConfig.fontColor, fontSize: 12),
               decoration:
                   InputDecorations.basic(hint_text: "John Doe").copyWith(
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -373,7 +373,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               style: TextStyle(color: ThemeConfig.fontColor, fontSize: 12),
               decoration:
                   InputDecorations.basic(hint_text: "+01xxxxxxxxxx").copyWith(
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -403,7 +403,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                 child: Container(
                     decoration: BoxDecorations.basic(),
                     height: 36,
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     alignment: Alignment.centerLeft,
                     child: Text(
                       data.emailController.text,
@@ -440,14 +440,14 @@ class _ProfileEditState extends State<ProfileEdit> {
             alignment: Alignment.center,
             width: getWidth(context) / 2.5,
             child: Button(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               minWidth: MediaQuery.of(context).size.width,
               color: ThemeConfig.accentColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(8.0))),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
               child: Text(
                 AppLang.local(context).update_profile_ucf,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w600),

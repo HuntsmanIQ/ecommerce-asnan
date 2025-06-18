@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_countdown_timer/countdown.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:grostore/app_lang.dart';
@@ -61,7 +60,7 @@ class _CouponsState extends State<Coupons> {
                     Container(
                       child: Text("UP to  ${data.coupons[index].discountValue.toString()}${data.coupons[index].discountType== 'percent'?'%':''} OFF",style: StyleConfig.fs24fwBold.copyWith(color: Colors.red,),),
                     ),
-                    SizedBox(height: 14,),
+                    const SizedBox(height: 14,),
                     Container(
                       height: 40,
                       margin: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
@@ -76,9 +75,9 @@ class _CouponsState extends State<Coupons> {
                             padding: const EdgeInsets.only(left:8 ,right: 8.0),
                             child: Text(data.coupons[index].code,style: StyleConfig.fs16fwBold,),
                           ),
-                        Spacer(),
+                        const Spacer(),
                         Button(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           color: ThemeConfig.accentColor,
                             minHeight: 40.0,
                             minWidth: 10,
@@ -94,7 +93,7 @@ class _CouponsState extends State<Coupons> {
                       ],
                       ),
                     ),
-                    SizedBox(height: 14,),
+                    const SizedBox(height: 14,),
                     buildCounterRow(data, index)
                   ],
                 ),

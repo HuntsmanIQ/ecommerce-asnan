@@ -1,7 +1,6 @@
 
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grostore/app_lang.dart';
 
@@ -14,8 +13,8 @@ class Loading{
         return  AlertDialog(content: Container(
           child: Row(
             children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 20,),
+              const CircularProgressIndicator(),
+              const SizedBox(width: 20,),
               Text(AppLang.local(context).please_wait_ucf),
             ],
           ),

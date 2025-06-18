@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grostore/app_lang.dart';
 import 'package:grostore/configs/style_config.dart';
 import 'package:grostore/configs/theme_config.dart';
@@ -62,7 +60,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 36,
                     child: TextField(
                       controller: data.otpCodeController,
@@ -89,7 +87,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
-              child: Container(
+              child: SizedBox(
                 height: 36,
                 child: TextField(
                   controller: data.otpPasswordController,
@@ -117,7 +115,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
-              child: Container(
+              child: SizedBox(
                 height: 36,
                 child: TextField(
                   controller: data.otpPasswordConfirmController,
@@ -138,7 +136,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
 
             Padding(
               padding: const EdgeInsets.only(top: 30.0),
-              child: Container(
+              child: SizedBox(
                 height: 45,
                 child: Button.minSize(
                     width: getWidth(context),
@@ -148,7 +146,7 @@ class _PasswordOtpState extends State<PasswordOtp> {
                         borderRadius: BorderRadius.all(Radius.circular(6.0))),
                     child: Text(
                       AppLang.local(context).send,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),

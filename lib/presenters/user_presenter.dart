@@ -66,33 +66,33 @@ Loading.close();
 
   onPressUpdatePassword(BuildContext context) async {
     var password = passwordController.text.toString();
-    var password_confirm = passwordConfirmController.text.toString();
+    var passwordConfirm = passwordConfirmController.text.toString();
 
-    var change_password = password != "" ||
-        password_confirm !=
+    var changePassword = password != "" ||
+        passwordConfirm !=
             ""; // if both fields are empty we will not change user's password
 
-    if (!change_password && password == "") {
+    if (!changePassword && password == "") {
       ToastUi.show(context, "Password is empty");
       return;
     }
-    if (!change_password && password_confirm == "") {
+    if (!changePassword && passwordConfirm == "") {
       ToastUi.show(context, "Confirm Password is empty");
       return;
     }
-    if (change_password && password.length < 6) {
+    if (changePassword && password.length < 6) {
       ToastUi.show(context, AppLang.local(context).password_must_be_at_last_6_digit);
       return;
     }
-    if (change_password && password != password_confirm) {
+    if (changePassword && password != passwordConfirm) {
       ToastUi.show(context, "Password and Confirm Password does not matched!");
       return;
     }
 
-    var post_body = jsonEncode({"password": "$password","password_confirmation": "$password_confirm"});
+    var postBody = jsonEncode({"password": password,"password_confirmation": passwordConfirm});
 
     var res =
-    await UserApi.updatePassword( post_body);
+    await UserApi.updatePassword( postBody);
     ToastUi.show(context, res.object.message);
   }
 

@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_controller.dart' as custom;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:grostore/app_lang.dart';
 import 'package:grostore/screens/landing_pages/auth_model.dart';
 import 'package:grostore/screens/landing_pages/page_model.dart';

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:grostore/middlewares/middleware.dart';
 import 'package:http/http.dart' as http;
@@ -81,7 +80,7 @@ class ApiRequest {
       } else {
         return ApiResponse(result: true,body:  response.body,statusCode:200 );
       }
-    } on Exception catch (e) {
+    } on Exception {
       return ApiResponse(result: false,body:  "Something went wrong",statusCode: 500);
     }
   }

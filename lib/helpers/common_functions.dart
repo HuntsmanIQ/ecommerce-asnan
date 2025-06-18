@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grostore/custom_classes/system_data.dart';
 import 'package:grostore/helpers/shared_value_helper.dart';
@@ -12,7 +11,7 @@ bool isEmail(String input){
 
 resetApp(BuildContext context){
  Provider.of<MainPresenter>(context, listen: false).dispose();
- Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Main()), (route) => false);
+ Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const Main()), (route) => false);
 }
 
 getAssetImage(String img){
@@ -38,12 +37,12 @@ final path = ModalRoute.of(context);
     if (route.isNotEmpty && route[1] != "") {
       List qParameters = route[1].split("&");
 
-      qParameters.forEach((element) {
+      for (var element in qParameters) {
         List tmp = element.split("=");
         if (tmp.isNotEmpty && tmp[0]==key) {
           value = tmp[1];
         }
-      });
+      }
     }
   }
   return value;

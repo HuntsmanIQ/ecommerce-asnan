@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:grostore/presenters/cart_presenter.dart';
 import 'package:grostore/presenters/check_out_presenter.dart';
 import 'package:grostore/screens/product_details.dart';

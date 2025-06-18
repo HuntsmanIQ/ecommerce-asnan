@@ -40,7 +40,7 @@ class ImageView extends StatelessWidget {
       height: height,
       width: width,
       fit: BoxFit.cover,
-      placeholder: (context, url) => Row(
+      placeholder: (context, url) => const Row(
         children: [
           CircularProgressIndicator(),
           SizedBox(

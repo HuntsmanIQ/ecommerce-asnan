@@ -29,7 +29,7 @@ class _CartState extends State<Cart> {
       backgroundColor: ThemeConfig.xxlightGrey,
       appBar: CommonAppbar.show(
           title: AppLang.local(context).cart, context: context),
-      body: Container(
+      body: SizedBox(
         height: getHeight(context),
         width: getWidth(context),
         child: Stack(
@@ -40,7 +40,7 @@ class _CartState extends State<Cart> {
                   if (data.isCartResponseFetch &&
                       data.cartResponse.carts.isNotEmpty) {
                     return ListView.separated(
-                        padding: EdgeInsets.only(top: 16, bottom: 200),
+                        padding: const EdgeInsets.only(top: 16, bottom: 200),
                         itemBuilder: (context, index) {
                           return Container(
                             margin: EdgeInsets.only(
@@ -86,10 +86,10 @@ class _CartState extends State<Cart> {
                                   ),*/
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 8,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: getWidth(context) * 0.4,
                                   child: Column(
                                     crossAxisAlignment:
@@ -165,7 +165,7 @@ class _CartState extends State<Cart> {
                         children: [
                           Container(
                             height: 60,
-                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
                             margin: EdgeInsets.symmetric(
                                 horizontal: StyleConfig.padding, vertical: 14),
                             decoration: BoxDecorations.customRadius(
@@ -173,7 +173,7 @@ class _CartState extends State<Cart> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
+                                SizedBox(
                                   width: getWidth(context) * 0.6,
                                   child: TextField(
                                     controller: data.couponTxtController,
@@ -186,7 +186,7 @@ class _CartState extends State<Cart> {
                                   minWidth: 40,
                                   shape: StyleConfig.buttonRadius(8),
                                   color: ThemeConfig.amber,
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 10),
                                   onPressed: () {
                                     data.applyCoupon(context,
@@ -204,13 +204,13 @@ class _CartState extends State<Cart> {
                             height: 200,
                             width: 400,
                             decoration: BoxDecorations.customRadius(
-                                    radius: BorderRadius.only(
+                                    radius: const BorderRadius.only(
                                         topLeft: Radius.circular(24),
                                         topRight: Radius.circular(24)))
                                 .copyWith(color: ThemeConfig.white),
                             child: Column(
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 16,
                                 ),
                                 Text(
@@ -230,7 +230,7 @@ class _CartState extends State<Cart> {
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                       Text(
-                                        "${showPrice(data.cartResponse.subTotal)}",
+                                        showPrice(data.cartResponse.subTotal),
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                     ],
@@ -249,7 +249,7 @@ class _CartState extends State<Cart> {
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                       Text(
-                                        "${showPrice(data.cartResponse.couponDiscount)}",
+                                        showPrice(data.cartResponse.couponDiscount),
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                     ],
@@ -286,7 +286,7 @@ class _CartState extends State<Cart> {
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                       Text(
-                                        "${showPrice(data.cartResponse.total)}",
+                                        showPrice(data.cartResponse.total),
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                     ],
@@ -300,9 +300,9 @@ class _CartState extends State<Cart> {
                                     shape: StyleConfig.buttonRadius(4),
                                     color: ThemeConfig.accentColor,
                                     onPressed: () {
-                                      MakeRoute.go(context, CheckOut());
+                                      MakeRoute.go(context, const CheckOut());
                                     },
-                                    padding: EdgeInsets.symmetric(vertical: 16),
+                                    padding: const EdgeInsets.symmetric(vertical: 16),
                                     minWidth: getWidth(context),
                                     child: Text(
                                       AppLang.local(context)
@@ -333,24 +333,24 @@ class _CartState extends State<Cart> {
         children: [
           Button(
             minWidth: 20,
-            shape: CircleBorder(),
+            shape: const CircleBorder(),
             color: ThemeConfig.fontColor,
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             onPressed: () {
               data.updateCart(
                   cartId: data.cartResponse.carts[index].id,
                   action: "decrease",
                   context: context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.remove,
               color: ThemeConfig.white,
               size: 10,
             ),
           ),
           Container(
-              padding: EdgeInsets.symmetric(horizontal: 2),
-              constraints: BoxConstraints(minWidth: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              constraints: const BoxConstraints(minWidth: 40),
               alignment: Alignment.center,
               child: Text(
                 "${data.cartResponse.carts[index].quantity}",
@@ -358,16 +358,16 @@ class _CartState extends State<Cart> {
               )),
           Button(
             minWidth: 20,
-            shape: CircleBorder(),
+            shape: const CircleBorder(),
             color: ThemeConfig.accentColor,
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             onPressed: () {
               data.updateCart(
                   cartId: data.cartResponse.carts[index].id,
                   action: "increase",
                   context: context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.add,
               color: ThemeConfig.white,
               size: 10,

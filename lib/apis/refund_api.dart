@@ -6,11 +6,8 @@ import 'package:grostore/configs/app_config.dart';
 import 'package:grostore/helpers/common_functions.dart';
 import 'package:grostore/helpers/shared_value_helper.dart';
 import 'package:grostore/models/common_response.dart';
-import 'package:grostore/models/coupon_response.dart';
-import 'package:grostore/models/home_banner_response.dart';
 import 'package:grostore/models/refund_response.dart';
 import 'package:grostore/models/response_model.dart';
-import 'package:grostore/models/wallet_history_response.dart';
 
 
 class RefundApi{
@@ -34,7 +31,7 @@ class RefundApi{
     }
   }
 
-  static Future<ResponseModel<CommonResponse>> refundRequest(order_item_id,reason)async{
+  static Future<ResponseModel<CommonResponse>> refundRequest(orderItemId,reason)async{
     var url = "${AppConfig.apiUrl}/refund/request";
     Map<String,String> header = {
       "Accept": "application/json",
@@ -46,7 +43,7 @@ class RefundApi{
     });
 
     var postBody = jsonEncode({
-      "order_item_id":order_item_id,
+      "order_item_id":orderItemId,
       "refund_reason":reason
     });
 

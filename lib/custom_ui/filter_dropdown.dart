@@ -41,7 +41,7 @@ class _FilterDropDownState extends State<FilterDropDown> {
       },
       items:  [
         DropdownMenuItem<DropDownFilterModel>(
-          child: Container(
+          child: SizedBox(
             width: getWidth(context)*0.5,
             height: 40,
             child: TextField(
@@ -65,7 +65,7 @@ class _FilterDropDownState extends State<FilterDropDown> {
           ),
         ),
         DropdownMenuItem<DropDownFilterModel>(
-          child: Container(
+          child: SizedBox(
             width: getWidth(context)*0.5,
             height: 40,
             child: TextField(

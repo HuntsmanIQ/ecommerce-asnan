@@ -5,8 +5,6 @@ import 'package:grostore/configs/theme_config.dart';
 import 'package:grostore/custom_ui/BoxDecorations.dart';
 import 'package:grostore/custom_ui/Button.dart';
 import 'package:grostore/custom_ui/common_appbar.dart';
-import 'package:grostore/custom_ui/input_decorations.dart';
-import 'package:grostore/custom_ui/toast_ui.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/models/city_response.dart';
 import 'package:grostore/models/country_response.dart';
@@ -168,7 +166,7 @@ class _AddressNewOrUpdateState extends State<AddressNewOrUpdate> {
     return Button(
         onPressed: () => onPress(),
         color: ThemeConfig.grey,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(8), topLeft: Radius.circular(8))),
         child: Row(

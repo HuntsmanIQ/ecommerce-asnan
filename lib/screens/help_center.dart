@@ -40,7 +40,7 @@ class _HelpCenterState extends State<HelpCenter> {
         listenable: helpCenterPresenter,
         builder: (context,child) {
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
             margin: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
             height: 200,
             width: getWidth(context),
@@ -51,14 +51,14 @@ class _HelpCenterState extends State<HelpCenter> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.location_on_outlined),
+                    const Icon(Icons.location_on_outlined),
                     SizedBox(
                       width: getWidth(context)*0.7,
                         child: Text(helpCenterPresenter.helpCenter?.location??""))
 
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Button(
                   onPressed: (){
                     launchUrl(Uri(scheme: 'tel', path: helpCenterPresenter.helpCenter?.contactNumber??"123"));
@@ -67,7 +67,7 @@ class _HelpCenterState extends State<HelpCenter> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.phone),
+                      const Icon(Icons.phone),
                       SizedBox(
                         width: getWidth(context)*0.7,
                           child: Text(helpCenterPresenter.helpCenter?.contactNumber??""))
@@ -83,7 +83,7 @@ class _HelpCenterState extends State<HelpCenter> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.email_outlined),
+                      const Icon(Icons.email_outlined),
                       SizedBox(
                         width: getWidth(context)*0.7,
                           child: Text(helpCenterPresenter.helpCenter?.email??""))

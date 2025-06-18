@@ -47,11 +47,11 @@ class _WalletState extends State<Wallet> {
                 )
                 : data.isWalletInit?
             ListView.separated(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
                shrinkWrap: true,
                padding: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
                 itemBuilder: (context,index)=>Container(
-                  padding: EdgeInsets.symmetric(horizontal: 14,vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 10),
                   decoration: BoxDecorations.shadow(radius: 10),
                   child: Row(
                     children: [
@@ -59,11 +59,11 @@ class _WalletState extends State<Wallet> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(data.walletHistory[index].date),
-                          SizedBox(height: 8,),
+                          const SizedBox(height: 8,),
                           Text(data.walletHistory[index].paymentMethod),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Text(data.walletHistory[index].amount,style: StyleConfig.fs14cSecondryfwBold,),
                     ],
                   ),

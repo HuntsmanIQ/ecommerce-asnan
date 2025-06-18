@@ -53,8 +53,8 @@ class _WishlistState extends State<Wishlist> {
       onRefresh: data.reFresh,
       child: GridView.builder(
           padding: EdgeInsets.symmetric(horizontal: StyleConfig.padding,vertical: StyleConfig.smSectionSpacer),
-          physics: AlwaysScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          physics: const AlwaysScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
@@ -77,8 +77,8 @@ class _WishlistState extends State<Wishlist> {
                     },
                     minWidth: 10.0,
                     minHeight: 10.0,
-                    padding: EdgeInsets.all(5),
-                    child: Icon(Icons.delete,size: 24,color: Colors.red,),
+                    padding: const EdgeInsets.all(5),
+                    child: const Icon(Icons.delete,size: 24,color: Colors.red,),
 
                   ),
                 )

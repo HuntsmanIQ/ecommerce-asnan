@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grostore/apis/category_api.dart';
-import 'package:grostore/apis/order_api.dart';
-import 'package:grostore/app_lang.dart';
 import 'package:grostore/models/common/category_info.dart';
-import 'package:grostore/models/order/orders_response.dart';
-import 'package:grostore/models/category_response.dart';
 
 class CategoriesPresenter extends ChangeNotifier {
   static BuildContext? context;

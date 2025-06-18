@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:grostore/app_lang.dart';
 import 'package:grostore/configs/style_config.dart';
 import 'package:grostore/configs/theme_config.dart';
@@ -15,6 +13,8 @@ import 'package:provider/provider.dart';
 
 
 class PasswordForget extends StatefulWidget {
+  const PasswordForget({super.key});
+
   @override
   _PasswordForgetState createState() => _PasswordForgetState();
 }
@@ -57,7 +57,7 @@ class _PasswordForgetState extends State<PasswordForget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 36,
                     child: TextField(
                       controller: data.forgetEmailController,

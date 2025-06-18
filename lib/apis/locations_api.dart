@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:grostore/api_request.dart';
 import 'package:grostore/configs/app_config.dart';
 import 'package:grostore/helpers/shared_value_helper.dart';
-import 'package:grostore/models/home_banner_response.dart';
 import 'package:grostore/models/locations_response.dart';
 import 'package:grostore/models/response_model.dart';
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grostore/app_lang.dart';
 import 'package:grostore/configs/theme_config.dart';
@@ -8,12 +7,10 @@ import 'package:grostore/custom_ui/shimmers.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/shared_value_helper.dart';
 import 'package:grostore/presenters/stock_locations_presenter.dart';
-import 'package:toast/toast.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StockLocations extends StatefulWidget {
-  StockLocations({Key? key}) : super(key: key);
+  const StockLocations({Key? key}) : super(key: key);
 
   @override
   _StockLocationsState createState() => _StockLocationsState();
@@ -76,20 +73,20 @@ Provider.of<StockLocationsPresenter>(context,listen: false).setContext(context);
   }
 
   buildLanguageMethodList(StockLocationsPresenter data) {
-    if (!data.isLocationInit && data.locations.length == 0) {
+    if (!data.isLocationInit && data.locations.isEmpty) {
       return SingleChildScrollView(
           child: Shimmers.list(10, getWidth(context), 20));
-    } else if (data.locations.length > 0) {
+    } else if (data.locations.isNotEmpty) {
       return SingleChildScrollView(
         child: ListView.separated(
           separatorBuilder: (context, index) {
-            return SizedBox(
+            return const SizedBox(
               height: 14,
             );
           },
           itemCount: data.locations.length,
           scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return buildCard(index,data);
@@ -97,7 +94,7 @@ Provider.of<StockLocationsPresenter>(context,listen: false).setContext(context);
         ),
       );
     } else if (data.isLocationInit && data.locations.isEmpty) {
-      return Container(
+      return SizedBox(
           height: 100,
           child: Center(
               child: Text(
@@ -116,7 +113,7 @@ Provider.of<StockLocationsPresenter>(context,listen: false).setContext(context);
       child: Stack(
         children: [
           AnimatedContainer(
-            duration: Duration(milliseconds: 400),
+            duration: const Duration(milliseconds: 400),
             decoration: BoxDecorations.basic().copyWith(
                 border: Border.all(
                     color: stock_location_id.$ == data.locations[index].id.toString()
@@ -131,9 +128,9 @@ Provider.of<StockLocationsPresenter>(context,listen: false).setContext(context);
                     height: 50,
                     alignment: Alignment.center,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 8.0),
                       child: Text(
-                        "${data.locations[index].name}",
+                        data.locations[index].name,
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

@@ -191,10 +191,10 @@ class AppLang {
   List<Locale> localList = [];
 
   List<Locale> supportedLocales() {
-    langList.forEach((lang) {
+    for (var lang in langList) {
       var local = Locale(lang, '');
       localList.add(local);
-    });
+    }
 
     return localList;
   }

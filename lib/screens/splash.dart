@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grostore/apis/auth_api.dart';
 import 'package:grostore/apis/setting_api.dart';
-import 'package:grostore/configs/app_config.dart';
-import 'package:grostore/configs/style_config.dart';
-import 'package:grostore/configs/theme_config.dart';
 import 'package:grostore/custom_classes/system_data.dart';
 import 'package:grostore/helpers/common_functions.dart';
-import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/helpers/shared_value_helper.dart';
 import 'package:grostore/presenters/auth/auth_presenter.dart';
@@ -60,7 +56,7 @@ class _SplashState extends State<Splash> {
     } else {
       Provider.of<AuthPresenter>(context, listen: false).tokenCheck(context);
 
-      MakeRoute.goAndRemoveAll(context, Main());
+      MakeRoute.goAndRemoveAll(context, const Main());
     }
   }
 
@@ -86,7 +82,7 @@ class _SplashState extends State<Splash> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 15,
-                    offset: Offset(0, 8),
+                    offset: const Offset(0, 8),
                   ),
                 ],
               ),

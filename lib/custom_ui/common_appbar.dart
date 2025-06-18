@@ -26,13 +26,13 @@ class CommonAppbar {
               minWidth: 60,
               onPressed: () {
                 if (gotoMain) {
-                  MakeRoute.goAndRemoveAll(context, Main());
+                  MakeRoute.goAndRemoveAll(context, const Main());
                 } else {
                   Navigator.pop(context);
                 }
               },
               child: Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecorations.shadow(radius: 20),
                 child: Icon(
                   Icons.arrow_back_outlined,

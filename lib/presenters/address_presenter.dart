@@ -100,11 +100,11 @@ class AddressPresenter extends ChangeNotifier {
     countries.addAll(response.object.data);
 
     if(editAddress!=null){
-      countries.forEach((element) {
+      for (var element in countries) {
         if(element.id==editAddress!.data.countryId){
           setSelectedCountry(element);
         }
-      });
+      }
     }
 
     filteredCountries.addAll(countries);
@@ -115,11 +115,11 @@ class AddressPresenter extends ChangeNotifier {
     var response = await AddressApi.getState(id);
     states.addAll(response.object.data);
     if(editAddress!=null){
-      states.forEach((element) {
+      for (var element in states) {
         if(element.id==editAddress!.data.stateId){
           setSelectedState(element);
         }
-      });
+      }
     }
     filteredStates.addAll(states);
     notifyListeners();
@@ -129,13 +129,13 @@ class AddressPresenter extends ChangeNotifier {
     var response = await AddressApi.getCity(id);
     cities.addAll(response.object.data);
     if(editAddress!=null){
-      cities.forEach((element) {
+      for (var element in cities) {
         print(element.id);
         print(editAddress!.data.cityId);
         if(element.id==editAddress!.data.cityId){
           setSelectedCity(element);
         }
-      });
+      }
     }
 
     notifyListeners();

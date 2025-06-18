@@ -14,7 +14,7 @@ class InputDecorations {
               color: ThemeConfig.lightGrey,
               width: 1),
           borderRadius: const BorderRadius.all(
-            const Radius.circular(2.0),
+            Radius.circular(2.0),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -22,10 +22,10 @@ class InputDecorations {
               color: ThemeConfig.accentColor,
               width: 1),
           borderRadius: const BorderRadius.all(
-            const Radius.circular(2.0),
+            Radius.circular(2.0),
           ),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.0));
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0));
   }
 
   static InputDecoration phone({hint_text = "",Widget?prefixIcon}) {
@@ -35,15 +35,15 @@ class InputDecorations {
         hintStyle: TextStyle(fontSize: 12.0, color: ThemeConfig.lightGrey),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: ThemeConfig.lightGrey, width: 1),
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topRight: Radius.circular(2.0),
               bottomRight: Radius.circular(2.0)),
         ),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: ThemeConfig.accentColor, width: 1),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(2.0),
                 bottomRight: Radius.circular(2.0))),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.0));
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0));
   }
 }

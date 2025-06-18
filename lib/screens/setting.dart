@@ -6,7 +6,6 @@ import 'package:grostore/custom_ui/BoxDecorations.dart';
 import 'package:grostore/custom_ui/common_appbar.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/models/currency_response.dart';
-import 'package:grostore/models/language_response.dart';
 import 'package:grostore/presenters/setting_presenter.dart';
 import 'package:provider/provider.dart';
 
@@ -71,12 +70,12 @@ class _SettingState extends State<Setting> {
                 AppLang.local(context).currency,
                 style: StyleConfig.fs12fwBold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 14,
               ),
               Container(
                 width: getWidth(context),
-                padding: EdgeInsets.symmetric(horizontal: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 14),
                 decoration: BoxDecorations.customRadius(
                         radius: BorderRadius.circular(5))
                     .copyWith(

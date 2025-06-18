@@ -116,7 +116,7 @@ class AuthPresenter extends ChangeNotifier {
       loginPasswordController.clear();
       SystemData.isLogIn = true;
       SystemData.userInfo = response.user;
-      MakeRoute.goAndRemoveAll(_context!, Main());
+      MakeRoute.goAndRemoveAll(_context!, const Main());
       //UserInfo(name: response.name, email: response.email, phone: response.phone, balance: response.balance, avatar: response.avatar);
     }
     ToastUi.show(_context!, response.message);
@@ -161,7 +161,7 @@ class AuthPresenter extends ChangeNotifier {
     var name = regNameController.text.toString();
     var email = regEmailController.text.toString();
     var password = regPasswordController.text.toString();
-    var password_confirm = regPasswordConfirmController.text.toString();
+    var passwordConfirm = regPasswordConfirmController.text.toString();
     regPhone = regPhoneNumberController.text.trim();
     if (regPhone.isNotEmpty) {
       regPhone = regCountry.dial_code + regPhone;
@@ -179,7 +179,7 @@ class AuthPresenter extends ChangeNotifier {
     } else if (password == "") {
       ToastUi.show(_context!, AppLang.local(_context!).please_enter_password);
       return;
-    } else if (password_confirm == "") {
+    } else if (passwordConfirm == "") {
       ToastUi.show(
           _context!, AppLang.local(_context!).please_enter_confirm_password);
       return;
@@ -187,7 +187,7 @@ class AuthPresenter extends ChangeNotifier {
       ToastUi.show(
           _context!, AppLang.local(_context!).password_must_be_at_last_6_digit);
       return;
-    } else if (password != password_confirm) {
+    } else if (password != passwordConfirm) {
       ToastUi.show(
           _context!,
           AppLang.local(_context!)
@@ -195,7 +195,7 @@ class AuthPresenter extends ChangeNotifier {
       return;
     }
 
-    var body = makeRegBody(name, email, regPhone, password, password_confirm);
+    var body = makeRegBody(name, email, regPhone, password, passwordConfirm);
     Loading.show(_context!);
     var signupResponse = await AuthApi.registration(_context!, body);
     Loading.close();
@@ -221,7 +221,7 @@ class AuthPresenter extends ChangeNotifier {
       loginPasswordController.clear();
       SystemData.isLogIn = true;
       SystemData.userInfo = signupResponse.user;
-      MakeRoute.goAndRemoveAll(_context!, Main());
+      MakeRoute.goAndRemoveAll(_context!, const Main());
 
       // if ((mail_verification_status.$ && _register_by == "email") ||
       //     _register_by == "phone") {
@@ -284,7 +284,7 @@ class AuthPresenter extends ChangeNotifier {
   onPressConfirm() async {
     var code = otpCodeController.text.toString();
     var password = otpPasswordController.text.toString();
-    var password_confirm = otpPasswordConfirmController.text.toString();
+    var passwordConfirm = otpPasswordConfirmController.text.toString();
 
     if (code == "") {
       ToastUi.show(
@@ -295,7 +295,7 @@ class AuthPresenter extends ChangeNotifier {
     } else if (password == "") {
       ToastUi.show(_context!, AppLang.local(_context!).please_enter_password);
       return;
-    } else if (password_confirm == "") {
+    } else if (passwordConfirm == "") {
       ToastUi.show(
           _context!, AppLang.local(_context!).please_enter_confirm_password);
       return;
@@ -303,7 +303,7 @@ class AuthPresenter extends ChangeNotifier {
       ToastUi.show(
           _context!, AppLang.local(_context!).password_must_be_at_last_6_digit);
       return;
-    } else if (password != password_confirm) {
+    } else if (password != passwordConfirm) {
       ToastUi.show(
           _context!,
           AppLang.local(_context!)

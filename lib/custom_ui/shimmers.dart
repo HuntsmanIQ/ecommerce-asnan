@@ -13,7 +13,7 @@ class Shimmers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       height: height,
       child: Shimmer.fromColors(
@@ -33,7 +33,7 @@ class Shimmers extends StatelessWidget {
 
   static list(int items, double width, double height) {
     return ListView.separated(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Shimmers(width: width, height: height);
@@ -54,7 +54,7 @@ class Shimmers extends StatelessWidget {
           return Shimmers(width: width, height: height);
         },
         separatorBuilder: (context, index) {
-          return SizedBox(
+          return const SizedBox(
             width: 10,
           );
         },
@@ -62,11 +62,11 @@ class Shimmers extends StatelessWidget {
   }
 
   static gridShimmer(int crossAxisCount, int items,
-      {double width: 160, double height: 186, double radius: 8}) {
+      {double width = 160, double height = 186, double radius = 8}) {
     return GridView.builder(
         padding: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisCount,
             crossAxisSpacing: 16,

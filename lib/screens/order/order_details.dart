@@ -54,7 +54,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 24,
                             ),
                             Container(
@@ -69,7 +69,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     "Order Id: ${orderDetailsPresenter.orderInfo?.code ?? ''}",
                                     style: StyleConfig.fs12fwBold,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 14,
                                   ),
                                   Text(
@@ -79,14 +79,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 14,
                             ),
                             Text(
                               "Billing Address",
                               style: StyleConfig.fs14fwBold,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                             Container(
@@ -94,14 +94,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     horizontal: 8, vertical: 8),
                                 decoration: BoxDecorations.shadow(radius: 8),
                                 child: buildBillingAddress(context)),
-                            SizedBox(
+                            const SizedBox(
                               height: 14,
                             ),
                             Text(
                               "Shipping Address",
                               style: StyleConfig.fs14fwBold,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                             Container(
@@ -109,14 +109,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 8),
                                 child: buildShippingAddress(context)),
-                            SizedBox(
+                            const SizedBox(
                               height: 14,
                             ),
                             Text(
                               "Products",
                               style: StyleConfig.fs14fwBold,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                             Container(
@@ -146,9 +146,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   GridView.builder(
                                       //padding: EdgeInsets.only(left: StyleConfig.padding,right: StyleConfig.padding,bottom: 20),
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,
                                               crossAxisSpacing: 16,
                                               mainAxisSpacing: 8,
@@ -294,7 +294,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                             const SizedBox(
                               height: 14,
                             ),
-                            DottedLine(),
+                            const DottedLine(),
                             const SizedBox(
                               height: 14,
                             ),
@@ -322,7 +322,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       )
                     : SizedBox(
                         height: getHeight(context),
-                        child: Center(child: CircularProgressIndicator())),
+                        child: const Center(child: CircularProgressIndicator())),
               ),
             );
           }),

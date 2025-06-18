@@ -12,7 +12,6 @@ import 'package:grostore/helpers/common_functions.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/presenters/cart_presenter.dart';
-import 'package:grostore/presenters/categories_presenter.dart';
 import 'package:grostore/presenters/filter_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
 import 'package:grostore/screens/cart.dart';
@@ -93,14 +92,14 @@ class _FilterState extends State<Filter> {
                   Button(
                       color: ThemeConfig.green,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                          const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                       shape: StyleConfig.buttonRadius(5),
                       onPressed: () {
                         if (SystemData.isLogIn) {
-                          MakeRoute.go(context, Cart());
+                          MakeRoute.go(context, const Cart());
                         } else {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Login()));
+                              MaterialPageRoute(builder: (context) => const Login()));
                           return;
                         }
                       },
@@ -303,7 +302,7 @@ class _FilterState extends State<Filter> {
                     },
                     shape: StyleConfig.buttonRadius(6),
                     color: ThemeConfig.green,
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
                     minWidth: 40,
                     child: Text(
                       AppLang.local(context).filter,
@@ -334,7 +333,7 @@ class _FilterState extends State<Filter> {
                                     data.selectedCategoryId.toString()
                                 ? ThemeConfig.accentColor
                                 : ThemeConfig.noColor)),
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     onPressed: () {
                       data.onSelectCategory(data.categories[index].id);
                     },
@@ -345,7 +344,7 @@ class _FilterState extends State<Filter> {
                 );
               },
               separatorBuilder: (context, index) {
-                return SizedBox(
+                return const SizedBox(
                   width: 8,
                 );
               },
@@ -401,7 +400,7 @@ class _FilterState extends State<Filter> {
                   "Filter Form",
                   style: StyleConfig.fs12fwBold,
                 )),
-                content: Container(
+                content: SizedBox(
                   height: getHeight(context) * 0.28,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

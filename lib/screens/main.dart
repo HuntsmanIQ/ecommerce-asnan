@@ -23,7 +23,7 @@ class _MainState extends State<Main> {
   @override
   void initState() {
     Provider.of<MainPresenter>(context, listen: false).setContext(context);
-    Future.delayed(Duration(seconds: 1)).then((value) {
+    Future.delayed(const Duration(seconds: 1)).then((value) {
       Provider.of<StockLocationsPresenter>(context, listen: false)
           .fetchLocations(context);
     });
@@ -54,13 +54,13 @@ class _MainState extends State<Main> {
               onTap: data.onTapped,
               currentIndex: data.bottomAppbarIndex,
               backgroundColor: Colors.white.withOpacity(0.95),
-              unselectedItemColor: Color.fromRGBO(168, 175, 179, 1),
+              unselectedItemColor: const Color.fromRGBO(168, 175, 179, 1),
               selectedItemColor: ThemeConfig.accentColor,
               selectedLabelStyle: TextStyle(
                   fontWeight: FontWeight.w700,
                   color: ThemeConfig.accentColor,
                   fontSize: 12),
-              unselectedLabelStyle: TextStyle(
+              unselectedLabelStyle: const TextStyle(
                   fontWeight: FontWeight.w400,
                   color: Color.fromRGBO(168, 175, 179, 1),
                   fontSize: 12),
@@ -96,7 +96,7 @@ class _MainState extends State<Main> {
                         getAssetIcon("orders.png"),
                         color: data.bottomAppbarIndex == 2
                             ? ThemeConfig.accentColor
-                            : Color.fromRGBO(153, 153, 153, 1),
+                            : const Color.fromRGBO(153, 153, 153, 1),
                         height: 16,
                       ),
                     ),
@@ -120,10 +120,10 @@ class _MainState extends State<Main> {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               if (SystemData.isLogIn) {
-                MakeRoute.go(context, Cart());
+                MakeRoute.go(context, const Cart());
               } else {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
+                    context, MaterialPageRoute(builder: (context) => const Login()));
                 return;
               }
             },

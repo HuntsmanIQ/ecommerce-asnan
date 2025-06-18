@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:grostore/apis/coupons_api.dart';
-import 'package:grostore/apis/order_api.dart';
-import 'package:grostore/app_lang.dart';
 import 'package:grostore/models/coupon_response.dart';
-import 'package:grostore/models/order/orders_response.dart';
 
 class CouponPresenter extends ChangeNotifier {
   static BuildContext? context;
@@ -27,7 +24,7 @@ class CouponPresenter extends ChangeNotifier {
     if (response.statusCode == 200) {
       coupons.addAll(response.object.data);
       isCouponsInit=true;
-      coupons.forEach((element) {
+      for (var element in coupons) {
 
         DateTime end = convertTimeStampToDateTime(
             int.parse(element.endDate)); // YYYY-mm-dd
@@ -38,7 +35,7 @@ class CouponPresenter extends ChangeNotifier {
 
         print(element.endDate);
         controller.add( CountdownTimerController(endTime:endTime , onEnd: (){}));
-      });
+      }
       notifyListeners();
     }
   }

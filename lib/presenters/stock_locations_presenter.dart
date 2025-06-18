@@ -24,11 +24,11 @@ class StockLocationsPresenter extends ChangeNotifier{
     isLocationInit = true;
   await  stock_location_id.load();
     if(stock_location_id.$.isEmpty){
-      locations.forEach((element) {
+      for (var element in locations) {
         if(element.isDefault) {
           stock_location_id.$ = element.id.toString();
         }
-      });
+      }
     }
 
     notifyListeners();

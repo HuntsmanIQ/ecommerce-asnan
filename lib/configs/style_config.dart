@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:grostore/configs/theme_config.dart';
 
@@ -39,10 +38,10 @@ class StyleConfig {
       color: ThemeConfig.fontColor,
       fontWeight: FontWeight.normal);
 
-  static TextStyle get fs12cWhitefwBold => TextStyle(
+  static TextStyle get fs12cWhitefwBold => const TextStyle(
       fontSize: 12, color: ThemeConfig.white, fontWeight: FontWeight.bold);
 
-  static TextStyle get fs12cWhite => TextStyle(
+  static TextStyle get fs12cWhite => const TextStyle(
       fontSize: 12, color: ThemeConfig.white, fontWeight: FontWeight.normal);
 
   static TextStyle get fs12cGrey => TextStyle(
@@ -81,9 +80,9 @@ class StyleConfig {
       color: Color.fromARGB(255, 2, 165, 157),
       fontWeight: FontWeight.bold);
 
-  static TextStyle get fs14cWhitefwNormal => TextStyle(
+  static TextStyle get fs14cWhitefwNormal => const TextStyle(
       fontSize: 14, color: ThemeConfig.white, fontWeight: FontWeight.normal);
-  static TextStyle get fs14cWhitefwBold => TextStyle(
+  static TextStyle get fs14cWhitefwBold => const TextStyle(
       fontSize: 14, color: ThemeConfig.white, fontWeight: FontWeight.bold);
 
   static TextStyle get fs16 => TextStyle(
@@ -94,7 +93,7 @@ class StyleConfig {
   static TextStyle get fs16fwBold => TextStyle(
       fontSize: 16, color: ThemeConfig.fontColor, fontWeight: FontWeight.bold);
 
-  static TextStyle get fs16cWhitefwBold => TextStyle(
+  static TextStyle get fs16cWhitefwBold => const TextStyle(
       fontSize: 16, color: ThemeConfig.white, fontWeight: FontWeight.bold);
 
   static TextStyle get fs16cRedfwBold => TextStyle(

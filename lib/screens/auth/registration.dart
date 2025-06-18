@@ -1,11 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:grostore/app_lang.dart';
 import 'package:grostore/configs/style_config.dart';
 import 'package:grostore/configs/theme_config.dart';
-import 'package:grostore/constant/country_code.dart';
-import 'package:grostore/constant/country_search.dart';
 import 'package:grostore/custom_ui/Button.dart';
 import 'package:grostore/custom_ui/BoxDecorations.dart';
 import 'package:grostore/custom_ui/input_decorations.dart';
@@ -13,11 +9,12 @@ import 'package:grostore/helpers/common_functions.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/presenters/auth/auth_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 import '../../custom_ui/auth_ui.dart';
 
 class Registration extends StatefulWidget {
+  const Registration({super.key});
+
   @override
   _RegistrationState createState() => _RegistrationState();
 }
@@ -68,7 +65,7 @@ class _RegistrationState extends State<Registration> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
-              child: Container(
+              child: SizedBox(
                 height: 36,
                 child: TextField(
                   controller: data.regNameController,
@@ -96,7 +93,7 @@ class _RegistrationState extends State<Registration> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 36,
                     child: TextField(
                       controller: data.regEmailController,
@@ -153,18 +150,18 @@ class _RegistrationState extends State<Registration> {
                                   "${getAssetFlag(data.regCountry.code.toLowerCase())}.png"),
                             ),
                             Text(
-                              "${data.regCountry.dial_code}",
+                              data.regCountry.dial_code,
                               style: StyleConfig.fs14fwNormal,
                             )
                           ],
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 10),
                         width: getWidth(context) - 200,
                         child: TextField(
                           style: StyleConfig.fs14fwNormal,
-                          decoration: InputDecoration.collapsed(
+                          decoration: const InputDecoration.collapsed(
                               hintText: "XXX XXX XXX"),
                           controller: data.regPhoneNumberController,
                         ),
@@ -185,7 +182,7 @@ class _RegistrationState extends State<Registration> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 36,
                     child: TextField(
                       controller: data.regPasswordController,
@@ -221,7 +218,7 @@ class _RegistrationState extends State<Registration> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
-              child: Container(
+              child: SizedBox(
                 height: 36,
                 child: TextField(
                   controller: data.regPasswordConfirmController,
@@ -242,7 +239,7 @@ class _RegistrationState extends State<Registration> {
 
             Padding(
               padding: const EdgeInsets.only(top: 30.0),
-              child: Container(
+              child: SizedBox(
                 height: 45,
                 child: Button.minSize(
                     width: getWidth(context),
@@ -252,7 +249,7 @@ class _RegistrationState extends State<Registration> {
                         borderRadius: BorderRadius.all(Radius.circular(6.0))),
                     child: Text(
                       AppLang.local(context).sign_up_ucf,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
@@ -273,7 +270,7 @@ class _RegistrationState extends State<Registration> {
                     style:
                         TextStyle(color: ThemeConfig.fontColor, fontSize: 12),
                   )),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Button(
@@ -288,7 +285,7 @@ class _RegistrationState extends State<Registration> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Login();
+                        return const Login();
                       }));
                     },
                   ),
@@ -304,18 +301,18 @@ class _RegistrationState extends State<Registration> {
   AlertDialog buildFilterDialog(AuthPresenter data) {
     return AlertDialog(
       title: const Text('Search Country'),
-      content: Container(
+      content: SizedBox(
         height: 300,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             TextField(
               onChanged: data.filterCountry,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Expanded(
               child: SingleChildScrollView(
                 child: Consumer<AuthPresenter>(

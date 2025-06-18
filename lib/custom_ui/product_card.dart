@@ -93,18 +93,18 @@ class ProductCard extends StatelessWidget {
                           this.context, ProductDetails(slug: product.slug));
                     }
                   } else {
-                    MakeRoute.productRoute(this.context, Login());
+                    MakeRoute.productRoute(this.context, const Login());
                   }
                 },
                 width: 40,
                 height: 40,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
                     bottomRight: Radius.circular(8),
                   ),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.add,
                   color: ThemeConfig.white,
                 ),
@@ -113,9 +113,9 @@ class ProductCard extends StatelessWidget {
           ],
         ),
       );
-    } catch (e, stack) {
+    } catch (e) {
       print('❌ خطأ في ProductCard: $e');
-      return SizedBox(); // أو Text("حدث خطأ")
+      return const SizedBox(); // أو Text("حدث خطأ")
     }
   }
 }

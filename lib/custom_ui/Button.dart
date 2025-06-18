@@ -6,9 +6,9 @@ class Button extends StatelessWidget {
  final OutlinedBorder? shape;
  final Widget child;
  final EdgeInsetsGeometry? padding;
- final dynamic? minWidth;
- final dynamic? minHeight;
- final dynamic? onPressed;
+ final dynamic minWidth;
+ final dynamic minHeight;
+ final dynamic onPressed;
  final AlignmentGeometry alignment;
 
    const Button({Key? key, this.color = const Color.fromARGB(0, 0, 0, 0),

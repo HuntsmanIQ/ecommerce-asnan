@@ -2,7 +2,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:grostore/apis/currency_api.dart';
 import 'package:grostore/apis/language_api.dart';
-import 'package:grostore/custom_classes/system_data.dart';
 import 'package:grostore/models/currency_response.dart';
 import 'package:grostore/models/language_response.dart';
 
@@ -26,7 +25,7 @@ class SettingPresenter extends ChangeNotifier{
     currencyList.addAll(res.object.data);
 
     print("Currency");
-    currencyList.forEach((element) {
+    for (var element in currencyList) {
       if(system_currency.$.isEmpty && element.isDefault){
         print("Currency isDefault");
         onChange(element);
@@ -36,7 +35,7 @@ class SettingPresenter extends ChangeNotifier{
         print(element.toJson());
         onChange(element);
       }
-    });
+    }
 
     notifyListeners();
   }
@@ -45,23 +44,21 @@ class SettingPresenter extends ChangeNotifier{
     languageList.clear();
     var res = await LanguageApi.getLanguages();
     languageList.addAll(res.object.data);
-    languageList.forEach((element) {
+    for (var element in languageList) {
       if(app_language.$ == element.code){
         selectedLanguage = element;
       }
-    });
+    }
     notifyListeners();
   }
 
   onChange(CurrencyInfo currency){
-    if(currency!=null) {
-      selectedCurrency = currency;
-      // SystemData.systemCurrency = currency;
-      system_currency.$ = currency.code;
-      system_currency.save();
-      notifyListeners();
+    selectedCurrency = currency;
+    // SystemData.systemCurrency = currency;
+    system_currency.$ = currency.code;
+    system_currency.save();
+    notifyListeners();
     }
-  }
 
   Locale get locale {
     //print("app_mobile_language.isEmpty${app_mobile_language.$.isEmpty}");

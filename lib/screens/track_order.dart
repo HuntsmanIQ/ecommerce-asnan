@@ -6,7 +6,6 @@ import 'package:grostore/custom_classes/system_data.dart';
 import 'package:grostore/custom_ui/BoxDecorations.dart';
 import 'package:grostore/custom_ui/Button.dart';
 import 'package:grostore/custom_ui/common_appbar.dart';
-import 'package:grostore/custom_ui/input_decorations.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/presenters/order_presenter.dart';
 
@@ -59,7 +58,7 @@ class _TrackOrderState extends State<TrackOrder> {
                               decoration: const InputDecoration.collapsed(
                                   hintText: "123456")),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         SizedBox(
                             width: 40,
                             height: 40,
@@ -70,11 +69,11 @@ class _TrackOrderState extends State<TrackOrder> {
                                           .trim(),
                                       context);
                                 },
-                                child: Icon(Icons.search))),
+                                child: const Icon(Icons.search))),
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 24,
                   ),
                   if (orderPresenter.trackInfo != null)
@@ -85,7 +84,7 @@ class _TrackOrderState extends State<TrackOrder> {
                           AppLang.local(context).order_tracking,
                           style: StyleConfig.fs16fwBold,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 14,
                         ),
                         Container(
@@ -125,7 +124,7 @@ class _TrackOrderState extends State<TrackOrder> {
                                       0,
                                   (index) => Column(
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       Padding(
@@ -150,7 +149,7 @@ class _TrackOrderState extends State<TrackOrder> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       Container(
@@ -164,7 +163,7 @@ class _TrackOrderState extends State<TrackOrder> {
                               ),
                               Column(
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Padding(
@@ -184,7 +183,7 @@ class _TrackOrderState extends State<TrackOrder> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                 ],

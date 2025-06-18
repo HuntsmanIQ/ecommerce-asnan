@@ -49,7 +49,7 @@ class AuthPageModel extends StatelessWidget {
             style: StyleConfig.fs22fwEBold,
             textAlign: TextAlign.center,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
@@ -76,7 +76,7 @@ class AuthPageModel extends StatelessWidget {
                   MakeRoute.go(context, const Login());
                 },
               ),
-              Spacer(),
+              const Spacer(),
               Button(
                 shape: StyleConfig.buttonRadius(5),
 
@@ -86,7 +86,7 @@ class AuthPageModel extends StatelessWidget {
                     horizontal: StyleConfig.padding14,
                     vertical: StyleConfig.padding14),
                 onPressed: (){
-                  MakeRoute.go(context, Registration());
+                  MakeRoute.go(context, const Registration());
                 },
                 child: Text(
                   AppLang.local(context).register,

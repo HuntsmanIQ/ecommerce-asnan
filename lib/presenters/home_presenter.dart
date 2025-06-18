@@ -43,7 +43,7 @@ class HomePresenter extends ChangeNotifier {
 
   Widget bannerImageSimple(BannerData data) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       child: Button(
         minWidth: getWidth(context),
         onPressed: () {
@@ -90,9 +90,9 @@ class HomePresenter extends ChangeNotifier {
     homeBannerImages = [];
     var bannerOneResponse = await BannersApi.homeBanner(context!);
     if (bannerOneResponse.statusCode == 200) {
-      bannerOneResponse.object.data.forEach((slider) {
+      for (var slider in bannerOneResponse.object.data) {
         homeBannerImages.add(bannerImageSimple(slider));
-      });
+      }
       isHomeBannerInitial = true;
 
       notifyListeners();

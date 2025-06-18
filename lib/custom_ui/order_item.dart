@@ -72,7 +72,7 @@ class OrderItem extends StatelessWidget {
           ),
           if (item.refund_status != "off")
             Container(
-              margin: EdgeInsets.only(top: 5),
+              margin: const EdgeInsets.only(top: 5),
               alignment: Alignment.center,
               child: Button(
                   onPressed: item.refund_status == "request"
@@ -81,7 +81,7 @@ class OrderItem extends StatelessWidget {
                         }
                       : null,
                   shape: StyleConfig.buttonRadius(5),
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   color: item.refund_status == "request"
                       ? ThemeConfig.accentColor
                       : null,
@@ -103,14 +103,14 @@ class OrderItem extends StatelessWidget {
         builder: (context) => AlertDialog(
               title: const Text("Refund Reason"),
               content: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecorations.basic()
                     .copyWith(border: Border.all(color: ThemeConfig.grey)),
                 height: 100,
                 width: getWidth(context) * 0.5,
                 child: TextField(
                   controller: controller,
-                  decoration: InputDecoration.collapsed(hintText: "reason"),
+                  decoration: const InputDecoration.collapsed(hintText: "reason"),
                 ),
               ),
               actions: [

@@ -154,7 +154,7 @@ class _HomeState extends State<Home> {
   }
 
   Container buildTopCategorySection(HomePresenter data) {
-    return Container(
+    return SizedBox(
       height: 87,
       child: data.isTopCategoryInitial
           ? ListView.separated(
@@ -180,7 +180,7 @@ class _HomeState extends State<Home> {
                 );
               },
               separatorBuilder: (context, index) {
-                return SizedBox(
+                return const SizedBox(
                   width: 8,
                 );
               },
@@ -232,7 +232,7 @@ class _HomeState extends State<Home> {
                   height: 16,
                   width: 16,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 Text(
@@ -266,7 +266,7 @@ class _HomeState extends State<Home> {
           );
         },
         separatorBuilder: (context, index) {
-          return SizedBox(
+          return const SizedBox(
             width: 8,
             height: 10,
           );
@@ -278,8 +278,8 @@ class _HomeState extends State<Home> {
     return GridView.builder(
         padding: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
@@ -310,7 +310,7 @@ class _HomeState extends State<Home> {
                 return const Text('لا توجد منتجات');
               }
             },
-            separatorBuilder: (context, index) => SizedBox(
+            separatorBuilder: (context, index) => const SizedBox(
                   width: 10,
                 ),
             itemCount: data.bestSellingProductList.length)
@@ -325,8 +325,8 @@ class _HomeState extends State<Home> {
                 right: StyleConfig.padding,
                 bottom: 20),
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,

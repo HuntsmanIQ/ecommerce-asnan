@@ -19,7 +19,7 @@ class MainPresenter extends ChangeNotifier {
 
   // BottomAppbarIndex bottomAppbarIndex = BottomAppbarIndex();
 
-  var bottomAppbarChildren = [Home(), Categories(), Orders(), Account()];
+  var bottomAppbarChildren = [Home(), Categories(), Orders(), const Account()];
 
   fetchAll() {
     getCartCount();
@@ -29,15 +29,15 @@ class MainPresenter extends ChangeNotifier {
     if ((i == 2)) {
       if ((!SystemData.isLogIn)) {
         Navigator.push(
-            context!, MaterialPageRoute(builder: (context) => Login()));
+            context!, MaterialPageRoute(builder: (context) => const Login()));
         return;
       }
     }
 
     if (i == 3) {
       language_is_rtl.$
-          ? slideLeftWidget(newPage: Account(), context: context!)
-          : slideRightWidget(newPage: Account(), context: context!);
+          ? slideLeftWidget(newPage: const Account(), context: context!)
+          : slideRightWidget(newPage: const Account(), context: context!);
       return;
     }
 

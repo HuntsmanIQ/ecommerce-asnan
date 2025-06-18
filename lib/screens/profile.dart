@@ -26,7 +26,6 @@ import 'package:grostore/screens/wallet.dart';
 import 'package:grostore/screens/wishlist.dart';
 import 'package:provider/provider.dart';
 import 'package:route_transitions/route_transitions.dart';
-import 'package:toast/toast.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -43,7 +42,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
       appBar: AppBar(
         backgroundColor: ThemeConfig.accentColor,
         elevation: 0,
-        leading: SizedBox.shrink(),
+        leading: const SizedBox.shrink(),
         actions: [
           buildBackButtonContainer(context),
         ],
@@ -54,7 +53,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
@@ -74,7 +73,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                               width: 80,
                               height: 80,
                               radius: 10),
-                          SizedBox(
+                          const SizedBox(
                             width: 14,
                           ),
                           Column(
@@ -85,7 +84,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                                 SystemData.userInfo.name,
                                 style: StyleConfig.fs16cWhitefwBold,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Text(
@@ -94,19 +93,19 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                               ),
                             ],
                           ),
-                          Spacer(),
+                          const Spacer(),
                         ],
                       ),
                       Button(
                         onPressed: () {
-                          MakeRoute.go(context, ProfileEdit());
+                          MakeRoute.go(context, const ProfileEdit());
                         },
                         minWidth: 60,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         shape: StyleConfig.buttonRadius(8).copyWith(
                             side:
-                                BorderSide(width: 1, color: ThemeConfig.white))
+                                const BorderSide(width: 1, color: ThemeConfig.white))
                         // RoundedRectangleBorder(borderRadius: BorderRadius.c),
                         ,
                         child: Text(
@@ -125,13 +124,13 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(45),
                             color: ThemeConfig.extraDarkGrey),
                         padding:
-                            EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                            const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                         child: Image.asset(
                           getAssetIcon("profile.png"),
                           color: ThemeConfig.lightGrey,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Button(
@@ -139,7 +138,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                         // shape: StyleConfig.buttonRadius(10).copyWith(side: BorderSide(width: 1,color: ThemeConfig.white))
                         // RoundedRectangleBorder(borderRadius: BorderRadius.c),
                         onPressed: () {
-                          MakeRoute.go(context, Login());
+                          MakeRoute.go(context, const Login());
                         },
                         child: Text(
                           "تـسجيل الدخـول",
@@ -160,7 +159,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                   top: 40),
               //height: getHeight(context)-220,
               decoration: BoxDecorations.customRadius(
-                  radius: BorderRadius.only(
+                  radius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10)),
                   color: ThemeConfig.white),
@@ -168,7 +167,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                 child: Column(
                   children: [
                     optionModel(AppLang.local(context).pick_a_location,
-                        getAssetIcon("address.png"), StockLocations()),
+                        getAssetIcon("address.png"), const StockLocations()),
                     if (SystemData.isLogIn)
                       Column(
                         children: [
@@ -177,7 +176,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                               getAssetIcon("coupons.png"),
                               const Coupons()),
                           optionModel(AppLang.local(context).favorite,
-                              getAssetIcon("favorite.png"), Wishlist()),
+                              getAssetIcon("favorite.png"), const Wishlist()),
                           optionModel(
                               AppLang.local(context).order_n_recording_ucf,
                               getAssetIcon("orders.png"),
@@ -213,18 +212,18 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                     optionModel(
                         AppLang.local(context).terms_n_conditions_ucf,
                         getAssetIcon("terms_condition.png"),
-                        Pages(slug: "terms-conditions")),
+                        const Pages(slug: "terms-conditions")),
                     if (SystemData.isLogIn)
                       logoutModel(AppLang.local(context).log_out_ucf,
                           getAssetIcon("logout.png"), () {
                         Provider.of<AuthPresenter>(context, listen: false)
                             .logout(context);
-                        MakeRoute.goAndRemoveAll(context, Main());
+                        MakeRoute.goAndRemoveAll(context, const Main());
                       }),
                     if (!SystemData.isLogIn)
                       optionModel(AppLang.local(context).login,
-                          getAssetIcon("login.png"), Login()),
-                    SizedBox(height: 50)
+                          getAssetIcon("login.png"), const Login()),
+                    const SizedBox(height: 50)
                   ],
                 ),
               ),
@@ -247,7 +246,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
           onPressed: () {
             pop(context);
           },
-          child: Icon(
+          child: const Icon(
             Icons.close,
             size: 30,
             color: ThemeConfig.white,

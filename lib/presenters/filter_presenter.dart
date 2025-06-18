@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:grostore/apis/category_api.dart';
-import 'package:grostore/apis/order_api.dart';
 import 'package:grostore/apis/product_api.dart';
 import 'package:grostore/app_lang.dart';
 import 'package:grostore/custom_ui/loading.dart';
 import 'package:grostore/custom_ui/toast_ui.dart';
 import 'package:grostore/models/common/category_info.dart';
-import 'package:grostore/models/order/orders_response.dart';
-import 'package:grostore/models/category_response.dart';
 import 'package:grostore/models/product_mini_response.dart';
 
 class FilterPresenter extends ChangeNotifier {
@@ -26,7 +23,7 @@ class FilterPresenter extends ChangeNotifier {
   List<CategoryInfo> categories = [];
   List<ProductMini> products = [];
 
-  RangeValues price = RangeValues(0, 5);
+  RangeValues price = const RangeValues(0, 5);
 
 //fetch data
   getCategories() async {
@@ -67,7 +64,7 @@ class FilterPresenter extends ChangeNotifier {
   }
 
   clearPriceRange() {
-    price = RangeValues(0, 0);
+    price = const RangeValues(0, 0);
     notifyListeners();
   }
 
