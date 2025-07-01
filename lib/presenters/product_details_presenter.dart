@@ -20,7 +20,6 @@ class ProductDetailsPresenter extends ChangeNotifier {
   int currentSlider = 0, quantity = 1;
   Variation? selectedVariation;
 
-
   // ScrollController mainScrollController = ScrollController();
   ProductDetailsInfo? productInfo;
   List<ProductMini> relatedProducts = [];
@@ -45,10 +44,10 @@ class ProductDetailsPresenter extends ChangeNotifier {
     if (selectedVariation != null && selectedVariation!.sock > quantity) {
       quantity++;
       notifyListeners();
-    }else{
-      ToastUi.show(context!, AppLang.local(context!).product_stock_not_available);
+    } else {
+      ToastUi.show(
+          context!, AppLang.local(context!).product_stock_not_available);
     }
-
   }
 
   decrementQty() {
@@ -60,18 +59,18 @@ class ProductDetailsPresenter extends ChangeNotifier {
 
   fetchProductInfo(String slug) async {
     var response = await ProductApi.details(context!, slug);
-    if(response.statusCode==200){
+    if (response.statusCode == 200) {
       productInfo = response.object.data;
-      if(SystemData.isLogIn) {
-        Provider.of<WishlistPresenter>(context!,listen: false).checkWishlist(productInfo!.id);
-
+      if (SystemData.isLogIn) {
+        Provider.of<WishlistPresenter>(context!, listen: false)
+            .checkWishlist(productInfo!.id);
       }
       isProductInfoInitial = true;
       selectedVariation = productInfo!.variations.first;
       for (var element in productInfo!.variationMaterials) {
         List<ProductVariationValue> value = [];
         for (var valueElement in element.values) {
-          String code;
+          String? code;
           if (valueElement.code != null) {
             code =
                 "0xFF${valueElement.code!.replaceAll("#", "").toUpperCase()}";
@@ -89,12 +88,12 @@ class ProductDetailsPresenter extends ChangeNotifier {
             id: element.id, name: element.name, values: value));
       }
       notifyListeners();
-    }else{
+    } else {
       _toastMessage();
     }
   }
 
-  _toastMessage(){
+  _toastMessage() {
     ToastUi.show(context!, AppLang.local(context!).something_went_wrong);
   }
 
@@ -120,11 +119,11 @@ class ProductDetailsPresenter extends ChangeNotifier {
 
   fetchRelatedProduct(slug) async {
     var response = await ProductApi.relatedProducts(context!, slug);
-    if(response.statusCode==200){
+    if (response.statusCode == 200) {
       relatedProducts.addAll(response.object.data);
       isRelatedInitial = true;
       notifyListeners();
-    }else{
+    } else {
       _toastMessage();
     }
   }
@@ -149,7 +148,7 @@ class ProductDetailsPresenter extends ChangeNotifier {
 
   Future<void> onRefresh() async {
     reset();
-  return  fetchAll(slug);
+    return fetchAll(slug);
   }
 
   changeCurrentSlider(index) {
@@ -161,5 +160,4 @@ class ProductDetailsPresenter extends ChangeNotifier {
     reset();
     fetchAll(slug);
   }
-
 }

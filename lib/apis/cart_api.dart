@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:grostore/api_request.dart';
 import 'package:grostore/configs/app_config.dart';
 import 'package:grostore/helpers/common_functions.dart';
@@ -11,7 +10,7 @@ class CartApi {
   static Future<ResponseModel<CartResponse>> carts() async {
     var url = "${AppConfig.apiUrl}/carts";
     Map<String, String> header = getCommonHeader();
-    header.addAll({"Authorization": "Bearer $access_token"});
+    header.addAll({"Authorization": "Bearer ${access_token.$}"});
     header.addAll(getCurrencyHeader());
     print(header);
     ApiResponse response = await ApiRequest.get(url, header);

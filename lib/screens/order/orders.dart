@@ -16,7 +16,8 @@ class Orders extends StatefulWidget {
   bool fromBottomBar;
   bool fromCheckOut;
 
-  Orders({Key? key, this.fromBottomBar = true,this.fromCheckOut=false}) : super(key: key);
+  Orders({Key? key, this.fromBottomBar = true, this.fromCheckOut = false})
+      : super(key: key);
 
   @override
   State<Orders> createState() => _OrdersState();
@@ -38,8 +39,8 @@ class _OrdersState extends State<Orders> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: (){
-        if(widget.fromCheckOut){
+      onWillPop: () {
+        if (widget.fromCheckOut) {
           MakeRoute.goAndRemoveAll(context, const Main());
           return Future(() => true);
         }
@@ -97,9 +98,10 @@ class _OrdersState extends State<Orders> {
                     )
                   else
                     Container(
-                      height: getHeight(context)-180,
+                        height: getHeight(context) - 180,
                         alignment: Alignment.center,
-                        child: Text(AppLang.local(context).data_is_not_available))
+                        child:
+                            Text(AppLang.local(context).data_is_not_available))
                 ],
               ),
             ),
@@ -109,9 +111,8 @@ class _OrdersState extends State<Orders> {
     );
   }
 
-  Container buildTapbar(BuildContext context, OrderPresenter data) {
+  buildTapbar(BuildContext context, OrderPresenter data) {
     return SizedBox(
-
       // color: Colors.red,
       width: getWidth(context),
       height: 40,

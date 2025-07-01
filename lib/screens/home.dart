@@ -153,7 +153,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Container buildTopCategorySection(HomePresenter data) {
+  buildTopCategorySection(HomePresenter data) {
     return SizedBox(
       height: 87,
       child: data.isTopCategoryInitial

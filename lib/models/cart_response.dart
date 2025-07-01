@@ -1,10 +1,11 @@
 // To parse this JSON data, do
-//
+
 //     final cartResponse = cartResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-CartResponse cartResponseFromJson(String str) => CartResponse.fromJson(json.decode(str));
+CartResponse cartResponseFromJson(String str) =>
+    CartResponse.fromJson(json.decode(str));
 
 String cartResponseToJson(CartResponse data) => json.encode(data.toJson());
 
@@ -28,24 +29,24 @@ class CartResponse {
   });
 
   factory CartResponse.fromJson(Map<String, dynamic> json) => CartResponse(
-    result: json["result"],
-    message: json["message"],
-    carts: List<Cart>.from(json["carts"].map((x) => Cart.fromJson(x))),
-    cartCount: json["cartCount"],
-    subTotal: json["subTotal"],
-    total: json["total"],
-    couponDiscount: json["couponDiscount"],
-  );
+        result: json["result"],
+        message: json["message"],
+        carts: List<Cart>.from(json["carts"].map((x) => Cart.fromJson(x))),
+        cartCount: json["cartCount"],
+        subTotal: json["subTotal"],
+        total: json["total"],
+        couponDiscount: json["couponDiscount"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "result": result,
-    "message": message,
-    "carts": List<dynamic>.from(carts.map((x) => x.toJson())),
-    "cartCount": cartCount,
-    "subTotal": subTotal,
-    "total": total,
-    "couponDiscount": couponDiscount,
-  };
+        "result": result,
+        "message": message,
+        "carts": List<dynamic>.from(carts.map((x) => x.toJson())),
+        "cartCount": cartCount,
+        "subTotal": subTotal,
+        "total": total,
+        "couponDiscount": couponDiscount,
+      };
 }
 
 class Cart {
@@ -70,24 +71,24 @@ class Cart {
   });
 
   factory Cart.fromJson(Map<String, dynamic> json) => Cart(
-    id: json["id"],
-    slug: json["slug"],
-    name: json["name"],
-    quantity: json["quantity"],
-    thumbnailImage: json["thumbnail_image"],
-    unit: json["unit"],
-    price: json["price"],
-    category: json["category"],
-  );
+        id: json["id"],
+        slug: json["slug"],
+        name: json["name"],
+        quantity: json["quantity"],
+        thumbnailImage: json["thumbnail_image"],
+        unit: json["unit"],
+        price: json["price"],
+        category: json["category"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "slug": slug,
-    "name": name,
-    "quantity": quantity,
-    "thumbnail_image": thumbnailImage,
-    "unit": unit,
-    "price": price,
-    "category": category,
-  };
+        "id": id,
+        "slug": slug,
+        "name": name,
+        "quantity": quantity,
+        "thumbnail_image": thumbnailImage,
+        "unit": unit,
+        "price": price,
+        "category": category,
+      };
 }
