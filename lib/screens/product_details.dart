@@ -101,7 +101,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, variationIndex) {
-                          return Container(
+                          return SizedBox(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

@@ -18,11 +18,9 @@ import 'package:grostore/screens/main.dart';
 import 'package:grostore/screens/order/orders.dart';
 import 'package:grostore/screens/pages.dart';
 import 'package:grostore/screens/profile_edit.dart';
-import 'package:grostore/screens/refund.dart';
 import 'package:grostore/screens/setting.dart';
 import 'package:grostore/screens/stock_locations.dart';
 import 'package:grostore/screens/track_order.dart';
-import 'package:grostore/screens/wallet.dart';
 import 'package:grostore/screens/wishlist.dart';
 import 'package:provider/provider.dart';
 import 'package:route_transitions/route_transitions.dart';
@@ -47,9 +45,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
           buildBackButtonContainer(context),
         ],
       ),
-      // PreferredSize(preferredSize: Size(getWidth(context),40),
-      // child:
-      //     ),
+      
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -57,7 +53,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
             height: 20,
           ),
           Container(
-            height: 160, //80
+            height: 160, 
             width: getWidth(context),
             padding: EdgeInsets.symmetric(
                 horizontal: StyleConfig.padding, vertical: 10),
@@ -135,21 +131,23 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                       ),
                       Button(
                         minWidth: 20,
-                        // shape: StyleConfig.buttonRadius(10).copyWith(side: BorderSide(width: 1,color: ThemeConfig.white))
-                        // RoundedRectangleBorder(borderRadius: BorderRadius.c),
+                       
                         onPressed: () {
                           MakeRoute.go(context, const Login());
                         },
                         child: Text(
                           "تـسجيل الدخـول",
-                          style: StyleConfig.fs16fwBold
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black
+                          )
                               .copyWith(decoration: TextDecoration.underline),
                         ),
                       )
                     ],
                   ),
           ),
-          //SizedBox(height: 20,),
           Expanded(
             flex: 5,
             child: Container(
@@ -157,7 +155,6 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                   left: StyleConfig.padding,
                   right: StyleConfig.padding,
                   top: 40),
-              //height: getHeight(context)-220,
               decoration: BoxDecorations.customRadius(
                   radius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
@@ -183,26 +180,14 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                               Orders(
                                 fromBottomBar: false,
                               )),
-                          // optionModel(AppLang
-                          //     .local(context)
-                          //     .my_profile_ucf, getAssetIcon("profile.png"),
-                          //     Container()),
+                          
                           optionModel(AppLang.local(context).address,
                               getAssetIcon("address.png"), const Addresses()),
-                          // optionModel(AppLang
-                          //     .local(context)
-                          //     .notification, getAssetIcon("notification.png"),
-                          //     Container()),
-                          // optionModel(AppLang
-                          //     .local(context)
-                          //     .security, getAssetIcon("security.png"),
-                          //     Container()),
+                          
                           optionModel(AppLang.local(context).track_my_order_ucf,
                               getAssetIcon("track.png"), const TrackOrder()),
-                          optionModel(AppLang.local(context).wallet_history_ucf,
-                              getAssetIcon("wallet.png"), const Wallet()),
-                          optionModel(AppLang.local(context).refund_history_ucf,
-                              getAssetIcon("refund.png"), const Refund()),
+                         
+                         
                         ],
                       ),
                     optionModel(AppLang.local(context).help_center_ucf,

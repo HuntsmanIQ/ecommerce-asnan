@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:grostore/app_lang.dart';
 import 'package:grostore/configs/style_config.dart';
-import 'package:grostore/configs/theme_config.dart';
 import 'package:grostore/custom_ui/BoxDecorations.dart';
 import 'package:grostore/custom_ui/Button.dart';
 import 'package:grostore/custom_ui/category_ui.dart';
@@ -13,6 +12,7 @@ import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/presenters/home_presenter.dart';
 import 'package:grostore/screens/filter.dart';
+import 'package:grostore/screens/test.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -34,18 +34,14 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   Provider.of<HomePresenter>(context, listen: false).dispose();
-  //   super.dispose();
-  // }
+  
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ThemeConfig.xxlightGrey,
+        backgroundColor: Color(0xffD0F0FF
+),
         appBar: buildSearchOption(context),
         body: Consumer<HomePresenter>(builder: (context, data, child) {
           return RefreshIndicator(
@@ -60,6 +56,9 @@ class _HomeState extends State<Home> {
                     const SizedBox(
                       height: 14,
                     ),
+                    Button(child: Text('test'),onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Test()));
+                    },),
                     Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: StyleConfig.padding),
@@ -214,10 +213,12 @@ class _HomeState extends State<Home> {
     return PreferredSize(
         preferredSize: Size(getWidth(context), 60),
         child: Container(
+  
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
           margin: const EdgeInsets.only(top: 12, left: 24, right: 24),
           width: getWidth(context),
-          decoration: BoxDecorations.shadow(radius: 6.0),
+          decoration: BoxDecorations.shadow(radius: 6.0,
+          ),
           child: Button(
             onPressed: () => MakeRoute.go(
                 context,

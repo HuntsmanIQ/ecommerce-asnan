@@ -91,15 +91,17 @@ class _FilterState extends State<Filter> {
                   ),
                   Button(
                       color: ThemeConfig.green,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 8),
                       shape: StyleConfig.buttonRadius(5),
                       onPressed: () {
                         if (SystemData.isLogIn) {
                           MakeRoute.go(context, const Cart());
                         } else {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const Login()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Login()));
                           return;
                         }
                       },
@@ -113,128 +115,6 @@ class _FilterState extends State<Filter> {
           },
         ),
       ),
-      /* bottomSheet:BottomSheet(
-        onClosing: (){}, builder: (context)=>Container(
-        height: 250,
-        width: getWidth(context),
-        color: Colors.red,
-        child: Consumer<FilterPresenter>(
-            builder: (context, data, child) {
-              return Column(
-                children: [
-                  spacer(height: 10),
-                  headerTitle(AppLang.local(context).categories),
-                  spacer(height: StyleConfig.xsSectionSpacer),
-                  buildCategorySection(data),
-                  spacer(height: StyleConfig.smSectionSpacer),
-                  headerTitle(AppLang.local(context).price_range_ucf),
-                  RangeSlider(
-                    onChanged: (nPrice) {
-                      data.onChangePrice(nPrice);
-                      print(nPrice);
-                    },
-                    //onChangeEnd: data.onChangePrice,
-
-                    min: 0,
-                    max: 500,
-                    values: data.price,
-                  ),
-                  Padding(
-                    padding:
-                    EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                    child: Row(
-                      children: [
-                        Text(
-                          data.price.start.round().toString(),
-                          style: StyleConfig.fs14fwNormal,
-                        ),
-                        SizedBox(
-                          width: StyleConfig.xsSectionSpacer,
-                        ),
-                        Text(
-                          AppLang.local(context).to,
-                          style: StyleConfig.fs14fwNormal,
-                        ),
-                        SizedBox(
-                          width: StyleConfig.xsSectionSpacer,
-                        ),
-                        Text(
-                          data.price.end.round().toString(),
-                          style: StyleConfig.fs14fwNormal,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              );
-            }
-        ),
-      ))
-*/
-      /*bottomNavigationBar: Container(
-       color: ThemeConfig.white,
-      height: 280,
-      width: getWidth(context),
-      child: Consumer<FilterPresenter>(
-          builder: (context, data, child) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                spacer(height: 10),
-                headerTitle(AppLang.local(context).categories),
-                spacer(height: StyleConfig.xsSectionSpacer),
-                buildCategorySection(data),
-                spacer(height: StyleConfig.smSectionSpacer),
-                headerTitle(AppLang.local(context).price_range_ucf),
-                RangeSlider(
-                  onChanged: (nPrice) {
-                    data.onChangePrice(nPrice);
-                  },
-                  min: 0,
-                  max: 500,
-                  values: (data.price),
-                ),
-                Padding(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                  child: Row(
-                    children: [
-                      Text(
-                        data.price.start.round().toString(),
-                        style: StyleConfig.fs14fwNormal,
-                      ),
-                      SizedBox(
-                        width: StyleConfig.xsSectionSpacer,
-                      ),
-                      Text(
-                        AppLang.local(context).to,
-                        style: StyleConfig.fs14fwNormal,
-                      ),
-                      SizedBox(
-                        width: StyleConfig.xsSectionSpacer,
-                      ),
-                      Text(
-                        data.price.end.round().toString(),
-                        style: StyleConfig.fs14fwNormal,
-                      ),
-                    ],
-                  ),
-                ),
-                Spacer(),
-                Button(
-                  color: ThemeConfig.green,
-                    minWidth: getWidth(context),
-                    padding: EdgeInsets.symmetric(vertical: 14),
-                    onPressed: (){
-
-                    },
-                    child: Text(AppLang.local(context).filter,style: StyleConfig.fs16cWhitefwBold,))
-              ],
-            );
-          }
-      ),
-    ),*/
     );
   }
 
@@ -302,7 +182,8 @@ class _FilterState extends State<Filter> {
                     },
                     shape: StyleConfig.buttonRadius(6),
                     color: ThemeConfig.green,
-                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 10),
                     minWidth: 40,
                     child: Text(
                       AppLang.local(context).filter,
@@ -401,7 +282,7 @@ class _FilterState extends State<Filter> {
                   style: StyleConfig.fs12fwBold,
                 )),
                 content: SizedBox(
-                  height: getHeight(context) * 0.28,
+                  height: getHeight(context) * 0.35,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -412,13 +293,15 @@ class _FilterState extends State<Filter> {
                           child: buildCategorySection(data)),
                       spacer(height: StyleConfig.smSectionSpacer),
                       headerTitle(AppLang.local(context).price_range_ucf),
-                      RangeSlider(
-                        onChanged: (nPrice) {
-                          data.onChangePrice(nPrice);
-                        },
-                        min: 0,
-                        max: 500,
-                        values: (data.price),
+                      Expanded(
+                        child: RangeSlider(
+                          onChanged: (nPrice) {
+                            data.onChangePrice(nPrice);
+                          },
+                          min: 0,
+                          max: 500,
+                          values: (data.price),
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(

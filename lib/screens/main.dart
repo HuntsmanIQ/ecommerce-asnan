@@ -28,7 +28,6 @@ class _MainState extends State<Main> {
           .fetchLocations(context);
     });
 
-    // TODO: implement initState
     super.initState();
   }
 
@@ -47,121 +46,154 @@ class _MainState extends State<Main> {
         child: Scaffold(
           extendBody: true,
           body: data.bottomAppbarChildren[data.bottomAppbarIndex],
-          bottomNavigationBar: SizedBox(
-            height: 120,
-            child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              onTap: data.onTapped,
-              currentIndex: data.bottomAppbarIndex,
-              backgroundColor: Colors.white.withOpacity(0.95),
-              unselectedItemColor: const Color.fromRGBO(168, 175, 179, 1),
-              selectedItemColor: ThemeConfig.accentColor,
-              selectedLabelStyle: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: ThemeConfig.accentColor,
-                  fontSize: 12),
-              unselectedLabelStyle: const TextStyle(
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromRGBO(168, 175, 179, 1),
-                  fontSize: 12),
-              items: [
-                BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Image.asset(
-                        getAssetIcon("home.png"),
-                        color: data.bottomAppbarIndex == 0
-                            ? ThemeConfig.accentColor
-                            : ThemeConfig.grey,
-                        height: 16,
+
+          // ✅ Bottom Bar جديد بالشكل المطلوب
+          bottomNavigationBar: BottomAppBar(
+            shape: const CircularNotchedRectangle(),
+            notchMargin: 10,
+            elevation: 10,
+            color: const Color(0xffFAD79C).withOpacity(0.4),
+            child: SizedBox(
+              height: 70,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      _buildNavItem(
+                        icon: getAssetIcon("home.png"),
+                        label: AppLang.local(context).home,
+                        index: 0,
+                        selectedIndex: data.bottomAppbarIndex,
+                        onTap: data.onTapped,
                       ),
-                    ),
-                    label: AppLang.local(context).home),
-                BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Image.asset(
-                        getAssetIcon("categories.png"),
-                        color: data.bottomAppbarIndex == 1
-                            ? ThemeConfig.accentColor
-                            : ThemeConfig.grey,
-                        height: 16,
+                      _buildNavItem(
+                        icon: getAssetIcon("categories.png"),
+                        label: AppLang.local(context).categories,
+                        index: 1,
+                        selectedIndex: data.bottomAppbarIndex,
+                        onTap: data.onTapped,
                       ),
-                    ),
-                    label: AppLang.local(context).categories),
-                BottomNavigationBarItem(
-                    icon: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Image.asset(
-                        getAssetIcon("orders.png"),
-                        color: data.bottomAppbarIndex == 2
-                            ? ThemeConfig.accentColor
-                            : const Color.fromRGBO(153, 153, 153, 1),
-                        height: 16,
-                      ),
-                    ),
-                    label: AppLang.local(context).orders),
-                BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Image.asset(
-                      getAssetIcon("profile.png"),
-                      color: data.bottomAppbarIndex == 3
-                          ? ThemeConfig.accentColor
-                          : ThemeConfig.grey,
-                      height: 16,
-                    ),
+                    ],
                   ),
-                  label: AppLang.local(context).profile,
-                ),
-              ],
+                  Row(
+                    children: [
+                      _buildNavItem(
+                        icon: getAssetIcon("orders.png"),
+                        label: AppLang.local(context).orders,
+                        index: 2,
+                        selectedIndex: data.bottomAppbarIndex,
+                        onTap: data.onTapped,
+                      ),
+                      _buildNavItem(
+                        icon: getAssetIcon("profile.png"),
+                        label: AppLang.local(context).profile,
+                        index: 3,
+                        selectedIndex: data.bottomAppbarIndex,
+                        onTap: data.onTapped,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
+
+          // ✅ زر السلة العائم
           floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              if (SystemData.isLogIn) {
-                MakeRoute.go(context, const Cart());
-              } else {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => const Login()));
-                return;
-              }
-            },
-            backgroundColor: const Color.fromARGB(255, 1, 214, 247),
-            child: badges.Badge(
-              position: badges.BadgePosition.custom(end: 12, bottom: -15),
-              badgeStyle: badges.BadgeStyle(
-                shape: badges.BadgeShape.circle,
-
-                badgeColor: ThemeConfig.red,
-                borderRadius: BorderRadius.circular(20),
-                borderSide:
-                    const BorderSide(width: 1, color: ThemeConfig.white),
-
-                //padding: EdgeInsets.all(5),
+              shape: const CircleBorder(
+                side: BorderSide(
+                    color: ThemeConfig.white,
+                    width: 3,
+                    strokeAlign: BorderSide.strokeAlignOutside),
               ),
-              badgeContent: Consumer<CartPresenter>(
+              onPressed: () {
+                if (SystemData.isLogIn) {
+                  MakeRoute.go(context, const Cart());
+                } else {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Login()));
+                  return;
+                }
+              },
+              backgroundColor: const Color(0xff56DFCF),
+              child: Consumer<CartPresenter>(
                 builder: (context, cart, child) {
-                  return Text(
-                    "${cart.cartResponse.cartCount}",
-                    style: const TextStyle(fontSize: 10, color: Colors.white),
+                  final cartCount = cart.cartResponse.cartCount;
+
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: cartCount == 0
+                        ? Image.asset(
+                            getAssetIcon("cart.png"),
+                            color: ThemeConfig.white,
+                            height: 20,
+                          )
+                        : badges.Badge(
+                            position: badges.BadgePosition.custom(
+                                end: 13, bottom: 10),
+                            badgeStyle: badges.BadgeStyle(
+                              shape: badges.BadgeShape.circle,
+                              badgeColor: ThemeConfig.red,
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: const BorderSide(
+                                  width: 1, color: ThemeConfig.white),
+                            ),
+                            badgeContent: Text(
+                              "$cartCount",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                  fontSize: 10, color: Colors.white),
+                            ),
+                            child: Image.asset(
+                              getAssetIcon("cart.png"),
+                              color: ThemeConfig.white,
+                              height: 20,
+                            ),
+                          ),
                   );
                 },
+              )
+             
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Image.asset(
-                  getAssetIcon("cart.png"),
-                  color: ThemeConfig.white,
-                  height: 20,
-                ),
-              ),
-            ),
-          ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
         ),
       );
     });
+  }
+
+  Widget _buildNavItem({
+    required String icon,
+    required String label,
+    required int index,
+    required int selectedIndex,
+    required Function(int) onTap,
+  }) {
+    final isSelected = selectedIndex == index;
+
+    return MaterialButton(
+      onPressed: () => onTap(index),
+      minWidth: 40,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            icon,
+            color: isSelected ? ThemeConfig.accentColor : ThemeConfig.grey,
+            height: 20,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? ThemeConfig.accentColor : ThemeConfig.grey,
+              fontSize: 11,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

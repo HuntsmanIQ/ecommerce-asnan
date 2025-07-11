@@ -20,10 +20,11 @@ class CheckOutPresenter extends ChangeNotifier {
     CheckOutPresenter.context = context;
   }
 
-  TextEditingController phoneTxt=TextEditingController(text: SystemData.userInfo.phone);
-  TextEditingController additionalPhoneTxt=TextEditingController();
-  TextEditingController additionalInfoTxt=TextEditingController();
-  TextEditingController tipsTxt=TextEditingController(text: "0");
+  TextEditingController phoneTxt =
+      TextEditingController(text: SystemData.userInfo.phone);
+  TextEditingController additionalPhoneTxt = TextEditingController();
+  TextEditingController additionalInfoTxt = TextEditingController();
+  TextEditingController tipsTxt = TextEditingController(text: "0");
 
   int billingAddressId = 0;
   AddressInfo selectedShippingAddress = AddressInfo(
@@ -45,10 +46,10 @@ class CheckOutPresenter extends ChangeNotifier {
   PaymentTypesResponse? selectedPaymentMethod;
   List<TimeSlot> timeSlots = [];
   TimeSlot? selectedTimeslot;
- // bool isFetchLogistic= false;
-  bool isFetchDeliveryAddress= false;
-  bool isFetchBillingAddress= false;
-  bool isFetchTimeSlot= false;
+  // bool isFetchLogistic= false;
+  bool isFetchDeliveryAddress = false;
+  bool isFetchBillingAddress = false;
+  bool isFetchTimeSlot = false;
 
   OrderSummeryResponse orderSummeryResponse = OrderSummeryResponse(
       subTotal: "",
@@ -67,7 +68,7 @@ class CheckOutPresenter extends ChangeNotifier {
     var res = await UserApi.getAddresses();
     addresses.clear();
     addresses.addAll(res.data);
-    if(addresses.isNotEmpty) {
+    if (addresses.isNotEmpty) {
       onChangeShippingAddress(addresses.first);
       billingAddressId = addresses.first.id;
     }
@@ -85,7 +86,7 @@ class CheckOutPresenter extends ChangeNotifier {
     var res = await OrderApi.getLogistics(cityId: cityId);
     logistics.clear();
     logistics.addAll(res.object.data);
-    if(logistics.isNotEmpty) {
+    if (logistics.isNotEmpty) {
       onChangeLogistic(logistics.first);
     }
     notifyListeners();
@@ -104,12 +105,12 @@ class CheckOutPresenter extends ChangeNotifier {
 
     var res = await OrderApi.getTimeSlot();
     timeSlots.clear();
-    lastDate =
-        DateTime.now().add(Duration(days: int.parse(res.object.days.toString())));
+    lastDate = DateTime.now()
+        .add(Duration(days: int.parse(res.object.days.toString())));
     timeSlots.addAll(res.object.timeSlots);
     selectedTimeslot = timeSlots.first;
     selectedDate = firstDate;
-    isFetchTimeSlot=true;
+    isFetchTimeSlot = true;
     notifyListeners();
   }
 
@@ -150,9 +151,9 @@ class CheckOutPresenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  clearAll(){
-     billingAddressId = 0;
-     selectedShippingAddress = AddressInfo(
+  clearAll() {
+    billingAddressId = 0;
+    selectedShippingAddress = AddressInfo(
         id: 0,
         userId: 0,
         countryId: 0,
@@ -164,18 +165,18 @@ class CheckOutPresenter extends ChangeNotifier {
         address: "",
         isDefault: 0);
     addresses = [];
-     logistics = [];
-     paymentTypes = [];
-     selectedLogistic =
-    LogisticInfo(id: 0, name: "", logisticId: 0, price: "", image: "");
+    logistics = [];
+    paymentTypes = [];
+    selectedLogistic =
+        LogisticInfo(id: 0, name: "", logisticId: 0, price: "", image: "");
     timeSlots = [];
-     selectedTimeslot=null;
+    selectedTimeslot = null;
     // bool isFetchLogistic= false;
-     isFetchDeliveryAddress= false;
-     isFetchBillingAddress= false;
-     isFetchTimeSlot= false;
+    isFetchDeliveryAddress = false;
+    isFetchBillingAddress = false;
+    isFetchTimeSlot = false;
 
-     orderSummeryResponse = OrderSummeryResponse(
+    orderSummeryResponse = OrderSummeryResponse(
         subTotal: "",
         tax: "",
         shippingCharge: "",
@@ -183,26 +184,34 @@ class CheckOutPresenter extends ChangeNotifier {
         couponDiscount: "",
         total: "");
 
-     firstDate=null;
-     lastDate=null;
-     selectedDate=null;
-     tipsTxt.text="";
-     shipping_delivery_type = "regular";
+    firstDate = null;
+    lastDate = null;
+    selectedDate = null;
+    tipsTxt.text = "";
+    shipping_delivery_type = "regular";
   }
 
-  init(context){
+  init(context) {
     fetchAddresses(context);
     fetchTimeSlots();
     fetchPaymentTypes();
   }
 
-
-  _store(BuildContext context)async{
+  _store(BuildContext context) async {
     Loading.show(context);
-    var response = await OrderApi.createOrder(shippingId: selectedShippingAddress.id, billingId: billingAddressId, phone: phoneTxt.text.trim(), alternativePhone: additionalPhoneTxt.text.trim(), logisticZoneId: selectedLogistic.logisticId, tips: tipsTxt.text.trim(), shippingDeliveryType: shipping_delivery_type, timeslot: selectedTimeslot!.id, scheduledData: selectedDate!.microsecond);
+    var response = await OrderApi.createOrder(
+        shippingId: selectedShippingAddress.id,
+        billingId: billingAddressId,
+        phone: phoneTxt.text.trim(),
+        alternativePhone: additionalPhoneTxt.text.trim(),
+        logisticZoneId: selectedLogistic.logisticId,
+        tips: tipsTxt.text.trim(),
+        shippingDeliveryType: shipping_delivery_type,
+        timeslot: selectedTimeslot!.id,
+        scheduledData: selectedDate!.microsecond);
     Loading.close();
-    if(response.object.result) {
-      SystemData.couponCode="";
+    if (response.object.result) {
+      SystemData.couponCode = "";
       MakeRoute.go(
           context,
           Payment(
@@ -212,48 +221,75 @@ class CheckOutPresenter extends ChangeNotifier {
     }
     ToastUi.show(context, response.object.message);
   }
-  _byCOD(BuildContext context)async{
+
+  _byCOD(BuildContext context) async {
     Loading.show(context);
-    var response = await OrderApi.createOrderByCOD(shippingId: selectedShippingAddress.id, billingId: billingAddressId, phone: phoneTxt.text.trim(), alternativePhone: additionalPhoneTxt.text.trim(), logisticZoneId: selectedLogistic.logisticId, tips: tipsTxt.text.trim(), shippingDeliveryType: shipping_delivery_type, timeslot: selectedTimeslot!.id, scheduledData: selectedDate!.microsecond);
+    Loading.show(context);
+    var response = await OrderApi.createOrderByCOD(
+      shippingId: selectedShippingAddress.id,
+      billingId: billingAddressId,
+      phone: phoneTxt.text.trim(),
+      alternativePhone: additionalPhoneTxt.text.trim(),
+      logisticZoneId: selectedLogistic.logisticId,
+      tips: tipsTxt.text.trim(),
+      shippingDeliveryType: shipping_delivery_type,
+      timeslot: selectedTimeslot!.id,
+      scheduledData: selectedDate!.microsecond,
+    );
     Loading.close();
-    if(response.object.result){
-      SystemData.couponCode="";
-    MakeRoute.go(context, Orders(fromBottomBar: false,fromCheckOut: true,));
+    if (response.object.result) {
+      SystemData.couponCode = "";
+      MakeRoute.go(context, Orders(fromBottomBar: false, fromCheckOut: true));
     }
     ToastUi.show(context, response.object.message);
   }
-  _byWallet(BuildContext context)async{
+
+  _byWallet(BuildContext context) async {
     Loading.show(context);
-    var response = await OrderApi.createOrderByCOD(shippingId: selectedShippingAddress.id, billingId: billingAddressId, phone: phoneTxt.text.trim(), alternativePhone: additionalPhoneTxt.text.trim(), logisticZoneId: selectedLogistic.logisticId, tips: tipsTxt.text.trim(), shippingDeliveryType: shipping_delivery_type, timeslot: selectedTimeslot!.id, scheduledData: selectedDate!.microsecond);
+    var response = await OrderApi.createOrderByCOD(
+        shippingId: selectedShippingAddress.id,
+        billingId: billingAddressId,
+        phone: phoneTxt.text.trim(),
+        alternativePhone: additionalPhoneTxt.text.trim(),
+        logisticZoneId: selectedLogistic.logisticId,
+        tips: tipsTxt.text.trim(),
+        shippingDeliveryType: shipping_delivery_type,
+        timeslot: selectedTimeslot!.id,
+        scheduledData: selectedDate!.microsecond);
     Loading.close();
-    if(response.object.result){
-      SystemData.couponCode="";
-    MakeRoute.go(context, Orders(fromBottomBar: false,fromCheckOut: true,));
+    if (response.object.result) {
+      SystemData.couponCode = "";
+      MakeRoute.go(
+          context,
+          Orders(
+            fromBottomBar: false,
+            fromCheckOut: true,
+          ));
     }
     ToastUi.show(context, response.object.message);
   }
 
-
-
-  placeOrder(BuildContext context)async{
-    if(selectedLogistic.id==0){
+  placeOrder(BuildContext context) async {
+    if (selectedLogistic.id == 0) {
       ToastUi.show(context, "Logistic not founded!");
       return;
     }
-
-    if(selectedPaymentMethod!.key=="cod"){
+    if (selectedPaymentMethod!.key == "cod") {
       _byCOD(context);
       return;
     }
-    if(selectedPaymentMethod!.key=="wallet"){
+    if (selectedPaymentMethod!.key == "wallet") {
       _byWallet(context);
       return;
     }
-    if(selectedPaymentMethod!.key=="paypal"||selectedPaymentMethod!.key=="stripe"||selectedPaymentMethod!.key=="paytm"||selectedPaymentMethod!.key=="razorpay"||selectedPaymentMethod!.key=="iyzico"){
+    if (selectedPaymentMethod!.key == "paypal" ||
+        selectedPaymentMethod!.key == "stripe" ||
+        selectedPaymentMethod!.key == "paytm" ||
+        selectedPaymentMethod!.key == "razorpay" ||
+        selectedPaymentMethod!.key == "iyzico") {
       _store(context);
       return;
     }
     ToastUi.show(context, "Not implemented Payment Method");
   }
-
 }

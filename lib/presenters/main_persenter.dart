@@ -36,8 +36,8 @@ class MainPresenter extends ChangeNotifier {
 
     if (i == 3) {
       language_is_rtl.$
-          ? slideLeftWidget(newPage: const Account(), context: context!)
-          : slideRightWidget(newPage: const Account(), context: context!);
+          ? slideRightWidget(newPage: const Account(), context: context!)
+          : slideLeftWidget(newPage: const Account(), context: context!);
       return;
     }
 

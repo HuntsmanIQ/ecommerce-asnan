@@ -12,7 +12,6 @@ import 'package:grostore/helpers/route.dart';
 import 'package:grostore/presenters/cart_presenter.dart';
 import 'package:grostore/screens/check_out.dart';
 import 'package:provider/provider.dart';
-
 import '../helpers/common_functions.dart';
 
 class Cart extends StatefulWidget {
@@ -62,28 +61,7 @@ class _CartState extends State<Cart> {
                                       width: 120,
                                       height: 100,
                                     ),
-                                    /*Positioned(
-                                    top: 10,
-                                    left: 10,
-                                    child: Button(
-                                      shape: StyleConfig.buttonRadius(8),
-                                      color: ThemeConfig.xlightGrey,
-                                      padding: EdgeInsets.all(4),
-                                      minWidth: 24,
-                                      onPressed: () {
-                                        data.updateCart(
-                                            cartId: data.cartResponse.carts[index].id,
-                                            action: "delete",
-                                            context: context);
-                                      },
-                                      child: Image.asset(
-                                        getAssetIcon('delete.png'),
-                                        height: 24,
-                                        width: 24,
-                                        color: ThemeConfig.darkGrey,
-                                      ),
-                                    ),
-                                  ),*/
+                                   
                                   ],
                                 ),
                                 const SizedBox(
@@ -158,7 +136,7 @@ class _CartState extends State<Cart> {
             Consumer<CartPresenter>(builder: (context, data, child) {
               return data.cartResponse.carts.isNotEmpty
                   ? Positioned(
-                      bottom: 0,
+                      bottom: 60,
                       left: 0,
                       right: 0,
                       child: Column(
@@ -249,7 +227,8 @@ class _CartState extends State<Cart> {
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                       Text(
-                                        showPrice(data.cartResponse.couponDiscount),
+                                        showPrice(
+                                            data.cartResponse.couponDiscount),
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                     ],
@@ -295,14 +274,15 @@ class _CartState extends State<Cart> {
                                 Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: StyleConfig.padding,
-                                      vertical: 10),
+                                      vertical: 2),
                                   child: Button(
                                     shape: StyleConfig.buttonRadius(4),
                                     color: ThemeConfig.accentColor,
                                     onPressed: () {
                                       MakeRoute.go(context, const CheckOut());
                                     },
-                                    padding: const EdgeInsets.symmetric(vertical: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
                                     minWidth: getWidth(context),
                                     child: Text(
                                       AppLang.local(context)
@@ -324,10 +304,8 @@ class _CartState extends State<Cart> {
     );
   }
 
-  Container quantitySection(BuildContext context, CartPresenter data, index) {
-    return Container(
-      // padding: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-      //height: 50,
+   quantitySection(BuildContext context, CartPresenter data, index) {
+    return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

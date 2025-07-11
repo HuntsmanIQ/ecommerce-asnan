@@ -96,13 +96,14 @@ class _RegistrationState extends State<Registration> {
                   SizedBox(
                     height: 36,
                     child: TextField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: data.regEmailController,
                       autofocus: false,
                       decoration: InputDecorations.basic(
                           prefixIcon: Icon(
                             Icons.email_outlined,
                             size: 18,
-                            color:ThemeConfig.mediumGrey,
+                            color: ThemeConfig.mediumGrey,
                           ),
                           hint_text: "user@example.com"),
                     ),
@@ -133,24 +134,18 @@ class _RegistrationState extends State<Registration> {
                           color: ThemeConfig.mediumGrey,
                         ),
                       ),
-                      Button(
-                        minWidth: 80,
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return buildFilterDialog(data);
-                              });
-                        },
+                      SizedBox(
+                       
                         child: Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Image.asset(
-                                  "${getAssetFlag(data.regCountry.code.toLowerCase())}.png"),
+                                getAssetFlag("iq.png"),
+                              ),
                             ),
                             Text(
-                              data.regCountry.dial_code,
+                              "+964",
                               style: StyleConfig.fs14fwNormal,
                             )
                           ],
@@ -162,7 +157,7 @@ class _RegistrationState extends State<Registration> {
                         child: TextField(
                           style: StyleConfig.fs14fwNormal,
                           decoration: const InputDecoration.collapsed(
-                              hintText: "XXX XXX XXX"),
+                              hintText: ""),
                           controller: data.regPhoneNumberController,
                         ),
                       )
@@ -236,7 +231,6 @@ class _RegistrationState extends State<Registration> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(top: 30.0),
               child: SizedBox(

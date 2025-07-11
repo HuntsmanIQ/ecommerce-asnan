@@ -57,6 +57,7 @@ class AuthPresenter extends ChangeNotifier {
   /// Registration variables
   String registerBy = "email"; //phone or email
   String regPhone = "";
+  String iraq = "+964";
   bool isAgree = false;
 
   //controllers
@@ -66,10 +67,6 @@ class AuthPresenter extends ChangeNotifier {
   TextEditingController regPasswordController = TextEditingController();
   TextEditingController regPasswordConfirmController = TextEditingController();
 
-  fetch_country() async {
-    // var data = await AddressRepository().getCountryList();
-    // data.countries.forEach((c) => countries_code.add(c.code));
-  }
 
   onPressedLogin() async {
     if (checkLoginValidation()) {
@@ -164,7 +161,7 @@ class AuthPresenter extends ChangeNotifier {
     var passwordConfirm = regPasswordConfirmController.text.toString();
     regPhone = regPhoneNumberController.text.trim();
     if (regPhone.isNotEmpty) {
-      regPhone = regCountry.dial_code + regPhone;
+      regPhone = iraq + regPhone;
     }
 
     if (name == "") {

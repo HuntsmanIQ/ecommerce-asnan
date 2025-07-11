@@ -44,6 +44,12 @@ class _CouponsState extends State<Coupons> {
             child:
                 Shimmers.list(10, getWidth(context) - StyleConfig.padding, 150),
           );
+        }else{
+          if(data.coupons.isEmpty){
+            return Center(
+              child: Text('لم يتم العثور على اي قسائم',style: TextStyle(color: ThemeConfig.grey,fontWeight: FontWeight.bold),),
+            );
+          }
         }
 
         return ListView.separated(

@@ -61,6 +61,7 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 36,
                     child: TextField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: data.loginEmailController,
                       autofocus: false,
                       decoration: InputDecorations.basic(

@@ -33,7 +33,7 @@ class CartPresenter extends ChangeNotifier {
 
   fetchCart() async {
     var res = await CartApi.carts();
-    if (res.object.result!) {
+    if (res.object.result) {
       cartResponse = res.object;
       isCartResponseFetch = true;
       notifyListeners();
@@ -42,17 +42,16 @@ class CartPresenter extends ChangeNotifier {
 
   addToCart(variantId, qty, BuildContext context) async {
     var res = await CartApi.addToCart(variantId: variantId, qty: qty);
-    if (res.object.result!) {
+    if (res.object.result) {
       cartResponse = res.object;
       isCartResponseFetch = true;
       notifyListeners();
     }
-    ToastUi.show(context, res.object.message);
   }
 
   applyCoupon(BuildContext context, code) async {
     var res = await CartApi.couponApply(code: code);
-    if (res.object.result!) {
+    if (res.object.result) {
       SystemData.couponCode = code;
       cartResponse = res.object;
       isCartResponseFetch = true;
@@ -66,10 +65,9 @@ class CartPresenter extends ChangeNotifier {
       required BuildContext context,
       required String action}) async {
     var res = await CartApi.cartUpdate(id: cartId, action: action);
-    if (res.object.result!) {
+    if (res.object.result) {
       cartResponse = res.object;
       isCartResponseFetch = true;
-      ToastUi.show(context, res.object.message);
       notifyListeners();
     }
   }

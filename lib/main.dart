@@ -31,6 +31,7 @@ import 'package:grostore/screens/main.dart';
 import 'package:grostore/screens/splash.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:grostore/screens/test.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shared_value/shared_value.dart';
@@ -47,7 +48,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const Splash();
+        return  const Splash();
       },
     ),
     GoRoute(
