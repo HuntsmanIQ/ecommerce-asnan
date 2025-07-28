@@ -20,6 +20,8 @@ import 'package:grostore/presenters/wishlist_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
 import 'package:grostore/screens/cart.dart';
 import 'package:provider/provider.dart';
+import 'package:html/parser.dart' show parse;
+import 'package:html_unescape/html_unescape.dart';
 
 class ProductDetails extends StatefulWidget {
   late String slug;
@@ -41,7 +43,6 @@ class _ProductDetailsState extends State<ProductDetails> {
       Provider.of<ProductDetailsPresenter>(context, listen: false)
           .iniState(widget.slug);
     });
-
     super.initState();
   }
 
@@ -49,6 +50,15 @@ class _ProductDetailsState extends State<ProductDetails> {
   void dispose() {
     super.dispose();
   }
+
+  String removeHtmlTags(String htmlText) {
+    var document = parse(htmlText);
+    String parsedString =
+        parse(document.body?.text).documentElement?.text ?? '';
+    return HtmlUnescape().convert(parsedString);
+  }
+
+  bool showFullDescription = false;
 
   @override
   Widget build(BuildContext context) {
@@ -81,14 +91,29 @@ class _ProductDetailsState extends State<ProductDetails> {
                   height: 16,
                 ),
                 data.isProductInfoInitial
-                    ? Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: StyleConfig.padding),
-                        child: Text(
-                          data.productInfo?.shortDescription ?? "",
-                          style: StyleConfig.fs14fwNormal.copyWith(height: 1.8),
-                        ),
-                      )
+                ? Padding(
+                  padding: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
+                  child: Column(children: [
+                    Text(data.productInfo?.shortDescription ?? ''),
+                    const SizedBox(height: 8),
+                     if (showFullDescription)
+                              Text(
+                                removeHtmlTags(data.productInfo?.description?? ''),
+                                style: TextStyle(fontSize: 14, height: 1.8, color: Colors.grey[700]),
+                              ),
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                  showFullDescription = !showFullDescription;
+                                });
+                              },
+                              child: Text(
+                                showFullDescription ? 'عرض أقل' : 'عرض المزيد',
+                                style: const TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                  ],),
+                )
                     : Shimmers(width: getWidth(context), height: 150),
                 const SizedBox(
                   height: 16,
@@ -230,7 +255,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Total: ${showPrice(data.cartResponse.subTotal)}",
+                            "IQD ${showPrice(data.cartResponse.subTotal.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', ''))}",
                             style: StyleConfig.fs16cWhitefwBold,
                           ),
                           Text(
@@ -313,7 +338,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 height: 6,
               ),
               data.isProductInfoInitial
-                  ? Text(showPrice(data.selectedVariation!.price),
+                  ? Text(
+                      '${showPrice(data.selectedVariation!.price.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', ''))} IQD',
                       style: StyleConfig.fs14cRedfwBold)
                   : Shimmers(width: 100, height: 25),
             ],

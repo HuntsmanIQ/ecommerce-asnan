@@ -12,7 +12,6 @@ import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/presenters/home_presenter.dart';
 import 'package:grostore/screens/filter.dart';
-import 'package:grostore/screens/test.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -34,120 +33,109 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xffD0F0FF
-),
-        appBar: buildSearchOption(context),
-        body: Consumer<HomePresenter>(builder: (context, data, child) {
-          return RefreshIndicator(
-            onRefresh: data.onRefresh,
-            child: SingleChildScrollView(
-              controller: data.homeScrollController,
-              child: SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildSliderSection(data),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    Button(child: Text('test'),onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Test()));
-                    },),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                      child: Row(
-                        children: [
-                          Text(
-                            AppLang.local(context).top_categories_ucf,
-                            style: StyleConfig.fs16fwBold,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Image.asset(
-                            getAssetIcon("fire.png"),
-                            height: 20,
-                            width: 20,
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    buildTopCategorySection(data),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                      child: Row(
-                        children: [
-                          Text(
-                            AppLang.local(context).best_selling_products_ucf,
-                            style: StyleConfig.fs16fwBold,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Image.asset(
-                            getAssetIcon("fire.png"),
-                            height: 20,
-                            width: 20,
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                        height: 200,
-                        child: buildBestSellingProductSection(data)),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                      child: Row(
-                        children: [
-                          Text(
-                            AppLang.local(context).all_products_ucf,
-                            style: StyleConfig.fs16fwBold,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Image.asset(
-                            getAssetIcon("fire.png"),
-                            height: 20,
-                            width: 20,
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    allProducts(data),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                  ],
-                ),
+        backgroundColor: Colors.blueGrey,
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                getAssetImage("img.png"),
+                width: getWidth(context),
+                height: 200,
+                fit: BoxFit.cover,
               ),
             ),
-          );
-        }),
+            Consumer<HomePresenter>(builder: (context, data, child) {
+              return RefreshIndicator(
+                onRefresh: data.onRefresh,
+                child: SingleChildScrollView(
+                  controller: data.homeScrollController,
+                  child: SafeArea(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildSearchOption(context),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        buildSliderSection(data),
+                        const SizedBox(
+                          height: 14,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: StyleConfig.padding),
+                          child: Row(
+                            children: [
+                              Text(
+                                AppLang.local(context).top_categories_ucf,
+                                style: StyleConfig.fs16fwBold,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        buildTopCategorySection(data),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: StyleConfig.padding),
+                          child: Row(
+                            children: [
+                              Text(
+                                AppLang.local(context)
+                                    .best_selling_products_ucf,
+                                style: StyleConfig.fs16fwBold,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                            height: 200,
+                            child: buildBestSellingProductSection(data)),
+                        const SizedBox(
+                          height: 14,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: StyleConfig.padding),
+                          child: Row(
+                            children: [
+                              Text(
+                                AppLang.local(context).all_products_ucf,
+                                style: StyleConfig.fs16fwBold,
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        allProducts(data),
+                        const SizedBox(
+                          height: 14,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
@@ -213,11 +201,11 @@ class _HomeState extends State<Home> {
     return PreferredSize(
         preferredSize: Size(getWidth(context), 60),
         child: Container(
-  
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
           margin: const EdgeInsets.only(top: 12, left: 24, right: 24),
           width: getWidth(context),
-          decoration: BoxDecorations.shadow(radius: 6.0,
+          decoration: BoxDecorations.shadow(
+            radius: 6.0,
           ),
           child: Button(
             onPressed: () => MakeRoute.go(

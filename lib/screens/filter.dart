@@ -86,11 +86,11 @@ class _FilterState extends State<Filter> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Your Cart: ${showPrice(cart.cartResponse.total)}",
+                    "Total : ${showPrice(cart.cartResponse.total).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD",
                     style: StyleConfig.fs14fwNormal,
                   ),
                   Button(
-                      color: ThemeConfig.green,
+                      color: ThemeConfig.accentColor,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 18, vertical: 8),
                       shape: StyleConfig.buttonRadius(5),
@@ -105,9 +105,12 @@ class _FilterState extends State<Filter> {
                           return;
                         }
                       },
-                      child: Text(
-                        "Go to Cart",
-                        style: StyleConfig.fs14cWhitefwNormal,
+                      child: const Text(
+                        "السـلة",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 16),
                       ))
                 ],
               ),
@@ -181,13 +184,14 @@ class _FilterState extends State<Filter> {
                       showFilterDialog();
                     },
                     shape: StyleConfig.buttonRadius(6),
-                    color: ThemeConfig.green,
+                    color: ThemeConfig.accentColor,
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 10),
                     minWidth: 40,
                     child: Text(
                       AppLang.local(context).filter,
-                      style: StyleConfig.fs14cWhitefwNormal,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
                     )),
               )
             ],
@@ -199,7 +203,7 @@ class _FilterState extends State<Filter> {
 
   Widget buildCategorySection(FilterPresenter data) {
     return SizedBox(
-      height: 87,
+      height: 100,
       child: data.isCategoryInit
           ? ListView.separated(
               scrollDirection: Axis.horizontal,
@@ -289,7 +293,7 @@ class _FilterState extends State<Filter> {
                       headerTitle(AppLang.local(context).categories),
                       spacer(height: StyleConfig.xsSectionSpacer),
                       SizedBox(
-                          width: getWidth(context),
+                          width: getWidth(context) - 100,
                           child: buildCategorySection(data)),
                       spacer(height: StyleConfig.smSectionSpacer),
                       headerTitle(AppLang.local(context).price_range_ucf),

@@ -9,6 +9,7 @@ import 'package:grostore/helpers/common_functions.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/models/product_mini_response.dart';
 import 'package:grostore/presenters/cart_presenter.dart';
+import 'package:grostore/presenters/wishlist_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
 import 'package:grostore/screens/product_details.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,6 @@ class ProductCard extends StatelessWidget {
     try {
       return Container(
         width: 160,
-        height: 160,
         decoration: BoxDecorations.shadow(radius: 8),
         child: Stack(
           children: [
@@ -64,13 +64,14 @@ class ProductCard extends StatelessWidget {
                     child: Text(
                       product.name,
                       style: StyleConfig.fs12fwBold,
-                      maxLines: 2,
+                      maxLines: 1,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 12.0, top: 8),
                     child: Text(
-                      showPrice(product.price.toString()),
+                      showPrice(
+                          '${product.price.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD'),
                       style: StyleConfig.fs14cRedfwBold,
                     ),
                   ),
@@ -110,6 +111,7 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
             ),
+            
           ],
         ),
       );

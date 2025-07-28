@@ -205,7 +205,7 @@ class _CheckOutState extends State<CheckOut> {
                           style: StyleConfig.fs14fwNormal,
                         ),
                         Text(
-                          showPrice(data.orderSummeryResponse.subTotal),
+                          '${showPrice(data.orderSummeryResponse.subTotal).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD',
                           style: StyleConfig.fs14fwNormal,
                         ),
                       ],
@@ -221,7 +221,7 @@ class _CheckOutState extends State<CheckOut> {
                           style: StyleConfig.fs14fwNormal,
                         ),
                         Text(
-                          showPrice(data.orderSummeryResponse.shippingCharge),
+                        '${showPrice(data.orderSummeryResponse.shippingCharge).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD',
                           style: StyleConfig.fs14fwNormal,
                         ),
                       ],
@@ -229,19 +229,19 @@ class _CheckOutState extends State<CheckOut> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "${AppLang.local(context).tax} :",
-                          style: StyleConfig.fs14fwNormal,
-                        ),
-                        Text(
-                          showPrice(data.orderSummeryResponse.tax),
-                          style: StyleConfig.fs14fwNormal,
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Text(
+                    //       "${AppLang.local(context).tax} :",
+                    //       style: StyleConfig.fs14fwNormal,
+                    //     ),
+                    //     Text(
+                    //       showPrice(data.orderSummeryResponse.tax),
+                    //       style: StyleConfig.fs14fwNormal,
+                    //     ),
+                    //   ],
+                    // ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -253,7 +253,7 @@ class _CheckOutState extends State<CheckOut> {
                           style: StyleConfig.fs14fwNormal,
                         ),
                         Text(
-                          showPrice(data.orderSummeryResponse.couponDiscount),
+                          '${showPrice(data.orderSummeryResponse.couponDiscount).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD',
                           style: StyleConfig.fs14fwNormal,
                         ),
                       ],
@@ -266,11 +266,11 @@ class _CheckOutState extends State<CheckOut> {
                         lineThickness: 1.0,
                         dashLength: 4.0,
                         dashColor: ThemeConfig.grey,
-                        //dashGradient: [Colors.red, Colors.blue],
+                      
                         dashRadius: 0.0,
                         dashGapLength: 4.0,
                         dashGapColor: Colors.transparent,
-                        //dashGapGradient: [Colors.red, Colors.blue],
+                        
                         dashGapRadius: 0.0,
                       ),
                     ),
@@ -282,7 +282,7 @@ class _CheckOutState extends State<CheckOut> {
                           style: StyleConfig.fs14fwNormal,
                         ),
                         Text(
-                          showPrice(data.orderSummeryResponse.total),
+                          '${showPrice(data.orderSummeryResponse.total).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD',
                           style: StyleConfig.fs14fwNormal,
                         ),
                       ],
@@ -562,8 +562,8 @@ class _CheckOutState extends State<CheckOut> {
                                   ? ThemeConfig.accentColor
                                   : ThemeConfig.grey)),
                       child: Button(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
                         shape: StyleConfig.buttonRadius(8),
                         minWidth: getWidth(context) * 0.5,
                         child: Column(
@@ -638,8 +638,8 @@ class _CheckOutState extends State<CheckOut> {
                                   ? ThemeConfig.accentColor
                                   : ThemeConfig.grey)),
                       child: Button(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
                         shape: StyleConfig.buttonRadius(8),
                         minWidth: getWidth(context) * 0.5,
                         child: Column(
@@ -712,7 +712,8 @@ class _CheckOutState extends State<CheckOut> {
                                 ? ThemeConfig.accentColor
                                 : ThemeConfig.grey)),
                 child: Button(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   shape: StyleConfig.buttonRadius(8),
                   minWidth: getWidth(context) * 0.5,
                   child: Column(
@@ -729,7 +730,7 @@ class _CheckOutState extends State<CheckOut> {
                         width: getWidth(context) * 0.4,
                       ),
                       Text(
-                        showPrice(data.logistics[index].price),
+                        '${showPrice(data.logistics[index].price).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD',
                         style: StyleConfig.fs12,
                       ),
                     ],

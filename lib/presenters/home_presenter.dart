@@ -12,6 +12,7 @@ import 'package:grostore/models/home_banner_response.dart';
 import 'package:grostore/models/product_mini_response.dart';
 import 'package:flutter/material.dart';
 import 'package:grostore/screens/filter.dart';
+import 'package:grostore/screens/product_details.dart';
 
 class HomePresenter extends ChangeNotifier {
   static BuildContext? context;
@@ -49,9 +50,23 @@ class HomePresenter extends ChangeNotifier {
         onPressed: () {
           String url = data.link;
           String extractedNumber = url.replaceAll("http://", "");
-          print(extractedNumber);
 
-          MakeRoute.go(context!, Filter(category_id: extractedNumber));
+        int? number = int.tryParse(extractedNumber);
+
+if (number != null) {
+  
+
+           MakeRoute.go(context!, Filter(category_id: extractedNumber));
+} 
+
+          else {
+            MakeRoute.go(
+              context!,
+              ProductDetails(
+                slug: extractedNumber,
+              ),
+            );
+          }
         },
         child: ImageView(
           url: data.image,
@@ -100,7 +115,8 @@ class HomePresenter extends ChangeNotifier {
   }
 
   fetchTopCategories() async {
-    var categoryResponse = await CategoryApi.topCategory();
+    //var categoryResponse = await CategoryApi.topCategory();
+    var categoryResponse = await CategoryApi.getCategories(page);
     if (categoryResponse.statusCode == 200) {
       topCategoryList.addAll(categoryResponse.object.data);
       isTopCategoryInitial = true;

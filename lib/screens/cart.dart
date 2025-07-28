@@ -33,105 +33,96 @@ class _CartState extends State<Cart> {
         width: getWidth(context),
         child: Stack(
           children: [
-            Container(
-              child: Consumer<CartPresenter>(
-                builder: (context, data, child) {
-                  if (data.isCartResponseFetch &&
-                      data.cartResponse.carts.isNotEmpty) {
-                    return ListView.separated(
-                        padding: const EdgeInsets.only(top: 16, bottom: 200),
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: EdgeInsets.only(
-                                left: StyleConfig.padding,
-                                right: StyleConfig.padding,
-                                bottom:
-                                    index == data.cartResponse.carts.length - 1
-                                        ? 80
-                                        : 0),
-                            decoration: BoxDecorations.shadow(),
-                            width: getWidth(context),
-                            child: Row(
-                              children: [
-                                Stack(
+            Consumer<CartPresenter>(
+              builder: (context, data, child) {
+                if (data.isCartResponseFetch &&
+                    data.cartResponse.carts.isNotEmpty) {
+                  return ListView.separated(
+                      padding: const EdgeInsets.only(top: 16, bottom: 200),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                              left: StyleConfig.padding,
+                              right: StyleConfig.padding,
+                              bottom:
+                                  index == data.cartResponse.carts.length - 1
+                                      ? 80
+                                      : 0),
+                          decoration: BoxDecorations.shadow(),
+                          width: getWidth(context),
+                          child: Row(
+                            children: [
+                              Stack(
+                                children: [
+                                  ImageView(
+                                    url: data.cartResponse.carts[index]
+                                        .thumbnailImage,
+                                    width: 120,
+                                    height: 100,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              SizedBox(
+                                width: getWidth(context) * 0.4,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ImageView(
-                                      url: data.cartResponse.carts[index]
-                                          .thumbnailImage,
-                                      width: 120,
-                                      height: 100,
+                                    Text(
+                                      data.cartResponse.carts[index].category,
+                                      style: StyleConfig.fs10,
+                                      maxLines: 1,
                                     ),
-                                   
+                                    Text(
+                                      data.cartResponse.carts[index].name,
+                                      style: StyleConfig.fs12fwBold,
+                                      maxLines: 1,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          data.cartResponse.carts[index].unit,
+                                          style: StyleConfig.fs12,
+                                          maxLines: 1,
+                                        ),
+                                        const SizedBox(height: 20),
+                                        Text(
+                                          '${showPrice(data.cartResponse.carts[index].price).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD',
+                                          style: StyleConfig.fs12,
+                                          maxLines: 1,
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                SizedBox(
-                                  width: getWidth(context) * 0.4,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        data.cartResponse.carts[index].category,
-                                        style: StyleConfig.fs10,
-                                        maxLines: 1,
-                                      ),
-                                      Text(
-                                        data.cartResponse.carts[index].name,
-                                        style: StyleConfig.fs12fwBold,
-                                        maxLines: 1,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            data.cartResponse.carts[index].unit,
-                                            style: StyleConfig.fs12,
-                                            maxLines: 1,
-                                          ),
-                                          Text(
-                                            ", ",
-                                            style: StyleConfig.fs12,
-                                            maxLines: 1,
-                                          ),
-                                          Text(
-                                            showPrice(data.cartResponse
-                                                .carts[index].price),
-                                            style: StyleConfig.fs12,
-                                            maxLines: 1,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                quantitySection(context, data, index),
-                              ],
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          print(index);
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: StyleConfig.padding),
-                            child: Divider(
-                              height: 1,
-                              color: ThemeConfig.grey,
-                            ),
-                          );
-                        },
-                        itemCount: data.cartResponse.carts.length);
-                  } else {
-                    return Center(
-                        child: Text(
-                      AppLang.local(context).empty,
-                      style: StyleConfig.fs16fwBold,
-                    ));
-                  }
-                },
-              ),
+                              ),
+                              quantitySection(context, data, index),
+                            ],
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                       
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: StyleConfig.padding),
+                          child: Divider(
+                            height: 1,
+                            color: ThemeConfig.grey,
+                          ),
+                        );
+                      },
+                      itemCount: data.cartResponse.carts.length);
+                } else {
+                  return Center(
+                      child: Text(
+                    AppLang.local(context).empty,
+                    style: StyleConfig.fs16fwBold,
+                  ));
+                }
+              },
             ),
             Consumer<CartPresenter>(builder: (context, data, child) {
               return data.cartResponse.carts.isNotEmpty
@@ -208,7 +199,7 @@ class _CartState extends State<Cart> {
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                       Text(
-                                        showPrice(data.cartResponse.subTotal),
+                                        '${showPrice(data.cartResponse.subTotal).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD',
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                     ],
@@ -227,8 +218,7 @@ class _CartState extends State<Cart> {
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                       Text(
-                                        showPrice(
-                                            data.cartResponse.couponDiscount),
+                                        '${showPrice(data.cartResponse.couponDiscount).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD',
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                     ],
@@ -265,7 +255,7 @@ class _CartState extends State<Cart> {
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                       Text(
-                                        showPrice(data.cartResponse.total),
+                                        '${showPrice(data.cartResponse.total).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD',
                                         style: StyleConfig.fs14fwNormal,
                                       ),
                                     ],
@@ -304,7 +294,7 @@ class _CartState extends State<Cart> {
     );
   }
 
-   quantitySection(BuildContext context, CartPresenter data, index) {
+  quantitySection(BuildContext context, CartPresenter data, index) {
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
