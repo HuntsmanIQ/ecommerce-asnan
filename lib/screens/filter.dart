@@ -86,11 +86,11 @@ class _FilterState extends State<Filter> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Your Cart: ${showPrice(cart.cartResponse.total)}",
+                    "Total : ${showPrice(cart.cartResponse.total).replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD",
                     style: StyleConfig.fs14fwNormal,
                   ),
                   Button(
-                      color: ThemeConfig.green,
+                      color: ThemeConfig.accentColor,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 18, vertical: 8),
                       shape: StyleConfig.buttonRadius(5),
@@ -105,9 +105,12 @@ class _FilterState extends State<Filter> {
                           return;
                         }
                       },
-                      child: Text(
-                        "Go to Cart",
-                        style: StyleConfig.fs14cWhitefwNormal,
+                      child: const Text(
+                        "السـلة",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 16),
                       ))
                 ],
               ),
@@ -120,7 +123,7 @@ class _FilterState extends State<Filter> {
 
   PreferredSize buildSearchOptions(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size(getWidth(context), 50),
+      preferredSize: Size(getWidth(context), 80),
       child: Consumer<FilterPresenter>(builder: (context, data, child) {
         return Container(
           margin: EdgeInsets.symmetric(
@@ -136,12 +139,12 @@ class _FilterState extends State<Filter> {
                     borderRadius: BorderRadius.circular(8)),
                 padding: EdgeInsets.symmetric(
                     horizontal: StyleConfig.xsSectionSpacer, vertical: 10),
-                width: getWidth(context) - 100,
+                width: getWidth(context) - 120, //102
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: getWidth(context) - 220,
+                      width: getWidth(context) - 210,
                       child: TextField(
                         autofocus: widget.isFocus,
                         controller: data.searchTxt,
@@ -175,19 +178,20 @@ class _FilterState extends State<Filter> {
                 ),
               ),
               SizedBox(
-                width: 60,
+                width: 80,
                 child: Button(
                     onPressed: () {
                       showFilterDialog();
                     },
                     shape: StyleConfig.buttonRadius(6),
-                    color: ThemeConfig.green,
+                    color: ThemeConfig.accentColor,
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 10),
-                    minWidth: 40,
+                    minWidth: 60,
                     child: Text(
                       AppLang.local(context).filter,
-                      style: StyleConfig.fs14cWhitefwNormal,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
                     )),
               )
             ],
@@ -199,7 +203,7 @@ class _FilterState extends State<Filter> {
 
   Widget buildCategorySection(FilterPresenter data) {
     return SizedBox(
-      height: 87,
+      height: 100,
       child: data.isCategoryInit
           ? ListView.separated(
               scrollDirection: Axis.horizontal,
@@ -289,7 +293,7 @@ class _FilterState extends State<Filter> {
                       headerTitle(AppLang.local(context).categories),
                       spacer(height: StyleConfig.xsSectionSpacer),
                       SizedBox(
-                          width: getWidth(context),
+                          width: getWidth(context) - 100,
                           child: buildCategorySection(data)),
                       spacer(height: StyleConfig.smSectionSpacer),
                       headerTitle(AppLang.local(context).price_range_ucf),
@@ -345,7 +349,7 @@ class _FilterState extends State<Filter> {
                       )),
                   Button(
                       shape: StyleConfig.buttonRadius(6),
-                      color: ThemeConfig.green,
+                      color: ThemeConfig.accentColor,
                       onPressed: () {
                         Navigator.pop(context);
                         data.clearKeyWord();

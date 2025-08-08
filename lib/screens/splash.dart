@@ -3,11 +3,13 @@ import 'package:grostore/apis/auth_api.dart';
 import 'package:grostore/apis/setting_api.dart';
 import 'package:grostore/custom_classes/system_data.dart';
 import 'package:grostore/helpers/common_functions.dart';
+import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/helpers/shared_value_helper.dart';
 import 'package:grostore/presenters/auth/auth_presenter.dart';
 import 'package:grostore/presenters/cart_presenter.dart';
 import 'package:grostore/presenters/setting_presenter.dart';
+import 'package:grostore/screens/landing_pages/landing_page.dart';
 import 'package:grostore/screens/landing_pages/landing_page.dart';
 import 'package:grostore/screens/main.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +32,7 @@ class _SplashState extends State<Splash> {
       Provider.of<SettingPresenter>(context, listen: false).initState();
     });
 
-    Future.delayed(const Duration(seconds: 2)).then((value) {
+    Future.delayed(const Duration(seconds: 3)).then((value) {
       access_token.load();
       show_landing_page.load().then((value) {
         checkLogin();
@@ -52,7 +54,7 @@ class _SplashState extends State<Splash> {
     if (show_landing_page.$) {
       show_landing_page.$ = false;
       show_landing_page.save();
-      MakeRoute.goAndRemoveAll(context, const LandingPage());
+      MakeRoute.goAndRemoveAll(context, LandingPage());
     } else {
       Provider.of<AuthPresenter>(context, listen: false).tokenCheck(context);
 
@@ -69,49 +71,25 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA), // خلفية عصرية وناعمة
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 180,
-              height: 180,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 15,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  getAssetLogo('logo.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+      body: Container(
+        height: getHeight(context),
+        width: getWidth(context),
+        child: Stack(children: [
+          Positioned.fill(
+            child: Image.asset(
+              getAssetImage("logo.png"),
+              width: getWidth(context),
+              height: 200,
+              fit: BoxFit.cover,
             ),
-            const SizedBox(height: 30),
-            const CircularProgressIndicator(
-              strokeWidth: 4,
-
-              valueColor: AlwaysStoppedAnimation(Color(0xFF00CFC1)), // لون حديث
+          ),
+          const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [],
             ),
-            const SizedBox(height: 20),
-            const Text(
-              'جاري تحميل التطبيق...',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xFF555555),
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.5,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ]),
       ),
     );
   }

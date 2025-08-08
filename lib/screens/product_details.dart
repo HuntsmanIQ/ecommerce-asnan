@@ -20,6 +20,8 @@ import 'package:grostore/presenters/wishlist_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
 import 'package:grostore/screens/cart.dart';
 import 'package:provider/provider.dart';
+import 'package:html/parser.dart' show parse;
+import 'package:html_unescape/html_unescape.dart';
 
 class ProductDetails extends StatefulWidget {
   late String slug;
@@ -41,7 +43,6 @@ class _ProductDetailsState extends State<ProductDetails> {
       Provider.of<ProductDetailsPresenter>(context, listen: false)
           .iniState(widget.slug);
     });
-
     super.initState();
   }
 
@@ -50,200 +51,226 @@ class _ProductDetailsState extends State<ProductDetails> {
     super.dispose();
   }
 
+  String removeHtmlTags(String htmlText) {
+    var document = parse(htmlText);
+    String parsedString =
+        parse(document.body?.text).documentElement?.text ?? '';
+    return HtmlUnescape().convert(parsedString);
+  }
+
+  bool showFullDescription = false;
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductDetailsPresenter>(builder: (context, data, child) {
-      return Scaffold(
-        backgroundColor: ThemeConfig.xxlightGrey,
-        appBar: CommonAppbar.show(
-            title: data.productInfo != null ? data.productInfo!.name : "",
-            context: context),
-        body: RefreshIndicator(
-          onRefresh: data.onRefresh,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildSliderSection(data),
-                buildProductNameSection(context, data),
-                const SizedBox(
-                  height: 16,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                  child: Text(
-                    AppLang.local(context).description,
-                    style: StyleConfig.fs12fwBold,
+      return SafeArea(
+        top: false,
+        child: Scaffold(
+          backgroundColor: ThemeConfig.xxlightGrey,
+          appBar: CommonAppbar.show(
+              title: data.productInfo != null ? data.productInfo!.name : "",
+              context: context),
+          body: RefreshIndicator(
+            onRefresh: data.onRefresh,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildSliderSection(data),
+                  buildProductNameSection(context, data),
+                  const SizedBox(
+                    height: 16,
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                data.isProductInfoInitial
-                    ? Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: StyleConfig.padding),
-                        child: Text(
-                          data.productInfo?.shortDescription ?? "",
-                          style: StyleConfig.fs14fwNormal.copyWith(height: 1.8),
-                        ),
-                      )
-                    : Shimmers(width: getWidth(context), height: 150),
-                const SizedBox(
-                  height: 16,
-                ),
-                if (data.productInfo != null)
-                  Container(
+                  Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                    child: ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, variationIndex) {
-                          return SizedBox(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                    child: Text(
+                      AppLang.local(context).description,
+                      style: StyleConfig.fs12fwBold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  data.isProductInfoInitial
+                      ? Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: StyleConfig.padding),
+                          child: Column(
+                            children: [
+                              Text(data.productInfo?.shortDescription ?? ''),
+                              const SizedBox(height: 8),
+                              if (showFullDescription)
                                 Text(
-                                  data.variations[variationIndex].name,
-                                  style: StyleConfig.fs16fwBold,
+                                  removeHtmlTags(
+                                      data.productInfo?.description ?? ''),
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      height: 1.8,
+                                      color: Colors.grey[700]),
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    showFullDescription = !showFullDescription;
+                                  });
+                                },
+                                child: Text(
+                                  showFullDescription
+                                      ? 'عرض أقل'
+                                      : 'عرض المزيد',
+                                  style: const TextStyle(color: Colors.blue),
                                 ),
-                                Wrap(
-                                  spacing: 10,
-                                  children: List.generate(
-                                      data.variations[variationIndex].values
-                                          .length, (valueIndex) {
-                                    return Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 5),
-                                      decoration: BoxDecorations.shadow(
-                                              radius: 6)
-                                          .copyWith(
-                                              border: Border.all(
-                                                  color: data
-                                                          .variations[
-                                                              variationIndex]
-                                                          .values[valueIndex]
-                                                          .isChosen
-                                                      ? ThemeConfig.accentColor
-                                                      : ThemeConfig.grey,
-                                                  width: 2)),
-                                      child: InkWell(
-                                        onTap: () {
-                                          data.onChangeVariation(
-                                              variationIndex, valueIndex);
-                                        },
-                                        child: data.variations[variationIndex]
-                                                    .id ==
-                                                2
-                                            ? Container(
-                                                height: 40,
-                                                width: 40,
-                                                color: Color(int.parse(data
-                                                    .variations[variationIndex]
-                                                    .values[valueIndex]
-                                                    .code)),
-                                              )
-                                            : Text(
-                                                data.variations[variationIndex]
-                                                    .values[valueIndex].name,
-                                                style: StyleConfig.fs14fwNormal,
-                                              ),
-                                      ),
-                                    );
-                                  }),
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            height: 16,
-                          );
-                        },
-                        itemCount: data.variations.length),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Shimmers(width: getWidth(context), height: 150),
+                  const SizedBox(
+                    height: 16,
                   ),
-                const SizedBox(
-                  height: 16,
-                ),
-                buildPriceAndQuantitySection(context, data),
-                const SizedBox(
-                  height: 16,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                  child: Text(
-                    AppLang.local(context).related_product_ucf,
-                    style: StyleConfig.fs16fwBold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                buildRelatedProductSection(data),
-              ],
-            ),
-          ),
-        ),
-        /*floatingActionButton: Container(
-          //margin: EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-          width: getWidth(context),
-          height: 70,
-          //color: Colors.red,
-          child:Button(
-            shape: StyleConfig.buttonRadius(10),
-            color: ThemeConfig.accentColor,
-            minWidth: getWidth(context)-40,
-            onPressed: (){},
-            child: Text(AppLang.local(context).add_to_cart,style: StyleConfig.fs14cWhitefwNormal,),
-          ),
-        ),
-*/
-
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        bottomNavigationBar: data.selectedVariation != null
-            ? SizedBox(
-                width: getWidth(context),
-                height: 50,
-                child: Button(
-                  color: ThemeConfig.fontColor,
-                  minWidth: getWidth(context) - 40,
-                  onPressed: () {
-                    if (SystemData.isLogIn) {
-                      MakeRoute.go(context, const Cart());
-                    } else {
-                      MakeRoute.go(context, const Login());
-                    }
-                  },
-                  child:
-                      Consumer<CartPresenter>(builder: (context, data, child) {
-                    return Padding(
+                  if (data.productInfo != null)
+                    Container(
                       padding:
                           EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Total: ${showPrice(data.cartResponse.subTotal)}",
-                            style: StyleConfig.fs16cWhitefwBold,
-                          ),
-                          Text(
-                            AppLang.local(context).go_to_cart,
-                            style: StyleConfig.fs16cWhitefwBold,
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                ),
-              )
-            : null,
+                      child: ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, variationIndex) {
+                            return SizedBox(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data.variations[variationIndex].name,
+                                    style: StyleConfig.fs16fwBold,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Wrap(
+                                    spacing: 10,
+                                    children: List.generate(
+                                        data.variations[variationIndex].values
+                                            .length, (valueIndex) {
+                                      return Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 5),
+                                        decoration: BoxDecorations.shadow(
+                                                radius: 6)
+                                            .copyWith(
+                                                border: Border.all(
+                                                    color: data
+                                                            .variations[
+                                                                variationIndex]
+                                                            .values[valueIndex]
+                                                            .isChosen
+                                                        ? ThemeConfig
+                                                            .accentColor
+                                                        : ThemeConfig.grey,
+                                                    width: 2)),
+                                        child: InkWell(
+                                          onTap: () {
+                                            data.onChangeVariation(
+                                                variationIndex, valueIndex);
+                                          },
+                                          child: data.variations[variationIndex]
+                                                      .id ==
+                                                  2
+                                              ? Container(
+                                                  height: 40,
+                                                  width: 40,
+                                                  color: Color(int.parse(data
+                                                      .variations[
+                                                          variationIndex]
+                                                      .values[valueIndex]
+                                                      .code)),
+                                                )
+                                              : Text(
+                                                  data
+                                                      .variations[
+                                                          variationIndex]
+                                                      .values[valueIndex]
+                                                      .name,
+                                                  style:
+                                                      StyleConfig.fs14fwNormal,
+                                                ),
+                                        ),
+                                      );
+                                    }),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 16,
+                            );
+                          },
+                          itemCount: data.variations.length),
+                    ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  buildPriceAndQuantitySection(context, data),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: StyleConfig.padding),
+                    child: Text(
+                      AppLang.local(context).related_product_ucf,
+                      style: StyleConfig.fs16fwBold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  buildRelatedProductSection(data),
+                ],
+              ),
+            ),
+          ),
+          bottomNavigationBar: data.selectedVariation != null
+              ? SizedBox(
+                  width: getWidth(context),
+                  height: 50,
+                  child: Button(
+                    color: ThemeConfig.fontColor,
+                    minWidth: getWidth(context) - 40,
+                    onPressed: () {
+                      if (SystemData.isLogIn) {
+                        MakeRoute.go(context, const Cart());
+                      } else {
+                        MakeRoute.go(context, const Login());
+                      }
+                    },
+                    child: Consumer<CartPresenter>(
+                        builder: (context, data, child) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: StyleConfig.padding),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "IQD ${showPrice(data.cartResponse.subTotal.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', ''))}",
+                              style: StyleConfig.fs16cWhitefwBold,
+                            ),
+                            Text(
+                              AppLang.local(context).go_to_cart,
+                              style: StyleConfig.fs16cWhitefwBold,
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
+                )
+              : null,
+        ),
       );
     });
   }
@@ -278,11 +305,14 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 0.8),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: MediaQuery.of(context).size.width > 600
+                  ? 4
+                  : 2, // عدد الأعمدة
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 0.7, //0.6
+            ),
             itemCount: data.relatedProducts.length,
             itemBuilder: (context, index) {
               return ProductCard(
@@ -313,7 +343,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 height: 6,
               ),
               data.isProductInfoInitial
-                  ? Text(showPrice(data.selectedVariation!.price),
+                  ? Text(
+                      '${showPrice(data.selectedVariation!.price.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', ''))} IQD',
                       style: StyleConfig.fs14cRedfwBold)
                   : Shimmers(width: 100, height: 25),
             ],
@@ -346,70 +377,27 @@ class _ProductDetailsState extends State<ProductDetails> {
             },
           ),
           Button(
-              minWidth: 40,
-              shape: StyleConfig.buttonRadius(6),
-              color: ThemeConfig.accentColor,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              onPressed: () {
-                if (SystemData.isLogIn) {
-                  if (data.selectedVariation!.sock > 0) {
-                    Provider.of<CartPresenter>(context, listen: false)
-                        .addToCart(
-                            data.selectedVariation!.id, data.quantity, context);
-                  } else {
-                    ToastUi.show(context, "Stock out");
-                  }
-                } else {
-                  MakeRoute.go(context, const Login());
-                }
-              },
-              child: Text(
-                AppLang.local(context).add_to_cart,
-                style: StyleConfig.fs14cWhitefwNormal,
-              )
-              /* Icon(
-              Icons.add_shopping_cart_outlined,
-              color: ThemeConfig.white,
-              size: 18,
-            ),*/
-              ),
-          /*Button(
-
-            minWidth: 30,
-            shape: CircleBorder(),
-            color: ThemeConfig.fontColor,
-            padding: EdgeInsets.all(8),
+            minWidth: 40,
+            shape: StyleConfig.buttonRadius(6),
+            color: ThemeConfig.accentColor,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             onPressed: () {
-              data.decrementQty();
+              if (SystemData.isLogIn) {
+                if (data.selectedVariation!.sock > 0) {
+                  Provider.of<CartPresenter>(context, listen: false).addToCart(
+                      data.selectedVariation!.id, data.quantity, context);
+                } else {
+                  ToastUi.show(context, "Stock out");
+                }
+              } else {
+                MakeRoute.go(context, const Login());
+              }
             },
-            child: Icon(
-              Icons.remove,
-              color: ThemeConfig.white,
-              size: 18,
+            child: Text(
+              AppLang.local(context).add_to_cart,
+              style: StyleConfig.fs14cWhitefwNormal,
             ),
           ),
-          Container(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              constraints: BoxConstraints(minWidth: 40),
-              alignment: Alignment.center,
-              child: Text(
-                "${data.quantity}",
-                style: StyleConfig.fs14fwBold,
-              )),
-          Button(
-            minWidth: 30,
-            shape: CircleBorder(),
-            color: ThemeConfig.accentColor,
-            padding: EdgeInsets.all(8),
-            onPressed: () {
-              data.incrementQty();
-            },
-            child: Icon(
-              Icons.add,
-              color: ThemeConfig.white,
-              size: 18,
-            ),
-          ),*/
         ],
       ),
     );
@@ -438,68 +426,25 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   Widget buildSliderSection(ProductDetailsPresenter data) {
     return Container(
-      height: 200,
+      height: 380,
       decoration: BoxDecorations.customRadius(
           radius: const BorderRadius.only(bottomRight: Radius.circular(70))),
       child: Column(
         children: [
-          Stack(
-            children: [
-              CarouselSlider(
-                items: data.isProductInfoInitial
-                    ? buildImages(data)
-                    : sliderShimmer(),
-                options: CarouselOptions(
-                  aspectRatio: 1,
-                  height: 150,
-                  enlargeCenterPage: true,
-                  scrollDirection: Axis.horizontal,
-                  autoPlay: true,
-                  onPageChanged: (index, reason) {
-                    data.onChangeBannerIndex(index);
-                  },
-                ),
-              ),
-              /*Positioned(
-                  right: 10,
-                  top: 10,
-                  child: Button(
-                    onPressed: () {
-                      MakeRoute.go(context, const Cart());
-                    },
-                    shape: StyleConfig.buttonRadius(30),
-                    padding: EdgeInsets.all(8),
-                    color:ThemeConfig.amber,
-                    minWidth: 35,
-                    child: badges.Badge(
-                      position: badges.BadgePosition.custom(end: 12, bottom: -15),
-                      badgeStyle: badges.BadgeStyle(
-                          shape: badges.BadgeShape.circle,
-                          badgeColor: ThemeConfig.red,
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(width: 1, color: ThemeConfig.white)
-                        //padding: EdgeInsets.all(5),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Image.asset(
-                          getAssetIcon("cart.png"),
-                          color: ThemeConfig.white,
-                          height: 20,
-                        ),
-                      ),
-                      badgeContent: Consumer<CartPresenter>(
-                        builder: (context, cart, child) {
-                          return Text(
-                            "${cart.cartResponse.cartCount}",
-                            style: TextStyle(fontSize: 10, color: Colors.white),
-                          );
-                        },
-                      ),
-                    ),
-                  )
-              )*/
-            ],
+          CarouselSlider(
+            items:
+                data.isProductInfoInitial ? buildImages(data) : sliderShimmer(),
+            options: CarouselOptions(
+              viewportFraction: 0.65,
+              aspectRatio: 1,
+              height: 300, //150
+              enlargeCenterPage: true,
+              scrollDirection: Axis.horizontal,
+              autoPlay: true,
+              onPageChanged: (index, reason) {
+                data.onChangeBannerIndex(index);
+              },
+            ),
           ),
           const SizedBox(
             height: 24,

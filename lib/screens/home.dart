@@ -12,13 +12,12 @@ import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/presenters/home_presenter.dart';
 import 'package:grostore/screens/filter.dart';
-import 'package:grostore/screens/test.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-  String? id;
+  final String? id;
 
-  Home({Key? key, this.id}) : super(key: key);
+  const Home({Key? key, this.id}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -27,134 +26,119 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   void initState() {
-    // TODO: implement initState
     Provider.of<HomePresenter>(context, listen: false).setContext(context);
     Provider.of<HomePresenter>(context, listen: false).initState(context);
 
     super.initState();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xffD0F0FF
-),
-        appBar: buildSearchOption(context),
-        body: Consumer<HomePresenter>(builder: (context, data, child) {
-          return RefreshIndicator(
-            onRefresh: data.onRefresh,
-            child: SingleChildScrollView(
-              controller: data.homeScrollController,
-              child: SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildSliderSection(data),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    Button(child: Text('test'),onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Test()));
-                    },),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                      child: Row(
-                        children: [
-                          Text(
-                            AppLang.local(context).top_categories_ucf,
-                            style: StyleConfig.fs16fwBold,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Image.asset(
-                            getAssetIcon("fire.png"),
-                            height: 20,
-                            width: 20,
-                          )
-                        ],
+    return Scaffold(
+      backgroundColor: Colors.blueGrey,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              getAssetImage("img.png"),
+              width: getWidth(context),
+              height: 200,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Consumer<HomePresenter>(builder: (context, data, child) {
+            return RefreshIndicator(
+              onRefresh: data.onRefresh,
+              child: SingleChildScrollView(
+                controller: data.homeScrollController,
+                child: SafeArea(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildSearchOption(context),
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    buildTopCategorySection(data),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                      child: Row(
-                        children: [
-                          Text(
-                            AppLang.local(context).best_selling_products_ucf,
-                            style: StyleConfig.fs16fwBold,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Image.asset(
-                            getAssetIcon("fire.png"),
-                            height: 20,
-                            width: 20,
-                          )
-                        ],
+                      buildSliderSection(data),
+                      const SizedBox(
+                        height: 14,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                        height: 200,
-                        child: buildBestSellingProductSection(data)),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: StyleConfig.padding),
-                      child: Row(
-                        children: [
-                          Text(
-                            AppLang.local(context).all_products_ucf,
-                            style: StyleConfig.fs16fwBold,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Image.asset(
-                            getAssetIcon("fire.png"),
-                            height: 20,
-                            width: 20,
-                          )
-                        ],
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: StyleConfig.padding),
+                        child: Row(
+                          children: [
+                            Text(
+                              AppLang.local(context).top_categories_ucf,
+                              style: StyleConfig.fs16fwBold,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    allProducts(data),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      buildTopCategorySection(data),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: StyleConfig.padding),
+                        child: Row(
+                          children: [
+                            Text(
+                              AppLang.local(context).best_selling_products_ucf,
+                              style: StyleConfig.fs16fwBold,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                          height: 200,
+                          child: buildBestSellingProductSection(data)),
+                      const SizedBox(
+                        height: 14,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: StyleConfig.padding),
+                        child: Row(
+                          children: [
+                            Text(
+                              AppLang.local(context).all_products_ucf,
+                              style: StyleConfig.fs16fwBold,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      allProducts(data),
+                      const SizedBox(
+                        height: 14,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        }),
+            );
+          }),
+        ],
       ),
     );
   }
 
   buildTopCategorySection(HomePresenter data) {
     return SizedBox(
-      height: 87,
+      height: 89,
       child: data.isTopCategoryInitial
           ? ListView.separated(
               scrollDirection: Axis.horizontal,
@@ -190,17 +174,25 @@ class _HomeState extends State<Home> {
 
   SizedBox buildSliderSection(HomePresenter data) {
     return SizedBox(
-      height: 170,
+      height: 200, // زيد الارتفاع هنا
       child: CarouselSlider(
-        items:
-            data.isHomeBannerInitial ? data.homeBannerImages : sliderShimmer(),
+        items: data.isHomeBannerInitial
+            ? data.homeBannerImages.map((widget) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: widget, // احذف SizedBox(height: 500)
+                  ),
+                );
+              }).toList()
+            : sliderShimmer(),
         options: CarouselOptions(
-          aspectRatio: 2,
-          viewportFraction: 0.94,
-          height: 150,
-          // enlargeCenterPage: true,
-          scrollDirection: Axis.horizontal,
+          aspectRatio: 16 / 9,
+          viewportFraction: 1,
+          height: 300, // لازم يكون نفس اللي فوق
           autoPlay: true,
+          scrollDirection: Axis.horizontal,
           onPageChanged: (index, reason) {
             data.onChangeBannerIndex(index);
           },
@@ -213,11 +205,11 @@ class _HomeState extends State<Home> {
     return PreferredSize(
         preferredSize: Size(getWidth(context), 60),
         child: Container(
-  
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
           margin: const EdgeInsets.only(top: 12, left: 24, right: 24),
           width: getWidth(context),
-          decoration: BoxDecorations.shadow(radius: 6.0,
+          decoration: BoxDecorations.shadow(
+            radius: 6.0,
           ),
           child: Button(
             onPressed: () => MakeRoute.go(
@@ -327,11 +319,14 @@ class _HomeState extends State<Home> {
                 bottom: 20),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 0.8),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: MediaQuery.of(context).size.width > 600
+                  ? 4
+                  : 2, // عدد الأعمدة
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 0.7, // ✅ هذا مهم: نسبة العرض إلى الارتفاع
+            ),
             itemCount: data.products.length,
             itemBuilder: (context, index) {
               return ProductCard(

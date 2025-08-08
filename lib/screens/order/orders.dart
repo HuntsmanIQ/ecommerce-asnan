@@ -129,7 +129,7 @@ class _OrdersState extends State<Orders> {
           return Button(
             padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 15),
             color: data.keySelectedIndex == index
-                ? ThemeConfig.green
+                ? Color.fromARGB(255, 39, 219, 186).withOpacity(0.8)
                 : ThemeConfig.white,
             minWidth: 80,
             minHeight: 40.0,

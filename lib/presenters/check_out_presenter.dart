@@ -14,6 +14,7 @@ import 'package:grostore/screens/order/orders.dart';
 import 'package:grostore/screens/payment.dart';
 
 class CheckOutPresenter extends ChangeNotifier {
+  bool isInitialized = false;
   static BuildContext? context;
 
   setContext(BuildContext context) {
@@ -195,6 +196,8 @@ class CheckOutPresenter extends ChangeNotifier {
     fetchAddresses(context);
     fetchTimeSlots();
     fetchPaymentTypes();
+    isInitialized = true;
+    notifyListeners();
   }
 
   _store(BuildContext context) async {

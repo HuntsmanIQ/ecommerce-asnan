@@ -34,9 +34,7 @@ class StyleConfig {
       fontWeight: FontWeight.normal);
 
   static TextStyle get fs12 => TextStyle(
-      fontSize: 12,
-      color: ThemeConfig.fontColor,
-      fontWeight: FontWeight.normal);
+      fontSize: 12, color: ThemeConfig.fontColor, fontWeight: FontWeight.bold);
 
   static TextStyle get fs12cWhitefwBold => const TextStyle(
       fontSize: 12, color: ThemeConfig.white, fontWeight: FontWeight.bold);
@@ -91,8 +89,7 @@ class StyleConfig {
       fontWeight: FontWeight.normal);
 
   static TextStyle get fs16fwBold => const TextStyle(
-      fontSize: 16, color: Color(0xffFF6B3B
-), fontWeight: FontWeight.bold);
+      fontSize: 16, color: Color(0xff03346E), fontWeight: FontWeight.bold);
 
   static TextStyle get fs16cWhitefwBold => const TextStyle(
       fontSize: 16, color: ThemeConfig.white, fontWeight: FontWeight.bold);

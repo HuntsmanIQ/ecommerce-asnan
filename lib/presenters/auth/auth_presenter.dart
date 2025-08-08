@@ -67,7 +67,6 @@ class AuthPresenter extends ChangeNotifier {
   TextEditingController regPasswordController = TextEditingController();
   TextEditingController regPasswordConfirmController = TextEditingController();
 
-
   onPressedLogin() async {
     if (checkLoginValidation()) {
       makeLogin();
@@ -164,6 +163,10 @@ class AuthPresenter extends ChangeNotifier {
       regPhone = iraq + regPhone;
     }
 
+    if (regPhone == "") {
+      ToastUi.show(_context!, AppLang.local(_context!).please_enter_phone);
+      return;
+    }
     if (name == "") {
       ToastUi.show(_context!, AppLang.local(_context!).please_enter_name);
       return;

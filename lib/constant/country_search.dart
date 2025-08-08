@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:grostore/constant/country_code.dart';
 
 class CountrySearchDialog extends StatefulWidget {
-  const CountrySearchDialog({super.key});
-
   @override
   _CountrySearchDialogState createState() => _CountrySearchDialogState();
 }
@@ -31,17 +29,17 @@ class _CountrySearchDialogState extends State<CountrySearchDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Search Product'),
+      title: Text('Search Product'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           TextField(
             onChanged: filtercountry,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Search',
             ),
           ),
-          const SizedBox(height: 16.0),
+          SizedBox(height: 16.0),
           Expanded(
             child: ListView.builder(
               itemCount: filteredCountry.length,

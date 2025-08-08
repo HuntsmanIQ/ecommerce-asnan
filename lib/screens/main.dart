@@ -9,6 +9,7 @@ import 'package:grostore/presenters/main_persenter.dart';
 import 'package:grostore/presenters/stock_locations_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
 import 'package:grostore/screens/cart.dart';
+import 'package:grostore/screens/cart_test.dart';
 import 'package:provider/provider.dart';
 import '../presenters/cart_presenter.dart';
 
@@ -43,121 +44,125 @@ class _MainState extends State<Main> {
           }
           return Future.delayed(Duration.zero);
         },
-        child: Scaffold(
-          extendBody: true,
-          body: data.bottomAppbarChildren[data.bottomAppbarIndex],
+        child: SafeArea(
+          top:false,
+          child: Scaffold(
+            backgroundColor: const Color(0xffACD7FD),
+            extendBody: true,
+            body: data.bottomAppbarChildren[data.bottomAppbarIndex],
 
-          // ✅ Bottom Bar جديد بالشكل المطلوب
-          bottomNavigationBar: BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            notchMargin: 10,
-            elevation: 10,
-            color: const Color(0xffFAD79C).withOpacity(0.4),
-            child: SizedBox(
-              height: 70,
+            bottomNavigationBar: Container(
+              alignment: const Alignment(0, -0.7),
+              height: 60, //80
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 245, 245, 245),
+                    Color.fromARGB(255, 232, 236, 236)
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                border: Border(
+                  top: BorderSide(
+                      color: Colors.brown.withOpacity(0.3), width: 0.5),
+                ),
+              ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Row(
-                    children: [
-                      _buildNavItem(
-                        icon: getAssetIcon("home.png"),
-                        label: AppLang.local(context).home,
-                        index: 0,
-                        selectedIndex: data.bottomAppbarIndex,
-                        onTap: data.onTapped,
-                      ),
-                      _buildNavItem(
-                        icon: getAssetIcon("categories.png"),
-                        label: AppLang.local(context).categories,
-                        index: 1,
-                        selectedIndex: data.bottomAppbarIndex,
-                        onTap: data.onTapped,
-                      ),
-                    ],
+                  _buildNavItem(
+                    icon: getAssetIcon("home.png"),
+                    label: AppLang.local(context).home,
+                    index: 0,
+                    selectedIndex: data.bottomAppbarIndex,
+                    onTap: data.onTapped,
                   ),
-                  Row(
-                    children: [
-                      _buildNavItem(
-                        icon: getAssetIcon("orders.png"),
-                        label: AppLang.local(context).orders,
-                        index: 2,
-                        selectedIndex: data.bottomAppbarIndex,
-                        onTap: data.onTapped,
-                      ),
-                      _buildNavItem(
-                        icon: getAssetIcon("profile.png"),
-                        label: AppLang.local(context).profile,
-                        index: 3,
-                        selectedIndex: data.bottomAppbarIndex,
-                        onTap: data.onTapped,
-                      ),
-                    ],
+                  _buildNavItem(
+                    icon: getAssetIcon("categories.png"),
+                    label: AppLang.local(context).categories,
+                    index: 1,
+                    selectedIndex: data.bottomAppbarIndex,
+                    onTap: data.onTapped,
+                  ),
+                  _buildNavItem(
+                    icon: getAssetIcon("orders.png"),
+                    label: AppLang.local(context).orders,
+                    index: 2,
+                    selectedIndex: data.bottomAppbarIndex,
+                    onTap: data.onTapped,
+                  ),
+                  _buildNavItem(
+                    icon: getAssetIcon("profile.png"),
+                    label: AppLang.local(context).profile,
+                    index: 3,
+                    selectedIndex: data.bottomAppbarIndex,
+                    onTap: data.onTapped,
                   ),
                 ],
               ),
             ),
-          ),
+            //
+            floatingActionButton: (() {
+              final cart = Provider.of<CartPresenter>(context);
+              final cartCount = cart.cartResponse.cartCount;
 
-          // ✅ زر السلة العائم
-          floatingActionButton: FloatingActionButton(
-              shape: const CircleBorder(
-                side: BorderSide(
+              if (cartCount == 0) return null;
+
+              return FloatingActionButton(
+                shape: const CircleBorder(
+                  side: BorderSide(
                     color: ThemeConfig.white,
                     width: 3,
-                    strokeAlign: BorderSide.strokeAlignOutside),
-              ),
-              onPressed: () {
-                if (SystemData.isLogIn) {
-                  MakeRoute.go(context, const Cart());
-                } else {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Login()));
-                  return;
-                }
-              },
-              backgroundColor: const Color(0xff56DFCF),
-              child: Consumer<CartPresenter>(
-                builder: (context, cart, child) {
-                  final cartCount = cart.cartResponse.cartCount;
-
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: cartCount == 0
-                        ? Image.asset(
-                            getAssetIcon("cart.png"),
-                            color: ThemeConfig.white,
-                            height: 20,
-                          )
-                        : badges.Badge(
-                            position: badges.BadgePosition.custom(
-                                end: 13, bottom: 10),
-                            badgeStyle: badges.BadgeStyle(
-                              shape: badges.BadgeShape.circle,
-                              badgeColor: ThemeConfig.red,
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(
-                                  width: 1, color: ThemeConfig.white),
-                            ),
-                            badgeContent: Text(
-                              "$cartCount",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                  fontSize: 10, color: Colors.white),
-                            ),
-                            child: Image.asset(
-                              getAssetIcon("cart.png"),
-                              color: ThemeConfig.white,
-                              height: 20,
-                            ),
-                          ),
-                  );
+                    strokeAlign: BorderSide.strokeAlignOutside,
+                  ),
+                ),
+                onPressed: () {
+                  if (SystemData.isLogIn) {
+                    MakeRoute.go(context, const Cart());
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Login()),
+                    );
+                  }
                 },
-              )
-             
-              ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+                backgroundColor: const Color(0xff56DFCF),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: badges.Badge(
+                    position: badges.BadgePosition.custom(end: 13, bottom: 10),
+                    badgeStyle: badges.BadgeStyle(
+                      shape: badges.BadgeShape.circle,
+                      badgeColor: ThemeConfig.red,
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide:
+                          const BorderSide(width: 1, color: ThemeConfig.white),
+                    ),
+                    badgeContent: Text(
+                      "$cartCount",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: Image.asset(
+                      getAssetIcon("cart.png"),
+                      color: ThemeConfig.white,
+                      height: 20,
+                    ),
+                  ),
+                ),
+              );
+            })(),
+
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.startFloat,
+          ),
         ),
       );
     });
@@ -170,29 +175,48 @@ class _MainState extends State<Main> {
     required int selectedIndex,
     required Function(int) onTap,
   }) {
-    final isSelected = selectedIndex == index;
+    final isSelected = index == selectedIndex;
 
-    return MaterialButton(
-      onPressed: () => onTap(index),
-      minWidth: 40,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            icon,
-            color: isSelected ? ThemeConfig.accentColor : ThemeConfig.grey,
-            height: 20,
+    return GestureDetector(
+      onTap: () => onTap(index),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? const Color.fromARGB(255, 39, 219, 186).withOpacity(0.8)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: AnimatedScale(
+          scale: isSelected ? 1.2 : 1,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          child: Row(
+            children: [
+              Image.asset(
+                icon,
+                width: 24,
+                height: 24,
+                color: isSelected ? Colors.white : Colors.black54,
+              ),
+              if (isSelected) const SizedBox(width: 6),
+              if (isSelected)
+                AnimatedOpacity(
+                  opacity: 1.0,
+                  duration: const Duration(milliseconds: 300),
+                  child: Text(
+                    label,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+            ],
           ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? ThemeConfig.accentColor : ThemeConfig.grey,
-              fontSize: 11,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

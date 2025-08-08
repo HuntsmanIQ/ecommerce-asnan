@@ -22,64 +22,74 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     try {
-      return Container(
+      return SizedBox(
         width: 160,
-        height: 160,
-        decoration: BoxDecorations.shadow(radius: 8),
+        height: 270, // ✅ ارتفاع كافي للبطاقة
         child: Stack(
           children: [
-            Button(
-              minWidth: 160,
-              onPressed: () {
-                MakeRoute.productRoute(
-                    this.context, ProductDetails(slug: product.slug));
-              },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 160,
-                    alignment: Alignment.center,
-                    child: Hero(
-                      tag: product,
-                      child: ImageView(
-                        url: product.thumbnailImage,
-                        width: 150, //134
-                        height: 108, //92
+            // خلفية البطاقة كلها
+            Container(
+              width: 160,
+              decoration: BoxDecorations.shadow(radius: 8),
+              child: Button(
+                minWidth: 160,
+                onPressed: () {
+                  MakeRoute.productRoute(
+                      this.context, ProductDetails(slug: product.slug));
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 160,
+                      height: 150,
+                      alignment: Alignment.center,
+                      child: Hero(
+                        tag: product,
+                        child: ImageView(
+                          url: product.thumbnailImage,
+                          width: 120,
+                          height: 140,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0, top: 12),
-                    child: Text(
-                      product.categories.isNotEmpty
-                          ? product.categories.first.name
-                          : '',
-                      style: StyleConfig.fs10,
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Text(
+                        product.categories.isNotEmpty
+                            ? product.categories.first.name
+                            : '',
+                        style: StyleConfig.fs10,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0, top: 4),
-                    child: Text(
-                      product.name,
-                      style: StyleConfig.fs12fwBold,
-                      maxLines: 2,
+                    const SizedBox(height: 4),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Text(
+                        product.name,
+                        style: StyleConfig.fs12fwBold,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0, top: 8),
-                    child: Text(
-                      showPrice(product.price.toString()),
-                      style: StyleConfig.fs14cRedfwBold,
+                    const SizedBox(height: 6),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Text(
+                        showPrice(
+                            '${product.price.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD'),
+                        style: StyleConfig.fs14cRedfwBold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
+
             Positioned(
               bottom: -4,
-              right: -4,
+              right: 17,
               child: Button.minSize(
                 color: ThemeConfig.fontColor,
                 onPressed: () {

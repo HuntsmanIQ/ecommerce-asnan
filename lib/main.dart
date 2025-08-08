@@ -13,7 +13,6 @@ import 'package:grostore/presenters/check_out_presenter.dart';
 import 'package:grostore/presenters/coupon_presenter.dart';
 import 'package:grostore/presenters/filter_presenter.dart';
 import 'package:grostore/presenters/home_presenter.dart';
-import 'package:grostore/presenters/landing_page_presenter.dart';
 import 'package:grostore/presenters/order_details_presenter.dart';
 import 'package:grostore/presenters/setting_presenter.dart';
 import 'package:grostore/presenters/main_persenter.dart';
@@ -25,14 +24,11 @@ import 'package:grostore/presenters/user_presenter.dart';
 import 'package:grostore/presenters/wallet_presenter.dart';
 import 'package:grostore/presenters/wishlist_presenter.dart';
 import 'package:grostore/screens/home.dart';
-import 'package:grostore/screens/landing_pages/landing_page.dart';
 import 'package:grostore/screens/main.dart';
 
 import 'package:grostore/screens/splash.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:grostore/screens/test.dart';
-
 import 'package:provider/provider.dart';
 import 'package:shared_value/shared_value.dart';
 
@@ -51,12 +47,12 @@ final GoRouter router = GoRouter(
         return  const Splash();
       },
     ),
-    GoRoute(
-      path: '/landing-page',
-      builder: (BuildContext context, GoRouterState state) {
-        return const LandingPage();
-      },
-    ),
+    // GoRoute(
+    //   path: '/landing-page',
+    //   builder: (BuildContext context, GoRouterState state) {
+    //     return const LandingPage();
+    //   },
+    // ),
   ],
 );
 
@@ -71,7 +67,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SettingPresenter()),
         ChangeNotifierProvider(create: (context) => AuthPresenter()),
         ChangeNotifierProvider(create: (context) => MainPresenter()),
-        ChangeNotifierProvider(create: (context) => LandingPagePresenter()),
         ChangeNotifierProvider(create: (context) => CartPresenter()),
         ChangeNotifierProvider(create: (context) => HomePresenter()),
         ChangeNotifierProvider(create: (context) => ProductDetailsPresenter()),
@@ -100,9 +95,11 @@ class MyApp extends StatelessWidget {
             primarySwatch: ThemeConfig.accentMaterialColor,
             //textTheme: GoogleFonts.interTextTheme().copyWith(),
             textTheme:
-                GoogleFonts.almaraiTextTheme(Theme.of(context).textTheme),
+               GoogleFonts.almaraiTextTheme(Theme.of(context).textTheme),
+                
+              
 
-            //textTheme:
+            
           ),
           //builder: OneContext().builder,
           themeMode: ThemeMode.light,
@@ -128,7 +125,6 @@ class MyApp extends StatelessWidget {
                   id: getQueryParameter(context, "id"),
                 ),
             "/main": (context) => Main(),
-            "/landing_page": (context) => const LandingPage(),
           },
         );
       }),
