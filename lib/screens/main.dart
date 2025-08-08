@@ -9,6 +9,7 @@ import 'package:grostore/presenters/main_persenter.dart';
 import 'package:grostore/presenters/stock_locations_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
 import 'package:grostore/screens/cart.dart';
+import 'package:grostore/screens/cart_test.dart';
 import 'package:provider/provider.dart';
 import '../presenters/cart_presenter.dart';
 
@@ -31,7 +32,6 @@ class _MainState extends State<Main> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Consumer<MainPresenter>(builder: (context, data, child) {
@@ -44,120 +44,125 @@ class _MainState extends State<Main> {
           }
           return Future.delayed(Duration.zero);
         },
-        child: Scaffold(
-          backgroundColor: const Color(0xffACD7FD),
-          extendBody: true,
-          body: data.bottomAppbarChildren[data.bottomAppbarIndex],
+        child: SafeArea(
+          top:false,
+          child: Scaffold(
+            backgroundColor: const Color(0xffACD7FD),
+            extendBody: true,
+            body: data.bottomAppbarChildren[data.bottomAppbarIndex],
 
-          bottomNavigationBar: Container(
-            alignment: Alignment(0, -0.7),
-            height: 80,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              gradient: const LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 245, 245, 245),
-                  Color.fromARGB(255, 232, 236, 236)
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              border: Border(
-                top: BorderSide(
-                    color: Colors.brown.withOpacity(0.3), width: 0.5),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildNavItem(
-                  icon: getAssetIcon("home.png"),
-                  label: AppLang.local(context).home,
-                  index: 0,
-                  selectedIndex: data.bottomAppbarIndex,
-                  onTap: data.onTapped,
+            bottomNavigationBar: Container(
+              alignment: const Alignment(0, -0.7),
+              height: 60, //80
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 245, 245, 245),
+                    Color.fromARGB(255, 232, 236, 236)
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                _buildNavItem(
-                  icon: getAssetIcon("categories.png"),
-                  label: AppLang.local(context).categories,
-                  index: 1,
-                  selectedIndex: data.bottomAppbarIndex,
-                  onTap: data.onTapped,
-                ),
-                _buildNavItem(
-                  icon: getAssetIcon("orders.png"),
-                  label: AppLang.local(context).orders,
-                  index: 2,
-                  selectedIndex: data.bottomAppbarIndex,
-                  onTap: data.onTapped,
-                ),
-                _buildNavItem(
-                  icon: getAssetIcon("profile.png"),
-                  label: AppLang.local(context).profile,
-                  index: 3,
-                  selectedIndex: data.bottomAppbarIndex,
-                  onTap: data.onTapped,
-                ),
-              ],
-            ),
-          ),
-          //
-          floatingActionButton: (() {
-            final cart = Provider.of<CartPresenter>(context);
-            final cartCount = cart.cartResponse.cartCount;
-
-            if (cartCount == 0) return null;
-
-            return FloatingActionButton(
-              shape: const CircleBorder(
-                side: BorderSide(
-                  color: ThemeConfig.white,
-                  width: 3,
-                  strokeAlign: BorderSide.strokeAlignOutside,
+                border: Border(
+                  top: BorderSide(
+                      color: Colors.brown.withOpacity(0.3), width: 0.5),
                 ),
               ),
-              onPressed: () {
-                if (SystemData.isLogIn) {
-                  MakeRoute.go(context, const Cart());
-                } else {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Login()),
-                  );
-                }
-              },
-              backgroundColor: const Color(0xff56DFCF),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: badges.Badge(
-                  position: badges.BadgePosition.custom(end: 13, bottom: 10),
-                  badgeStyle: badges.BadgeStyle(
-                    shape: badges.BadgeShape.circle,
-                    badgeColor: ThemeConfig.red,
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide:
-                        const BorderSide(width: 1, color: ThemeConfig.white),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildNavItem(
+                    icon: getAssetIcon("home.png"),
+                    label: AppLang.local(context).home,
+                    index: 0,
+                    selectedIndex: data.bottomAppbarIndex,
+                    onTap: data.onTapped,
                   ),
-                  badgeContent: Text(
-                    "$cartCount",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 10,
-                      color: Colors.white,
+                  _buildNavItem(
+                    icon: getAssetIcon("categories.png"),
+                    label: AppLang.local(context).categories,
+                    index: 1,
+                    selectedIndex: data.bottomAppbarIndex,
+                    onTap: data.onTapped,
+                  ),
+                  _buildNavItem(
+                    icon: getAssetIcon("orders.png"),
+                    label: AppLang.local(context).orders,
+                    index: 2,
+                    selectedIndex: data.bottomAppbarIndex,
+                    onTap: data.onTapped,
+                  ),
+                  _buildNavItem(
+                    icon: getAssetIcon("profile.png"),
+                    label: AppLang.local(context).profile,
+                    index: 3,
+                    selectedIndex: data.bottomAppbarIndex,
+                    onTap: data.onTapped,
+                  ),
+                ],
+              ),
+            ),
+            //
+            floatingActionButton: (() {
+              final cart = Provider.of<CartPresenter>(context);
+              final cartCount = cart.cartResponse.cartCount;
+
+              if (cartCount == 0) return null;
+
+              return FloatingActionButton(
+                shape: const CircleBorder(
+                  side: BorderSide(
+                    color: ThemeConfig.white,
+                    width: 3,
+                    strokeAlign: BorderSide.strokeAlignOutside,
+                  ),
+                ),
+                onPressed: () {
+                  if (SystemData.isLogIn) {
+                    MakeRoute.go(context, const Cart());
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Login()),
+                    );
+                  }
+                },
+                backgroundColor: const Color(0xff56DFCF),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: badges.Badge(
+                    position: badges.BadgePosition.custom(end: 13, bottom: 10),
+                    badgeStyle: badges.BadgeStyle(
+                      shape: badges.BadgeShape.circle,
+                      badgeColor: ThemeConfig.red,
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide:
+                          const BorderSide(width: 1, color: ThemeConfig.white),
+                    ),
+                    badgeContent: Text(
+                      "$cartCount",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: Image.asset(
+                      getAssetIcon("cart.png"),
+                      color: ThemeConfig.white,
+                      height: 20,
                     ),
                   ),
-                  child: Image.asset(
-                    getAssetIcon("cart.png"),
-                    color: ThemeConfig.white,
-                    height: 20,
-                  ),
                 ),
-              ),
-            );
-          })(),
+              );
+            })(),
 
-          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.startFloat,
+          ),
         ),
       );
     });

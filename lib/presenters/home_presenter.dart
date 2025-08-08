@@ -3,7 +3,6 @@ import 'package:grostore/apis/category_api.dart';
 import 'package:grostore/apis/product_api.dart';
 import 'package:grostore/app_lang.dart';
 import 'package:grostore/custom_ui/Button.dart';
-import 'package:grostore/custom_ui/Image_view.dart';
 import 'package:grostore/custom_ui/toast_ui.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
 import 'package:grostore/helpers/route.dart';
@@ -46,34 +45,33 @@ class HomePresenter extends ChangeNotifier {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
       child: Button(
-        minWidth: getWidth(context),
-        onPressed: () {
-          String url = data.link;
-          String extractedNumber = url.replaceAll("http://", "");
+          minWidth: getWidth(context),
+          onPressed: () {
+            String url = data.link;
+            String extractedNumber = url.replaceAll("http://", "");
 
-        int? number = int.tryParse(extractedNumber);
+            int? number = int.tryParse(extractedNumber);
 
-if (number != null) {
-  
+            if (number != null) {
+              MakeRoute.go(context!, Filter(category_id: extractedNumber));
+            } else {
+              MakeRoute.go(
+                context!,
+                ProductDetails(
+                  slug: extractedNumber,
+                ),
+              );
+            }
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              data.image,
+              fit: BoxFit.contain,
+            ),
+          )
 
-           MakeRoute.go(context!, Filter(category_id: extractedNumber));
-} 
-
-          else {
-            MakeRoute.go(
-              context!,
-              ProductDetails(
-                slug: extractedNumber,
-              ),
-            );
-          }
-        },
-        child: ImageView(
-          url: data.image,
-          width: getWidth(context),
-          height: 200,
-        ),
-      ),
+          ),
     );
   }
 

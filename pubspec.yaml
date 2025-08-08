@@ -45,7 +45,14 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/logos/landing_logo.png"
+  image_path: "assets/logos/ic_launcher_foreground.png"
+  adaptive_icon_path: "assets/logos/ic_launcher_foreground.png"
+  image_path_ios: "assets/logos/play_store_512.png"
+  remove_alpha_ios: true
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/logos/ic_launcher_foreground.png"
+  adaptive_icon_padding: true
+
 
 flutter:
   generate: true

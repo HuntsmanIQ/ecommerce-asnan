@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:grostore/custom_ui/common_appbar.dart';
 import 'package:grostore/presenters/page_presenter.dart';
@@ -31,18 +28,18 @@ class _PagesState extends State<Pages> {
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: pagePresenter,
-      builder: (context,child) {
-        return Scaffold(
-          appBar: CommonAppbar.show(title: pagePresenter.pageInfo?.title??"", context: context),
-        body:Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: WebViewWidget(controller: pagePresenter.controller,),
-        ) ,
-
-
-        );
-      }
-    );
+        listenable: pagePresenter,
+        builder: (context, child) {
+          return Scaffold(
+            appBar: CommonAppbar.show(
+                title: pagePresenter.pageInfo?.title ?? "", context: context),
+            body: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: WebViewWidget(
+                controller: pagePresenter.controller,
+              ),
+            ),
+          );
+        });
   }
 }

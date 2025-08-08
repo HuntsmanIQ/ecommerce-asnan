@@ -123,7 +123,7 @@ class _FilterState extends State<Filter> {
 
   PreferredSize buildSearchOptions(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size(getWidth(context), 50),
+      preferredSize: Size(getWidth(context), 80),
       child: Consumer<FilterPresenter>(builder: (context, data, child) {
         return Container(
           margin: EdgeInsets.symmetric(
@@ -139,12 +139,12 @@ class _FilterState extends State<Filter> {
                     borderRadius: BorderRadius.circular(8)),
                 padding: EdgeInsets.symmetric(
                     horizontal: StyleConfig.xsSectionSpacer, vertical: 10),
-                width: getWidth(context) - 100,
+                width: getWidth(context) - 120, //102
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: getWidth(context) - 220,
+                      width: getWidth(context) - 210,
                       child: TextField(
                         autofocus: widget.isFocus,
                         controller: data.searchTxt,
@@ -178,7 +178,7 @@ class _FilterState extends State<Filter> {
                 ),
               ),
               SizedBox(
-                width: 60,
+                width: 80,
                 child: Button(
                     onPressed: () {
                       showFilterDialog();
@@ -187,7 +187,7 @@ class _FilterState extends State<Filter> {
                     color: ThemeConfig.accentColor,
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 10),
-                    minWidth: 40,
+                    minWidth: 60,
                     child: Text(
                       AppLang.local(context).filter,
                       style: const TextStyle(
@@ -349,7 +349,7 @@ class _FilterState extends State<Filter> {
                       )),
                   Button(
                       shape: StyleConfig.buttonRadius(6),
-                      color: ThemeConfig.green,
+                      color: ThemeConfig.accentColor,
                       onPressed: () {
                         Navigator.pop(context);
                         data.clearKeyWord();

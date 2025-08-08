@@ -20,6 +20,7 @@ import 'package:grostore/screens/pages.dart';
 import 'package:grostore/screens/profile_edit.dart';
 import 'package:grostore/screens/setting.dart';
 import 'package:grostore/screens/stock_locations.dart';
+import 'package:grostore/screens/terms_conditions.dart';
 import 'package:grostore/screens/track_order.dart';
 import 'package:grostore/screens/wishlist.dart';
 import 'package:provider/provider.dart';
@@ -197,7 +198,8 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                     optionModel(
                         AppLang.local(context).terms_n_conditions_ucf,
                         getAssetIcon("terms_condition.png"),
-                        const Pages(slug: "terms-conditions")),
+                       // const Pages(slug: "terms-conditions")),
+                        TermsConditions()),
                     if (SystemData.isLogIn)
                       logoutModel(AppLang.local(context).log_out_ucf,
                           getAssetIcon("logout.png"), () {
