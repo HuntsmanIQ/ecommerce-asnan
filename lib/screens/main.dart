@@ -9,7 +9,6 @@ import 'package:grostore/presenters/main_persenter.dart';
 import 'package:grostore/presenters/stock_locations_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
 import 'package:grostore/screens/cart.dart';
-import 'package:grostore/screens/cart_test.dart';
 import 'package:provider/provider.dart';
 import '../presenters/cart_presenter.dart';
 

@@ -10,6 +10,7 @@ import 'package:grostore/custom_ui/toast_ui.dart';
 import 'package:grostore/helpers/common_functions.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/helpers/shared_value_helper.dart';
+import 'package:grostore/models/auth/address_register.dart';
 import 'package:grostore/models/auth/login_response_model.dart';
 import 'package:grostore/models/common/user_info.dart';
 import 'package:grostore/models/user_info_response_model.dart';
@@ -221,7 +222,7 @@ class AuthPresenter extends ChangeNotifier {
       loginPasswordController.clear();
       SystemData.isLogIn = true;
       SystemData.userInfo = signupResponse.user;
-      MakeRoute.goAndRemoveAll(_context!, const Main());
+      MakeRoute.goAndRemoveAll(_context!, AddressRegister());
 
       // if ((mail_verification_status.$ && _register_by == "email") ||
       //     _register_by == "phone") {

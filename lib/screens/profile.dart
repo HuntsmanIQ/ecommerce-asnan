@@ -165,7 +165,7 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                 child: Column(
                   children: [
                     optionModel(AppLang.local(context).pick_a_location,
-                        getAssetIcon("address.png"), const StockLocations()),
+                        getAssetIcon("address.png"), const StockLocations()), 
                     if (SystemData.isLogIn)
                       Column(
                         children: [

@@ -7,8 +7,10 @@ import 'package:grostore/custom_ui/BoxDecorations.dart';
 import 'package:grostore/custom_ui/input_decorations.dart';
 import 'package:grostore/helpers/common_functions.dart';
 import 'package:grostore/helpers/device_info_helper.dart';
+import 'package:grostore/helpers/route.dart';
 import 'package:grostore/presenters/auth/auth_presenter.dart';
 import 'package:grostore/screens/auth/login.dart';
+import 'package:grostore/screens/terms_conditions.dart';
 import 'package:provider/provider.dart';
 import '../../custom_ui/auth_ui.dart';
 
@@ -29,6 +31,7 @@ class _RegistrationState extends State<Registration> {
   void dispose() {
     super.dispose();
   }
+          bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +138,6 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                       SizedBox(
-                       
                         child: Row(
                           children: [
                             Padding(
@@ -155,9 +157,10 @@ class _RegistrationState extends State<Registration> {
                         padding: const EdgeInsets.only(left: 10),
                         width: getWidth(context) - 200,
                         child: TextField(
+                          keyboardType: TextInputType.phone,
                           style: StyleConfig.fs14fwNormal,
-                          decoration: const InputDecoration.collapsed(
-                              hintText: ""),
+                          decoration:
+                              const InputDecoration.collapsed(hintText: ""),
                           controller: data.regPhoneNumberController,
                         ),
                       )
@@ -231,8 +234,42 @@ class _RegistrationState extends State<Registration> {
                 ),
               ),
             ),
+           const SizedBox(height: 5),
+
+Row(
+  children: [
+    Checkbox(
+      value: isChecked,
+      onChanged: (val) {
+        setState(() {
+          
+        isChecked = val!;
+        });
+      },
+    ),
+    GestureDetector(
+      onTap: () => MakeRoute.go(context, TermsConditions()),
+      child: RichText(
+        text: const TextSpan(
+          text: 'الموافقة على ',
+          style: TextStyle(color: Colors.black),
+          children: [
+            TextSpan(
+              text: 'الشروط والأحكام',
+              style: TextStyle(
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+),
             Padding(
               padding: const EdgeInsets.only(top: 30.0),
+              
               child: SizedBox(
                 height: 45,
                 child: Button.minSize(
@@ -248,9 +285,10 @@ class _RegistrationState extends State<Registration> {
                           fontSize: 14,
                           fontWeight: FontWeight.w600),
                     ),
-                    onPressed: () {
+                    onPressed: isChecked ?() {
                       data.onPressSignUp();
-                    }),
+                    } : null
+                    ),
               ),
             ),
             Padding(
