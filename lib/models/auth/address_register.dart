@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grostore/apis/address_api.dart';
+import 'package:grostore/custom_ui/toast_ui.dart';
 import 'package:grostore/helpers/route.dart';
 import 'package:grostore/models/city_response.dart';
 import 'package:grostore/models/state_response.dart';
@@ -63,7 +64,7 @@ class _AddressRegisterState extends State<AddressRegister> {
                             value: state.id,
                             child: Text(
                               state.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: 'Cairo',
                                 fontSize: 16,
                                 color: Colors.black,
@@ -210,7 +211,9 @@ class _AddressRegisterState extends State<AddressRegister> {
                       elevation: 4,
                     ),
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate() &&
+                          selectedGovernorateId != null &&
+                          selectedCityId != null) {
                         try {
                           AddressApi.addAddress(
                             countryId: 104,
@@ -221,8 +224,10 @@ class _AddressRegisterState extends State<AddressRegister> {
                           );
                           MakeRoute.goAndRemoveAll(context, const Main());
                         } catch (e) {
-                          print(e);
+                          ToastUi.show(context, e);
                         }
+                      } else {
+                        ToastUi.show(context, 'الرجاء ملئ جميع الحقول');
                       }
                     },
                     child: const Text(
