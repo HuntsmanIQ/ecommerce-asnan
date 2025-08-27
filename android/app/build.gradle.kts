@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ecommerce"
+    namespace = "com.asnank.iq"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
