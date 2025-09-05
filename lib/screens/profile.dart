@@ -16,7 +16,6 @@ import 'package:grostore/screens/coupons.dart';
 import 'package:grostore/screens/help_center.dart';
 import 'package:grostore/screens/main.dart';
 import 'package:grostore/screens/order/orders.dart';
-import 'package:grostore/screens/pages.dart';
 import 'package:grostore/screens/profile_edit.dart';
 import 'package:grostore/screens/setting.dart';
 import 'package:grostore/screens/stock_locations.dart';
@@ -182,8 +181,8 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                                 fromBottomBar: false,
                               )),
                           
-                          optionModel(AppLang.local(context).address,
-                              getAssetIcon("address.png"), const Addresses()),
+                          // optionModel(AppLang.local(context).address,
+                          //     getAssetIcon("address.png"), const Addresses()),
                           
                           optionModel(AppLang.local(context).track_my_order_ucf,
                               getAssetIcon("track.png"), const TrackOrder()),
@@ -193,8 +192,8 @@ class _AccountState extends State<Account> with TickerProviderStateMixin {
                       ),
                     optionModel(AppLang.local(context).help_center_ucf,
                         getAssetIcon("help_center.png"), const HelpCenter()),
-                    optionModel(AppLang.local(context).settings,
-                        getAssetIcon("setting.png"), const Setting()),
+                    // optionModel(AppLang.local(context).settings,
+                    //     getAssetIcon("setting.png"), const Setting()),
                     optionModel(
                         AppLang.local(context).terms_n_conditions_ucf,
                         getAssetIcon("terms_condition.png"),

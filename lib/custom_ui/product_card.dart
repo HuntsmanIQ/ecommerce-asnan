@@ -24,7 +24,7 @@ class ProductCard extends StatelessWidget {
     try {
       return SizedBox(
         width: 160,
-        height: 270, // ✅ ارتفاع كافي للبطاقة
+        height: 270, 
         child: Stack(
           children: [
             // خلفية البطاقة كلها

@@ -264,7 +264,7 @@ class _FilterState extends State<Filter> {
             crossAxisCount: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
-            childAspectRatio: 0.8),
+            childAspectRatio: 0.65), //0.8
         itemCount: data.products.length,
         itemBuilder: (context, index) {
           return ProductCard(

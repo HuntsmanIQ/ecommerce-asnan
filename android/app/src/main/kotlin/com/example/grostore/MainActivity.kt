@@ -1,4 +1,4 @@
-package com.example.grostore
+package com.asnank.iq
 
 import io.flutter.embedding.android.FlutterActivity
 

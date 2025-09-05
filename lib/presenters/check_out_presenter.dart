@@ -227,7 +227,6 @@ class CheckOutPresenter extends ChangeNotifier {
 
   _byCOD(BuildContext context) async {
     Loading.show(context);
-    Loading.show(context);
     var response = await OrderApi.createOrderByCOD(
       shippingId: selectedShippingAddress.id,
       billingId: billingAddressId,
@@ -243,6 +242,7 @@ class CheckOutPresenter extends ChangeNotifier {
     if (response.object.result) {
       SystemData.couponCode = "";
       MakeRoute.go(context, Orders(fromBottomBar: false, fromCheckOut: true));
+    
     }
     ToastUi.show(context, response.object.message);
   }

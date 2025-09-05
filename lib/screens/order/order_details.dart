@@ -83,7 +83,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               height: 14,
                             ),
                             Text(
-                              "Billing Address",
+                              "عنوان الفاتورة",
                               style: StyleConfig.fs14fwBold,
                             ),
                             const SizedBox(
@@ -97,23 +97,11 @@ class _OrderDetailsState extends State<OrderDetails> {
                             const SizedBox(
                               height: 14,
                             ),
-                            Text(
-                              "Shipping Address",
-                              style: StyleConfig.fs14fwBold,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Container(
-                                decoration: BoxDecorations.shadow(radius: 8),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 8),
-                                child: buildShippingAddress(context)),
                             const SizedBox(
                               height: 14,
                             ),
                             Text(
-                              "Products",
+                              "المنـتـج",
                               style: StyleConfig.fs14fwBold,
                             ),
                             const SizedBox(
@@ -146,7 +134,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   GridView.builder(
                                       //padding: EdgeInsets.only(left: StyleConfig.padding,right: StyleConfig.padding,bottom: 20),
                                       shrinkWrap: true,
-                                      physics: const NeverScrollableScrollPhysics(),
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
                                       gridDelegate:
                                           const SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,
@@ -203,18 +192,22 @@ class _OrderDetailsState extends State<OrderDetails> {
                             const SizedBox(
                               height: 14,
                             ),
+                            Divider(
+                              color: ThemeConfig.fontColor.withOpacity(0.3),
+                            ),
+                            const SizedBox(
+                              height: 14,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Payment Method",
+                                  "سعر المنتج",
                                   style: StyleConfig.fs14fwBold,
                                 ),
                                 Text(
-                                  orderDetailsPresenter
-                                          .orderInfo?.payment_method
-                                          .toUpperCase() ??
-                                      "",
+                                  showPrice(
+                                      '${orderDetailsPresenter.orderInfo?.subTotalAmount.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD'),
                                   style: StyleConfig.fs14fwNormal,
                                 ),
                               ],
@@ -226,13 +219,12 @@ class _OrderDetailsState extends State<OrderDetails> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Sub Total",
+                                  "تكلفة التوصيل",
                                   style: StyleConfig.fs14fwBold,
                                 ),
                                 Text(
-                                  showPrice(orderDetailsPresenter
-                                          .orderInfo?.subTotalAmount ??
-                                      ""),
+                                  showPrice(
+                                      '${orderDetailsPresenter.orderInfo?.totalShippingCost.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD'),
                                   style: StyleConfig.fs14fwNormal,
                                 ),
                               ],
@@ -244,49 +236,12 @@ class _OrderDetailsState extends State<OrderDetails> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Tips",
+                                  "كوبون الخـصـم",
                                   style: StyleConfig.fs14fwBold,
                                 ),
                                 Text(
-                                  showPrice(orderDetailsPresenter
-                                          .orderInfo?.totalTips ??
-                                      ""),
-                                  style: StyleConfig.fs14fwNormal,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 14,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Shipping Cost",
-                                  style: StyleConfig.fs14fwBold,
-                                ),
-                                Text(
-                                  showPrice(orderDetailsPresenter
-                                          .orderInfo?.totalShippingCost ??
-                                      ""),
-                                  style: StyleConfig.fs14fwNormal,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 14,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Coupon Discount",
-                                  style: StyleConfig.fs14fwBold,
-                                ),
-                                Text(
-                                  showPrice(orderDetailsPresenter
-                                          .orderInfo?.couponDiscountAmount ??
-                                      ""),
+                                  showPrice(
+                                      '${orderDetailsPresenter.orderInfo?.couponDiscountAmount.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD'),
                                   style: StyleConfig.fs14fwNormal,
                                 ),
                               ],
@@ -302,27 +257,26 @@ class _OrderDetailsState extends State<OrderDetails> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Total Price",
+                                  "المجموع الكلي",
                                   style: StyleConfig.fs14fwBold,
                                 ),
                                 Text(
-                                  showPrice(orderDetailsPresenter
-                                          .orderInfo?.totalPrice ??
-                                      ""),
-                                  style: StyleConfig.fs14fwBold
-                                      .copyWith(color: ThemeConfig.accentColor),
+                                  showPrice(
+                                      '${orderDetailsPresenter.orderInfo?.totalPrice.replaceAll(RegExp(r'\.0+$'), '').replaceAll('#', '')} IQD'),
+                                  style: StyleConfig.fs14fwNormal,
                                 ),
                               ],
                             ),
                             const SizedBox(
-                              height: 24,
+                              height: 50,
                             ),
                           ],
                         ),
                       )
                     : SizedBox(
                         height: getHeight(context),
-                        child: const Center(child: CircularProgressIndicator())),
+                        child:
+                            const Center(child: CircularProgressIndicator())),
               ),
             );
           }),

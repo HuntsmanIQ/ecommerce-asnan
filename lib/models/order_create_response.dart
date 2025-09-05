@@ -4,20 +4,20 @@
 
 import 'dart:convert';
 
-OrderCreateResponse orderCreateResponseFromJson(String str) => OrderCreateResponse.fromJson(json.decode(str));
+OrderCreateResponse orderCreateResponseFromJson(String str) =>
+    OrderCreateResponse.fromJson(json.decode(str));
 
-String orderCreateResponseToJson(OrderCreateResponse data) => json.encode(data.toJson());
+String orderCreateResponseToJson(OrderCreateResponse data) =>
+    json.encode(data.toJson());
 
 class OrderCreateResponse {
-
   bool result;
   int orderCode;
   String message;
 
-  factory OrderCreateResponse.init(){
-    return OrderCreateResponse(message: "",orderCode: 0,result: false);
+  factory OrderCreateResponse.init() {
+    return OrderCreateResponse(message: "", orderCode: 0, result: false);
   }
-
 
   OrderCreateResponse({
     required this.result,
@@ -25,15 +25,16 @@ class OrderCreateResponse {
     required this.message,
   });
 
-  factory OrderCreateResponse.fromJson(Map<String, dynamic> json) => OrderCreateResponse(
-    result: json["result"],
-    orderCode: json["order_code"],
-    message: json["message"],
-  );
+  factory OrderCreateResponse.fromJson(Map<String, dynamic> json) =>
+      OrderCreateResponse(
+        result: json["result"] ?? false,
+        orderCode: json["order_code"] ?? 0,
+        message: json["message"] ?? "",
+      );
 
   Map<String, dynamic> toJson() => {
-    "result": result,
-    "order_code": orderCode,
-    "message": message,
-  };
+        "result": result,
+        "order_code": orderCode,
+        "message": message,
+      };
 }
