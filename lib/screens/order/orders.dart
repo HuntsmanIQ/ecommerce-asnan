@@ -89,7 +89,9 @@ class _OrdersState extends State<Orders> {
                         return Button(
                             //padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
                             minWidth: 100,
-                            onPressed: () {},
+                            onPressed: () {
+                               print('================${data.orders[index].item.qty}');
+                            },
                             child: OrderViewModel(
                               orderInfo: data.orders[index],
                               context: context,
